@@ -1,3 +1,6 @@
+#ifndef CHARACTER_H
+#define CHARACTER_H
+
 #include "object.h"
 #include <iostream>
 using namespace std;
@@ -35,3 +38,5 @@ class Character : public Object {
         // Attack function (pure virtual for polymorphism, MUST override)
         virtual void attack() = 0;
     };
+
+    #endif
