@@ -11,30 +11,25 @@ class Player : public Character{
         static const int MAX_HEALTH;
         
     public:
-        // Constructor
-        Player(Inventory& inv, int curr, int max_health) 
-            : Character("Player", 0, 100, 10, 0, 0), inventory(inv), currency(curr), MAX_HEALTH(max_health);
-    
-        // Health functions
-        int getHealth() const override;
-        void setHealth(int h) override;
-    
-        // Damage functions
-        int getDamage() const override;
-        void setDamage(int d) override;
-    
-        // Inventory and Currency functions
-        Inventory& getInventory();
-        int getCurrency() const;
-    
-        // Player actions
-        void currTurn();
-        Object move(char direction, GameMap& map);
-        void attack() override;
+        // Player Constructor, 
         
-        // Display and interactions
-        string getDisplayChar() const;
-        void merchantInter();
+        Player(Inventory& inv, int curr, int max_health)    
+            : Character(CharacterType::PLAYER, "Player",   0   ,    100  ,    10  ,   0   ,    0   ), inventory(inv), currency(curr), MAX_HEALTH(max_health) {}
+                      //    CharacterType    ,  type   , value ,  health , damage , int x ,  int y ) 
+        
+        // Will need more constructors for different character classes
+
+        Inventory& getInventory();
+
+        int getCurrency() const;
+        void setCurrency(int curr);
+
+        string getDisplayChar();
+
+        
+        void attack() override;
+
+        
 };
 
 #endif

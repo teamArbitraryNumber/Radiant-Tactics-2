@@ -5,16 +5,25 @@
 #include <iostream>
 using namespace std;
 
+enum class CharacterType {
+    PLAYER,
+    ORC,
+    SKELETON,
+    MAGE,
+    BANDIT,
+    DRAGON
+};
+
 class Character : public Object {
     protected:
         int health;
         int damage;
         int row_pos;
         int col_pos;
-
+        CharacterType charType;
     public:
         // Constructor
-        Character(string type, int value, int h, int d, int x, int y)
+        Character(CharacterType char_type, string type, int value, int h, int d, int x, int y)
             : Object(type, value), health(h), damage(d), x_pos(x), y_pos(y) {}
     
         // Health functions
