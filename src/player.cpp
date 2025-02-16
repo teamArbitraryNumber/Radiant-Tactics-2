@@ -12,6 +12,10 @@ void Player::setCurrency(int curr){
 }
 
 string Player::getDisplayChar(){
-    return "placeholder";
+    return "TODO";
+}
+
+void Player::attack(){
+    //TODO
 }
 
