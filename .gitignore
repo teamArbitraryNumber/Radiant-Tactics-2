@@ -1,0 +1,9 @@
+CMakeFiles/
+cmake_install.cmake
+Makefile
+CMakeCache.txt
+bin/
+*.a
+.vscode/
+addit_src/gameManer().cs
+ncurses-6.1.tar.gz
