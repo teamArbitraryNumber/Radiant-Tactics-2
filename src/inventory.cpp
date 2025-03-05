@@ -1,11 +1,9 @@
 #include <inventory.h>
+#include <vector>
 using namespace std;
 
-
-
-
 //Add Weapon to inventory
-void addWeapon(string weaponToAdd){
+void Inventory::addWeapon(string weaponToAdd){
     if(inventoryCounter < inventorySize){
         weaponList.push_back(weaponToAdd);
         inventoryCounter++;
@@ -17,7 +15,7 @@ void addWeapon(string weaponToAdd){
 
 
 //Add Potion to inventory
-void addPotion(string potionToAdd){
+void Inventory::addPotion(string potionToAdd){
     if(inventoryCounter < inventorySize){
         potionList.push_back(potionToAdd);
         inventoryCounter++;
@@ -28,14 +26,14 @@ void addPotion(string potionToAdd){
 }
 
 //Checks if item is in inventory
-bool hasPotion(string itemToCompare){
+bool Inventory::hasPotion(string itemToCompare){
     for(int i = 0; i < potionList.size(); i++){
         if(potionList[i] == itemToCompare){
             return true;
         }
     }
 }
-bool hasWeapon(string itemToCompare){
+bool Inventory::hasWeapon(string itemToCompare){
 for(int i = 0; i < weaponList.size(); i++){
         if(weaponList[i] == itemToCompare){
             return true;
@@ -44,7 +42,7 @@ for(int i = 0; i < weaponList.size(); i++){
 }
 
 //If Inventory Full
-void invFull(string itemToAdd){
+void Inventory::invFull(string itemToAdd){
     int input = -1;
     int i;
     int j;
@@ -93,15 +91,15 @@ void invFull(string itemToAdd){
 
 
 //Set inventory size
-void setInvSize(int increase){
+void Inventory::setInvSize(int increase){
     inventorySize += increase;
 }
 
 
 
-int equipWeapon(int damageAmount){
+int Inventory::equipWeapon(int damageAmount){
     
 }
-int usePotion(int healAmount){
+int Inventory::usePotion(int healAmount){
 
 }
