@@ -18,7 +18,7 @@ class Player : public Character{
         
         Player(Inventory& inv, int curr, int max_health)    
             : Character(CharacterType::PLAYER, "Player", 100, max_health, 10), inventory(inv), currency(curr) {}
-      //                    CharacterType    ,  type   , value ,  health , damage , int x ,  int y ) 
+      //                    CharacterType    ,  type   , health , max_health , damage , int x ,  int y ) 
         
         // Will need more constructors for different character classes
 
@@ -29,8 +29,6 @@ class Player : public Character{
         void heal(int);
         Player(int x = 0, int y = 0); 
 
-
-        void move(GameMap& map, int new_row, int new_col);
 
         string getDisplayChar();
         int mod(int value, int limit);

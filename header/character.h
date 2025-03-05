@@ -7,11 +7,8 @@ using namespace std;
 
 enum class CharacterType {
     PLAYER,
-    ORC,
     SKELETON,
-    MAGE,
-    BANDIT,
-    DRAGON
+    
 };
 
 class Character : public virtual Object {
@@ -21,6 +18,7 @@ class Character : public virtual Object {
         CharacterType charType;
     public:
         // Constructor
+        Character(): Object("Null", 1), health(100), damage(20) {}
         Character(CharacterType char_type, string type, int value, int h, int d)
             : Object(type, value), health(h), damage(d) {}
         virtual ~Character() {};
