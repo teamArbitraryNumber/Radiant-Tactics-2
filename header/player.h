@@ -26,6 +26,8 @@ class Player : public Character{
         int getCurrency() const;
         void setCurrency(int curr);
         void heal(int);
+        Player(int x = 0, int y = 0); 
+
 
         string getDisplayChar();
         int mod(int value, int limit);
@@ -33,7 +35,7 @@ class Player : public Character{
         pair<int, int> getPosition() const;
         void setPosition(int x, int y);
         
-        void attack() override;
+        void attack(Character &opp) override;
 
         
 };

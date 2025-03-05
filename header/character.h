@@ -38,7 +38,7 @@ class Character : public virtual Object {
     
         // Position functions
         // Attack function (pure virtual for polymorphism, MUST override)
-        virtual void attack() = 0;
+        virtual void attack(Character &opp);
     };
 
     #endif
