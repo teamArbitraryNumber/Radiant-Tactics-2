@@ -14,17 +14,16 @@ enum class CharacterType {
     DRAGON
 };
 
-class Character : public Object {
+class Character : public virtual Object {
     protected:
         int health;
         int damage;
-        int row_pos;
-        int col_pos;
         CharacterType charType;
     public:
         // Constructor
-        Character(CharacterType char_type, string type, int value, int h, int d, int x, int y)
-            : Object(type, value), health(h), damage(d), row_pos(x), col_pos(y) {}
+        Character(CharacterType char_type, string type, int value, int h, int d)
+            : Object(type, value), health(h), damage(d) {}
+        virtual ~Character() {};
     
         // Health functions
         int getHealth() const;
@@ -38,12 +37,6 @@ class Character : public Object {
         bool isAlive() const;
     
         // Position functions
-        int getRowPosition() const;
-        void setRowPosition(int rowIndex);
-
-        int getColPosition() const;
-        void setColPosition(int colIndex);
-    
         // Attack function (pure virtual for polymorphism, MUST override)
         virtual void attack() = 0;
     };
