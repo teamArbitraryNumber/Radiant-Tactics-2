@@ -1,3 +1,6 @@
+#ifndef INVENTORY_H
+#define INVENTORY_H
+#include "item.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -12,23 +15,25 @@
 #include <algorithm>
 #include <limits>
 
+class Inventory{
+    vector<Item> weaponList;
+    vector<Item> potionList;
+    int inventorySize = 10;
+    int inventoryCounter = 0;
+    string currWeapon = "";
 
-vector<Item> weaponList;
-vector<Item> potionList;
-int inventorySize = 10;
-int inventoryCounter = 0;
-string currWeapon = "";
 
+    void addWeapon(string);
+    void addPotion(string);
 
-void addWeapon(string);
-void addPotion(string);
+    int equipWeapon(int);
+    int usePotion(int);
 
-int equipWeapon(int);
-int usePotion(int);
+    bool hasPotion(string);
+    bool hasWeapon(string);
 
-bool hasPotion(string);
-bool hasWeapon(string);
+    void invFull(string);
 
-void invFull(string);
-
-void setInvSize(int);
+    void setInvSize(int);
+};
+#endif
