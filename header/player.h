@@ -3,6 +3,7 @@
 
 #include "character.h"
 #include "inventory.h"
+#include "game_map.h"
 
 class Player : public Character{
     private:
@@ -22,6 +23,8 @@ class Player : public Character{
 
         int getCurrency() const;
         void setCurrency(int curr);
+
+        void move(GameMap& map, int new_row, int new_col);
 
         string getDisplayChar();
         
