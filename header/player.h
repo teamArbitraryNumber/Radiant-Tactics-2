@@ -3,6 +3,7 @@
 
 #include "character.h"
 #include "inventory.h"
+#include "game_map.h"
 
 class Player : public Character{
     private:
@@ -28,6 +29,8 @@ class Player : public Character{
         void heal(int);
         Player(int x = 0, int y = 0); 
 
+
+        void move(GameMap& map, int new_row, int new_col);
 
         string getDisplayChar();
         int mod(int value, int limit);
