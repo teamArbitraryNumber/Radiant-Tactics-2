@@ -24,7 +24,7 @@ class Character : public Object {
     public:
         // Constructor
         Character(CharacterType char_type, string type, int value, int h, int d, int x, int y)
-            : Object(type, value), health(h), damage(d), x_pos(x), y_pos(y) {}
+            : Object(type, value), health(h), damage(d), row_pos(x), col_pos(y) {}
     
         // Health functions
         int getHealth() const;
