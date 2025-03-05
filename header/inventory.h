@@ -11,6 +11,7 @@
 #include <string>
 #include <algorithm>
 #include <limits>
+#include <item.h>
 
 class Inventory
 {       // The class
@@ -37,4 +38,8 @@ public: // Access specifier
 
     void setInvSize(int);
     void setInvCounter(int);
+
+
+    //Destructor
+    ~Inventory(){}
 };
