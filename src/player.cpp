@@ -58,34 +58,3 @@ string Player::getDisplayChar(){
 void Player::attack(Character &opp){
     //TODO
 }
-
-
-    // private:
-    //     Inventory inventory;
-    //     char movement;
-    //     int x, y;
-    //     int currency;
-        
-    // public:
-    //     // Player Constructor, 
-    //     Player() = default;
-        
-    //     Player(Inventory& inv, int curr, int max_health)    
-    //         : Character(CharacterType::PLAYER, "Player", 100, max_health, 10), inventory(inv), currency(curr) {}
-    //   //                    CharacterType    ,  type   , value ,  health , damage , int x ,  int y ) 
-        
-    //     // Will need more constructors for different character classes
-
-    //     Inventory& getInventory();
-
-    //     int getCurrency() const;
-    //     void setCurrency(int curr);
-    //     void heal(int);
-
-    //     string getDisplayChar();
-    //     int mod(int value, int limit);
-    //     pair<int, int> move(char action, int height, int width);
-    //     pair<int, int> getPosition() const;
-    //     void setPosition(int x, int y);
-        
-    //     void attack() override;
