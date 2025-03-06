@@ -16,7 +16,7 @@ public:
     void move(GameMap& map);
 
     // Attack
-    void attack() override;
+    void attack(Character &) override;
 
     // Display character
     string getDisplayChar() const;
