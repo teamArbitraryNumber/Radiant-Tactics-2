@@ -1,6 +1,9 @@
 #include <inventory.h>
-#include <vector>
+
 using namespace std;
+
+
+
 
 //Add Weapon to inventory
 void Inventory::addWeapon(string weaponToAdd){
@@ -91,15 +94,48 @@ void Inventory::invFull(string itemToAdd){
 
 
 //Set inventory size
-void Inventory::setInvSize(int increase){
-    inventorySize += increase;
+void Inventory::setInvSize(int newSize){
+    inventorySize = newSize;
 }
 
 
 
-int Inventory::equipWeapon(int damageAmount){
+int equipWeapon(int damageAmount){
     
 }
-int Inventory::usePotion(int healAmount){
 
+
+
+int Inventory::usePotion(){
+    cout << "Select a potion to use: " << endl;
+    cout << "   Potions:" << endl;
+    int i;
+    for(i = 0; i < potionList.size(); i++){
+        cout << "   " << i+1 << ". " << potionList[i] << endl;
+    }
+
+    //Delete potion and return healing amount;
+    int healingAmount = potionList[i].healingAmount();
+    potionList.erase(potionList.begin() + i);
+    return healingAmount;
+}
+
+
+void market(int currGold){
+    cout << endl;
+    cout << "Current Gold: " << currGold << endl;
+    cout << "Select an Option: " << endl;
+    cout << "   " << "1. Buy Items" << endl;
+    cout << "   " << "2. Leave" << endl;
+    int input = 0;
+    if(input == 1){
+        cout << "Merchant List: " << endl;
+        //Implement Later
+    }else if(input == 2){
+        return;
+    }else{
+        cout << "Invalid input" << endl;
+        cout << endl;
+        market(currGold);
+    }
 }
