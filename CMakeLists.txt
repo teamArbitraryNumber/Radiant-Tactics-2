@@ -21,6 +21,8 @@ include_directories(
 link_directories(${LIBRARY_OUTPUT_PATH})
 
 add_subdirectory(googletest)
+add_subdirectory(src)
+add_subdirectory(tests)
 
 # Define libraries
 # file(GLOB CHARACTER_HEADERS ${CMAKE_SOURCE_DIR}/Character_header/*.h)
