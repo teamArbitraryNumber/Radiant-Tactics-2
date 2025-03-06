@@ -17,20 +17,19 @@ public:
 
     // Attack
     void attack(Character &) override;
-
-    // Display character
-    string getDisplayChar() const;
 };
 
 // Specific Enemy Types
 class Skeleton : public Enemy {
 public:
     Skeleton();
+    string getDisplayChar() override;
 };
 
 class Goblin : public Enemy {
 public:
     Goblin();
+    string getDisplayChar() override;
 };
 
 #endif

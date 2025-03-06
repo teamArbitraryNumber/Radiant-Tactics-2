@@ -29,7 +29,7 @@ class Player : public Character{
         void heal(int amount);
 
 
-        string getDisplayChar();
+        string getDisplayChar() override;
         int mod(int value, int limit);
         pair<int, int> move(char action, int height, int width);
         pair<int, int> getPosition() const;

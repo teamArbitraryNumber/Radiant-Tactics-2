@@ -111,15 +111,18 @@ void Enemy::attack(Character& player) {
     cout << enemyType << " attacks!" << endl; //Attack implenentation placeholder
 }
 
-// Display character for rendering
-string Enemy::getDisplayChar() const {
-    return enemyType == "Skeleton" ? "S" : "G";
-}
-
 // Skeleton enemy implementation
 Skeleton::Skeleton() : Enemy(CharacterType::SKELETON, "Skeleton",  5    ,  70,   10  ,  0   ,  0  ) {}
 //                                  CharacterType      type      value     h     d     row   col
 
+string Skeleton::getDisplayChar(){
+    return "💀";
+}
+
 // Goblin enemy implementation
 Goblin::Goblin() : Enemy(CharacterType::GOBLIN,   "Goblin",    2     ,  80   , 5  ,   0   ,   0) {}
 //                              CharacterType       type      value     h      d     row     col
+
+string Goblin::getDisplayChar(){
+    return "👺";
+}

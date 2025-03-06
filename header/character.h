@@ -43,6 +43,7 @@ class Character : public virtual Object {
         int getColPosition() const;
         int setColPosition(int new_col);
 
+        virtual string getDisplayChar() = 0;
 
 
     

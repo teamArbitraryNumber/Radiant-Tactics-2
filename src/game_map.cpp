@@ -9,7 +9,7 @@ GameMap::GameMap() : height(0), width(0), numSkeleton(0), skeletonKilled(0) {
     mapMatrix.resize(0, vector<shared_ptr<Object>>(0));
 }
 
-GameMap::GameMap(const vector<vector<int>>& initMatrix, int w, int h) : height(h), width(w), numSkeleton(0), skeletonKilled(0) {
+/*GameMap::GameMap(const vector<vector<int>>& initMatrix, int w, int h) : height(h), width(w), numSkeleton(0), skeletonKilled(0) {
     mapMatrix.resize(h, vector<shared_ptr<Object>>(w));
 
     for (int y = 0; y < height; y++) {
@@ -49,7 +49,7 @@ GameMap::GameMap(const vector<vector<int>>& initMatrix, int w, int h) : height(h
             }
         }
     }
-}
+}*/
 
 void GameMap::killSkeleton(int x, int y) {
     if (x < 0 || x >= width || y < 0 || y >= height) {
