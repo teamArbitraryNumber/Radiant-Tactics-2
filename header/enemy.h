@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #include "character.h"
+#include "game_map.h"
 using namespace std;
 
 class Enemy : public Character {
@@ -15,7 +16,7 @@ public:
     void move(GameMap& map);
 
     // Attack
-    void attack() override;
+    void attack(Character &) override;
 
     // Display character
     string getDisplayChar() const;

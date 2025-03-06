@@ -1,4 +1,5 @@
 #include "../header/enemy.h"
+#include "../header/player.h"
 #include <iostream>
 #include <queue>
 #include <vector>
@@ -103,7 +104,10 @@ void Enemy::move(GameMap& map) {
 }
 
 // Attack logic
-void Enemy::attack() {
+void Enemy::attack(Character& player) {
+    int targetHealth = player.getHealth();
+    player.setHealth(targetHealth - damage);
+    
     cout << enemyType << " attacks!" << endl; //Attack implenentation placeholder
 }
 
