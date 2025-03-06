@@ -26,7 +26,7 @@ public:
             }
             row.clear(); // Clear each row vector
         }
-    mapMatrix.clear();
+        mapMatrix.clear();
     };
 
     void initMap1();

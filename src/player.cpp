@@ -5,6 +5,10 @@ using namespace std;
 
 Player::Player() {}
 
+// Player Initialization Constructor
+Player::Player(CharacterType char_type, string type, int value, int h, int d, int row, int col, shared_ptr<Inventory> inv, int curr)    
+    : Character(char_type, type, value, h, d,  row, col), inventory(inv), currency(curr), max_health(h){}
+
 int Player::mod(int value, int limit){
     return (value % limit + limit ) % limit;
 }
@@ -44,7 +48,7 @@ void Player::heal(int amount){
     health = health + amount;
 }
 
-Inventory& Player::getInventory(){
+shared_ptr<Inventory> Player::getInventory(){
     return inventory;
 }
 

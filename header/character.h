@@ -22,8 +22,7 @@ class Character : public virtual Object {
         Character(): Object("Character", 1), health(100), damage(20) {}
         
         // Initialization Constructor
-        Character(CharacterType char_type, string type, int value, int h, int d, int row, int col)
-            : Object(type, value), health(h), damage(d), charType(char_type), row_pos(row), col_pos(col) {}
+        Character(CharacterType char_type, string type, int value, int h, int d, int row, int col);
         virtual ~Character() {};
     
         // Health functions

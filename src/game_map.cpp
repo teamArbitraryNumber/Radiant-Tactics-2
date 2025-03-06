@@ -2,6 +2,7 @@
 #include "../header/enemy.h"
 #include "../header/player.h"
 #include "../header/item.h"
+#include "../header/inventory.h"
 #include <iostream>
 using namespace std;
 
@@ -9,6 +10,11 @@ GameMap::GameMap() : height(0), width(0), numSkeleton(0), skeletonKilled(0) {
     mapMatrix.resize(0, vector<shared_ptr<Object>>(0));
 }
 
+GameMap::GameMap(const vector<vector<int>>& initMatrix, int w, int h){
+    mapMatrix.resize(h, vector<shared_ptr<Object>>(w));
+    height = h;
+    width = w;
+}
 /*GameMap::GameMap(const vector<vector<int>>& initMatrix, int w, int h) : height(h), width(w), numSkeleton(0), skeletonKilled(0) {
     mapMatrix.resize(h, vector<shared_ptr<Object>>(w));
 
@@ -66,7 +72,14 @@ void GameMap::killSkeleton(int x, int y) {
 }
 
 void GameMap::initMap1(){
-    //TODO
+    for(int y = 1; y <= this->height; y++){
+        for(int x = 1; x <= this->width; x++){
+            if(y == this->height && x == this->width / 2){//place player on the bottom middle of the map
+                shared_ptr<Inventory> inv = make_shared<Inventory>();
+                mapMatrix[y][x] = make_shared<Player>(CharacterType::PLAYER, "Player", 0, 100, 10, y, x, inv, 0);
+            }
+        }
+    }   
 }
 
 shared_ptr<Object> GameMap::getObjectAt(int x, int y) {

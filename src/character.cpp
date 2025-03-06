@@ -1,5 +1,8 @@
 #include "../header/character.h"
 
+Character::Character(CharacterType char_type, string type, int value, int h, int d, int row, int col)
+        : Object(type, value), health(h), damage(d), charType(char_type), row_pos(row), col_pos(col) {}
+
 // Health functions
 int Character::getHealth() const { 
     return health; 
