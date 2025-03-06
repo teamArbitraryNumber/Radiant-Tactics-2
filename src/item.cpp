@@ -1,4 +1,4 @@
-#include "item.h"
+#include "Item.h"
 
 // Display item details (base class)
 void Item::displayItem() const {
