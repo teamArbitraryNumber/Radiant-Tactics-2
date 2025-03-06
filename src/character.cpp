@@ -21,19 +21,15 @@ bool Character::isAlive() const {
     return health > 0; 
 }
 
-//int mod(int a, int b) {  }
+void Character::attack(Character &opp){
+    // if (!enemy.isalive()) {
+    //     std::cout << name << " is already defeated! " << enemy.getType() << " cannot attack.\n";
+    //     return;
+    // }
+    // std::cout << name << " attacks " << enemy.getType() << attackAmount << " hits!\n";
+    // enemy.receiveDamage(attackAmount);
+    // if (!enemy.isalive()) {
+    //     std::cout << enemy.getType()<< " has been defeated!\n";
+    // }
+}
 
-// Position functions
-int Character::getRowPosition() const { 
-    return row_pos; 
-}
-void Character::setRowPosition(int rowIndex) { 
-    row_pos = rowIndex; 
-}
-
-int Character::getColPosition() const{
-    return col_pos;
-}
-void Character::setColPosition(int colIndex){
-    col_pos = colIndex;
-}

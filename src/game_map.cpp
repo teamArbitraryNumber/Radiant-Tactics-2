@@ -84,7 +84,7 @@ int GameMap::getSkeletonsKilled() const {
     int count = 0;
     for (const auto& row : mapMatrix) {
         for (const auto& obj : row) {
-            if (obj->getType() == "Goblin") {
+            if (obj->getType() == "Skeleton") {
                 count++;
             }
         }
