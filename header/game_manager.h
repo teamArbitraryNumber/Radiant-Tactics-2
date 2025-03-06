@@ -12,7 +12,6 @@ class Game_Manager{
         GameMap gameMap;
         bool isPlayerTurn;
     public:
-        void startLevel();
         void start();
         void takeAction();
         GameMap& getGameMap();
