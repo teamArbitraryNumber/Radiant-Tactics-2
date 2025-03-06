@@ -1,19 +1,37 @@
 #include "../header/enemy.h"
 #include <iostream>
 #include <queue>
+#include <vector>
+#include <unordered_map>
+#include <limits>
 
 Enemy::Enemy(string type, int health, int damage, int x, int y)
     : Character(type, 0, health, damage, x, y), enemyType(type) {}
 
 // Movement logic: Move towards the player
 void Enemy::move(GameMap& map) {
-   int width = map.getWidth();
+    int width = map.getWidth();
     int height = map.getHeight();
 
     // Get player position
-    shared_ptr<Object> playerObj = map.getObjectAt(0, 0); // TODO: Replace with actual player position retrieval
-    int playerX = playerObj->getColPosition();
-    int playerY = playerObj->getRowPosition();
+    shared_ptr<Object> playerObj;
+    int playerX = -1, playerY = -1;
+
+    // Find the player's actual position
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            shared_ptr<Object> obj = map.getObjectAt(x, y);
+            if (obj && obj->getType() == "Player") {
+                playerX = x;
+                playerY = y;
+                break;
+            }
+        }
+    }
+
+    if (playerX == -1 || playerY == -1) {
+        return; // Player not found, do nothing
+    }
 
     int startX = col_pos;
     int startY = row_pos;
@@ -23,10 +41,10 @@ void Enemy::move(GameMap& map) {
 
     // BFS setup
     queue<pair<int, int>> q;
-    unordered_map<int, pair<int, int>> parent; // Stores the parent of each cell for backtracking
-    unordered_map<int, bool> visited; // Keeps track of visited positions
+    unordered_map<int, pair<int, int>> parent; // Tracks movement path
+    unordered_map<int, bool> visited;
 
-    // Convert (x, y) to a unique key for the map
+    // Lambda to convert (x, y) to a unique key
     auto toKey = [&](int x, int y) { return y * width + x; };
 
     q.push({startX, startY});
@@ -50,13 +68,13 @@ void Enemy::move(GameMap& map) {
 
             // Check if space is occupied
             shared_ptr<Object> obj = map.getObjectAt(newX, newY);
-            if (obj && obj->getType() != "empty") continue;  // Avoid occupied spaces
+            if (obj && obj->getType() != "empty" && obj->getType() != "Player") continue;  // Avoid obstacles/enemies
 
-            // Mark as visited and store parent for backtracking
+            // Mark as visited and store parent for pathfinding
             visited[toKey(newX, newY)] = true;
             parent[toKey(newX, newY)] = {x, y};
 
-            // Stop BFS when reaching the player
+            // If we reached the player, stop BFS
             if (newX == playerX && newY == playerY) {
                 found = true;
                 break;
@@ -66,8 +84,7 @@ void Enemy::move(GameMap& map) {
         }
     }
 
-    // If no path found, stay in place
-    if (!found) return;
+    if (!found) return; // No valid path to player
 
     // Backtrack to find the first move
     pair<int, int> current = {playerX, playerY};
