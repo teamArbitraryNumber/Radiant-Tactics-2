@@ -59,7 +59,17 @@ if(action == 'q'){
     }
 }
 
+void Game_Manager::movePlayer(char input, int new_x, int new_y){
+    //TODO
+}
 
+void Game_Manager::managePlayerInventory(shared_ptr<Inventory> inv){
+    //TODO
+}
+
+void moveEnemies(){
+    //TODO
+}
 
 
 // class Game_Manager{
