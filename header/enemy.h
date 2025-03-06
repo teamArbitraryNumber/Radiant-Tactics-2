@@ -10,7 +10,7 @@ protected:
     string enemyType;
 
 public:
-    Enemy(string type, int health, int damage, int x, int y);
+    Enemy(CharacterType charType, string type, int health, int damage);
 
     // Movement
     void move(GameMap& map);

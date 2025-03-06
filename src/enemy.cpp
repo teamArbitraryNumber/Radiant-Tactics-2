@@ -6,8 +6,8 @@
 #include <unordered_map>
 #include <limits>
 
-Enemy::Enemy(string type, int health, int damage, int x, int y)
-    : Character(type, 0, health, damage, x, y), enemyType(type) {}
+Enemy::Enemy(CharacterType charType, string type, int health, int damage)
+    : Character(charType, type, 0, health, damage), enemyType(type) {}
 
 // Movement logic: Move towards the player
 void Enemy::move(GameMap& map) {
@@ -117,7 +117,7 @@ string Enemy::getDisplayChar() const {
 }
 
 // Skeleton enemy implementation
-Skeleton::Skeleton(int x, int y) : Enemy("Skeleton", 100, 10, x, y) {}
+Skeleton::Skeleton(int x, int y) : Enemy(CharacterType::SKELETON, "Skeleton", 100, 10, x, y) {}
 
 // Goblin enemy implementation
 Goblin::Goblin(int x, int y) : Enemy("Goblin", 80, 8, x, y) {}
