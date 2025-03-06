@@ -11,20 +11,15 @@ protected:
     std::string type;
 
 public:
-    // Constructor
     Item(const std::string& itemName, const std::string& itemType) 
         : name(itemName), type(itemType) {}
 
     virtual ~Item() = default;
 
-    // Getters
     std::string getName() const { return name; }
     std::string getType() const { return type; }
 
-    // Virtual function for item effects
     virtual void useItem() const = 0;
-
-    // Display item details
     virtual void displayItem() const;
 };
 
@@ -32,41 +27,41 @@ public:
 class HealingItem : public Item {
 private:
     int healingAmount;
-    int duration; // For turn-based effects
 
 public:
-    HealingItem(const std::string& name, int healAmt, int turns = 0);
+    HealingItem(const std::string& name, int healAmt);
     void useItem() const override;
+    int getHealingAmount() const { return healingAmount; }
 };
 
-// Boosting Item
-class BoostingItem : public Item {
-private:
-    std::string statType;
-    int statIncrease;
-    int duration;
-
-public:
-    BoostingItem(const std::string& name, const std::string& stat, int increase, int turns);
-    void useItem() const override;
-};
-
-// Battle Item
-class BattleItem : public Item {
+// Damage Item
+class DamageItem : public Item {
 private:
     int damage;
-    int effectDuration;
 
 public:
-    BattleItem(const std::string& name, int dmg, int duration = 0);
+    DamageItem(const std::string& name, int dmgAmt);
     void useItem() const override;
+    int getDamage() const { return damage; }
 };
 
-// Special Item
-class SpecialItem : public Item {
-public:
-    SpecialItem(const std::string& name);
-    void useItem() const override;
-};
+// ===========================
+// Predefined Items (Global Constants)
+// ===========================
+
+// Healing Items
+const HealingItem SMALL_POTION("Small Potion", 10);
+const HealingItem LARGE_POTION("Large Potion", 25);
+const HealingItem MYSTIC_ELIXIR("Mystic Elixir", 50);
+
+// Damage Items (Weapons)
+const DamageItem BASIC_SWORD("Basic Sword", 15);
+const DamageItem GREATER_SWORD("Greater Sword", 25);
+const DamageItem MAGIC_WAND("Magic Wand", 30);
+
+// Explosive/Battle Items
+const DamageItem FIRE_BOMB("Fire Bomb", 20);
+const DamageItem EXPLOSIVE_ARROW("Explosive Arrow", 35);
+const DamageItem THUNDER_SCROLL("Thunder Scroll", 50);
 
 #endif // ITEM_H
