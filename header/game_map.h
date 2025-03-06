@@ -29,6 +29,8 @@ public:
     mapMatrix.clear();
     };
 
+    void initMap1();
+
     void killSkeleton(int x, int y);
     shared_ptr<Object> getObjectAt(int x, int y);
     void setObjectAt(int x, int y, const shared_ptr<Object>& obj);

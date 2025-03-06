@@ -21,6 +21,20 @@ bool Character::isAlive() const {
     return health > 0; 
 }
 
+int Character::getRowPosition(){
+    return row_pos;
+}
+int Character::setRowPosition(int new_row){
+    row_pos = new_row;
+}  
+
+int Character::getColPosition(){
+    return col_pos;
+}
+int Character::setColPosition(int new_col){
+    col_pos = new_col;
+}
+
 void Character::attack(Character &opp){
     // if (!enemy.isalive()) {
     //     std::cout << name << " is already defeated! " << enemy.getType() << " cannot attack.\n";

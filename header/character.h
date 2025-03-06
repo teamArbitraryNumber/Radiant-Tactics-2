@@ -7,11 +7,8 @@ using namespace std;
 
 enum class CharacterType {
     PLAYER,
-    ORC,
     SKELETON,
-    MAGE,
-    BANDIT,
-    DRAGON
+
 };
 
 class Character : public virtual Object {
@@ -19,8 +16,10 @@ class Character : public virtual Object {
         int health;
         int damage;
         CharacterType charType;
+        int row_pos, col_pos;
     public:
         // Constructor
+        Character(): Object("Null", 1), health(100), damage(20) {}
         Character(CharacterType char_type, string type, int value, int h, int d)
             : Object(type, value), health(h), damage(d) {}
         virtual ~Character() {};
@@ -35,6 +34,15 @@ class Character : public virtual Object {
 
         // Check if the character is alive
         bool isAlive() const;
+
+        int getRowPosition();
+        int setRowPosition(int new_row);
+
+        int getColPosition();
+        int setColPosition(int new_col);
+
+
+
     
         // Position functions
         // Attack function (pure virtual for polymorphism, MUST override)
