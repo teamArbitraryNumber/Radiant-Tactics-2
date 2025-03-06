@@ -17,7 +17,6 @@ class Game_Manager{
         int enemyGoal{};
         bool isPlayerTurn;
     public:
-        void initMap1();
         ~Game_Manager(){};
         void start();
         void takeAction();

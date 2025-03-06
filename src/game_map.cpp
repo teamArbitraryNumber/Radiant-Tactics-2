@@ -61,6 +61,9 @@ void GameMap::killSkeleton(int x, int y) {
         cerr << "No skeleton at the specified coordinates" << endl;
     }
 }
+void GameMap::initMap1(){
+    
+}
 
 shared_ptr<Object> GameMap::getObjectAt(int x, int y) {
     if (x < 0 || x >= width || y < 0 || y >= height) {

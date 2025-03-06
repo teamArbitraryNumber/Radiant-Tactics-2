@@ -19,16 +19,17 @@ private:
 public:
     GameMap();
     GameMap(const vector<vector<int>>& initMatrix, int w, int h);
-    ~GameMap() 
-    {
+    ~GameMap() {
         for (auto& row : mapMatrix) {
-        for (auto& obj : row) {
-            obj.reset(); // Reset each shared_ptr to release memory
+            for (auto& obj : row) {
+                obj.reset(); // Reset each shared_ptr to release memory
+            }
+            row.clear(); // Clear each row vector
         }
-        row.clear(); // Clear each row vector
-    }
     mapMatrix.clear();
     };
+
+    void initMap1();
 
     void killSkeleton(int x, int y);
     shared_ptr<Object> getObjectAt(int x, int y);

@@ -1,33 +1,35 @@
-#ifndef INVENTORY_H
-#define INVENTORY_H
-#include "item.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <queue>
-#include <sstream> 
+#include <sstream>
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
-#include <iomanip> 
+#include <iomanip>
 #include <fstream>
 #include <string>
 #include <algorithm>
 #include <limits>
+#include <item.h>
 
-class Inventory{
+class Inventory
+{       // The class
+public: // Access specifier
+    int inventorySize;
+    int inventoryCounter;
     vector<Item> weaponList;
     vector<Item> potionList;
-    int inventorySize = 10;
-    int inventoryCounter = 0;
-    string currWeapon = "";
-
-
+    Inventory()
+    { // Constructor
+        inventorySize = 10;
+        inventoryCounter = 0;
+    }
     void addWeapon(string);
     void addPotion(string);
 
     int equipWeapon(int);
-    int usePotion(int);
+    int usePotion();
 
     bool hasPotion(string);
     bool hasWeapon(string);
@@ -35,5 +37,10 @@ class Inventory{
     void invFull(string);
 
     void setInvSize(int);
+    void setInvCounter(int);
+
+
+    //Destructor
+    ~Inventory(){}
 };
-#endif
+

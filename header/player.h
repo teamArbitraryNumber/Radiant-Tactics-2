@@ -3,6 +3,7 @@
 
 #include "character.h"
 #include "inventory.h"
+#include "game_map.h"
 
 class Player : public Character{
     private:
@@ -17,7 +18,7 @@ class Player : public Character{
         
         Player(Inventory& inv, int curr, int max_health)    
             : Character(CharacterType::PLAYER, "Player", 100, max_health, 10), inventory(inv), currency(curr) {}
-      //                    CharacterType    ,  type   , value ,  health , damage , int x ,  int y ) 
+      //                    CharacterType    ,  type   , health , max_health , damage , int x ,  int y ) 
         
         // Will need more constructors for different character classes
 

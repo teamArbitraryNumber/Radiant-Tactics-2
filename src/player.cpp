@@ -52,7 +52,7 @@ void Player::setCurrency(int curr){
 }
 
 string Player::getDisplayChar(){
-    return "TODO";
+    return "☺";
 }
 
 void Player::attack(Character &opp){

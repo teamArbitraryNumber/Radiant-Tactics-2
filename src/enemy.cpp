@@ -1,4 +1,5 @@
 #include "../header/enemy.h"
+#include "../header/player.h"
 #include <iostream>
 
 Enemy::Enemy(string type, int health, int damage, int x, int y)
