@@ -1,4 +1,6 @@
 #include "../header/game_map.h"
+#include "../header/enemy.h"
+#include "../header/player.h"
 #include <iostream>
 using namespace std;
 

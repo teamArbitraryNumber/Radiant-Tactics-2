@@ -25,12 +25,12 @@ public:
 // Specific Enemy Types
 class Skeleton : public Enemy {
 public:
-    Skeleton(int x, int y);
+    Skeleton();
 };
 
 class Goblin : public Enemy {
 public:
-    Goblin(int x, int y);
+    Goblin();
 };
 
 #endif

@@ -117,7 +117,7 @@ string Enemy::getDisplayChar() const {
 }
 
 // Skeleton enemy implementation
-Skeleton::Skeleton(int x, int y) : Enemy(CharacterType::SKELETON, "Skeleton", 100, 10, x, y) {}
+Skeleton::Skeleton() : Enemy(CharacterType::SKELETON, "Skeleton", 100, 10) {}
 
 // Goblin enemy implementation
-Goblin::Goblin(int x, int y) : Enemy("Goblin", 80, 8, x, y) {}
+Goblin::Goblin() : Enemy(CharacterType::GOBLIN, "Goblin", 80, 8) {}
