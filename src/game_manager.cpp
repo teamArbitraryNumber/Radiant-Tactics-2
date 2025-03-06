@@ -40,9 +40,9 @@ void Game_Manager::takeAction(){
     char action;
     cout << "Enter your move: ";
     cin >> action;
+    char choice;
 if(action == 'q'){
         cout << endl;
-        char choice;
         cin >> choice;
         if (choice == '1') {
             cout << "You have quit the game." << endl << endl;
