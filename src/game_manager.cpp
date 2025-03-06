@@ -20,22 +20,6 @@ void Game_Manager::start(){
 }
 }
 
-// void Game_Manager::takeAction(){
-//     char action;
-//     cout << "Enter your move: ";
-//     cin >> action;
-//     pair<int, int> playerPos = player.getPosition();
-//     pair<int, int> newPos = player.move(action, gameMap.getHeight(), gameMap.getWidth());
-//     char whatIsThis = gameMap.getObjectAt(newPos.first, newPos.second)->getDisplayChar();
-//     if (whatIsThis == 'E') {
-//         movePlayer(whatIsThis, newPos.first, newPos.second);
-//     } else if (whatIsThis == 'I') {
-//         managePlayerInventory(inventory);
-//     } else {
-//         movePlayer(whatIsThis, newPos.first, newPos.second);
-//     }
-// }
-
 void Game_Manager::takeAction(){
     char action;
     cout << "Enter your move: ";
