@@ -1,45 +1,25 @@
-#include "Item.h"
+#include "item.h"
+#include <iostream>
 
-// Display item details (base class)
 void Item::displayItem() const {
-    std::cout << "Item: " << name << " (" << type << ")\n";
+    std::cout << "Item: " << name << " (" << type << ")
+";
 }
 
 // Healing Item Implementation
-HealingItem::HealingItem(const std::string& name, int healAmt, int turns) 
-    : Item(name, "Healing"), healingAmount(healAmt), duration(turns) {}
+HealingItem::HealingItem(const std::string& name, int healAmt) 
+    : Item(name, "Healing"), healingAmount(healAmt) {}
 
 void HealingItem::useItem() const {
-    std::cout << name << " used! Restores " << healingAmount;
-    if (duration > 0)
-        std::cout << " HP per turn for " << duration << " turns.";
-    std::cout << "\n";
+    std::cout << name << " used! Restores " << healingAmount << " HP.
+";
 }
 
-// Boosting Item Implementation
-BoostingItem::BoostingItem(const std::string& name, const std::string& stat, int increase, int turns)
-    : Item(name, "Boosting"), statType(stat), statIncrease(increase), duration(turns) {}
+// Damage Item Implementation
+DamageItem::DamageItem(const std::string& name, int dmgAmt) 
+    : Item(name, "Damage"), damage(dmgAmt) {}
 
-void BoostingItem::useItem() const {
-    std::cout << name << " used! Increases " << statType << " by " << statIncrease 
-              << " for " << duration << " turns.\n";
-}
-
-// Battle Item Implementation
-BattleItem::BattleItem(const std::string& name, int dmg, int duration) 
-    : Item(name, "Battle"), damage(dmg), effectDuration(duration) {}
-
-void BattleItem::useItem() const {
-    std::cout << name << " used! Deals " << damage << " damage";
-    if (effectDuration > 0)
-        std::cout << " and affects the enemy for " << effectDuration << " turns.";
-    std::cout << "\n";
-}
-
-// Special Item Implementation
-SpecialItem::SpecialItem(const std::string& name) 
-    : Item(name, "Special") {}
-
-void SpecialItem::useItem() const {
-    std::cout << name << " used! Provides a unique effect.\n";
+void DamageItem::useItem() const {
+    std::cout << name << " used! Deals " << damage << " damage.
+";
 }
