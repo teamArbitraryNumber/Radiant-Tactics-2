@@ -121,3 +121,10 @@ void GameMap::printMap(int playerX, int playerY) const {
         cout << endl;
     }
 }
+
+void GameMap::removeObjectAt(int x, int y) {
+    if (x < 0 || x >= width || y < 0 || y >= height) {
+        throw out_of_range("Invalid map coordinates");
+    }
+    mapMatrix[y][x] = make_shared<Object>();  // Replace with an empty object
+}
