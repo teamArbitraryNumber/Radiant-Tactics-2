@@ -9,16 +9,16 @@ class Player : public Character{
     private:
         Inventory inventory;
         char movement;
-        int x, y;
         int currency;
+        int max_health;
         
     public:
-        // Player Constructor, 
+        // Player Default Constructor, 
         Player() = default;
         
-        Player(Inventory& inv, int curr, int max_health)    
-            : Character(CharacterType::PLAYER, "Player", 100, max_health, 10), inventory(inv), currency(curr) {}
-      //                    CharacterType    ,  type   , health , max_health , damage , int x ,  int y ) 
+        // Player Initialization Constructor
+        Player(CharacterType char_type, string type, int value, int h, int d, int row, int col, Inventory& inv, int curr)    
+            : Character(char_type, type, value, h, d,  row, col), inventory(inv), currency(curr), max_health(h){}
         
         // Will need more constructors for different character classes
 
@@ -26,8 +26,7 @@ class Player : public Character{
 
         int getCurrency() const;
         void setCurrency(int curr);
-        void heal(int);
-        Player(int x = 0, int y = 0); 
+        void heal(int amount);
 
 
         string getDisplayChar();

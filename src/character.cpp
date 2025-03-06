@@ -21,14 +21,14 @@ bool Character::isAlive() const {
     return health > 0; 
 }
 
-int Character::getRowPosition(){
+int Character::getRowPosition() const{
     return row_pos;
 }
 int Character::setRowPosition(int new_row){
     row_pos = new_row;
 }  
 
-int Character::getColPosition(){
+int Character::getColPosition() const{
     return col_pos;
 }
 int Character::setColPosition(int new_col){

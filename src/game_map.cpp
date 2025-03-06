@@ -1,6 +1,7 @@
 #include "../header/game_map.h"
 #include "../header/enemy.h"
 #include "../header/player.h"
+#include "../header/item.h"
 #include <iostream>
 using namespace std;
 
@@ -63,8 +64,9 @@ void GameMap::killSkeleton(int x, int y) {
         cerr << "No skeleton at the specified coordinates" << endl;
     }
 }
+
 void GameMap::initMap1(){
-    
+    //TODO
 }
 
 shared_ptr<Object> GameMap::getObjectAt(int x, int y) {
