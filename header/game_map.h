@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <memory> // For smart pointers
-#include "item.h"
 #include "character.h"
 #include "object.h"
 using namespace std;

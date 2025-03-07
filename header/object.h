@@ -7,7 +7,7 @@ using namespace std;
 class Object {
 public:
 
-    std::string type;//{}; // "character" | "sword" | "potion" | "empty"
+    std::string type;//{}; // "character" | "empty"
     int value;//{}; // 0 | 5 | 10 | 15
     
     Object();
