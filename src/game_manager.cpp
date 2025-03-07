@@ -15,6 +15,7 @@ void Game_Manager::start(){
             pair<int, int> playerPos = player.getPosition();
             gameMap.printMap(playerPos.first, playerPos.second); //// Print the map
             takeAction();
+            moveEnemies();
         }
     }
 }
@@ -106,7 +107,9 @@ void Game_Manager::takeAction() {
 //     //TODO
 // }
 
-void Game_Manager::moveEnemies(){
-    //TODO
+void Game_Manager::moveEnemies() {
+    for (auto& enemy : gameMap.getEnemies()) {
+        enemy->move(gameMap); // Move each enemy
+    }
 }
 

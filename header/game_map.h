@@ -5,6 +5,8 @@
 #include <memory> // For smart pointers
 #include "character.h"
 #include "object.h"
+#include "enemy.h"
+#include "player.h"
 using namespace std;
 
 class GameMap {
@@ -14,6 +16,8 @@ private:
     int numEnemy;//{};
     int enemyKilled;//{};
     vector<vector<shared_ptr<Object> > > mapMatrix;  // Use smart pointers to handle objects
+    vector<shared_ptr<Enemy>> enemies; // Store enemy objects
+    shared_ptr<Player> player; // Store the player
 
 public:
     GameMap();
@@ -39,6 +43,10 @@ public:
 
     int getNumEnemy() const;
     int getEnemyKilled() const;
+    void setPlayer(shared_ptr<Player> p);
+    shared_ptr<Player> getPlayer();
+    void addEnemy(shared_ptr<Enemy> enemy);
+    vector<shared_ptr<Enemy>>& getEnemies();
     int getWidth() const;
     int getHeight() const;
     void printMap(int playerX, int playerY) const;
