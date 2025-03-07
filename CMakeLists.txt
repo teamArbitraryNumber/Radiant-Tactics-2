@@ -10,6 +10,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib")
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
 
 # Include directories
 include_directories(
@@ -37,16 +38,16 @@ add_executable(game
 target_link_libraries(game gmock gtest_main)
 
 add_executable(tests
-  # tests/objectT.cpp
-  # src/object.cpp
-  # tests/game_mapT.cpp
+  tests/objectT.cpp
+  src/object.cpp
+  tests/game_mapT.cpp
   src/game_map.cpp
   src/object.cpp
   src/character.cpp
   src/enemy.cpp
   tests/enemyT.cpp
-  # src/player.cpp
-  # tests/playerT.cpp
+  src/player.cpp
+  tests/playerT.cpp
 
 )
 target_link_libraries(tests gtest gmock gtest_main)
