@@ -11,8 +11,8 @@ class GameMap {
 private:
     int height;//{};
     int width;//{};
-    int numSkeleton;//{};
-    int skeletonKilled;//{};
+    int numEnemy;//{};
+    int enemyKilled;//{};
     vector<vector<shared_ptr<Object> > > mapMatrix;  // Use smart pointers to handle objects
 
 public:
@@ -28,15 +28,15 @@ public:
         mapMatrix.clear();
     };
 
-    void initMap1();
+    // void initMap1();
 
-    void killSkeleton(int x, int y);
+    void killEnemy(int x, int y);
     shared_ptr<Object> getObjectAt(int x, int y);
     void setObjectAt(int x, int y, const shared_ptr<Object>& obj);
     void removeObjectAt(int x, int y);
 
-    int getNumSkeleton() const;
-    int getSkeletonsKilled() const;
+    int getNumEnemy() const;
+    int getEnemyKilled() const;
     int getWidth() const;
     int getHeight() const;
     void printMap(int playerX, int playerY) const;
