@@ -1,23 +1,32 @@
-// main.cpp
-#include "game_map.h"
+#include "../header/game_manager.h"
 #include <iostream>
 
+using namespace std;
+
 int main() {
-    std::vector<std::vector<int>> mapData = {
+    // Initialize the game map with a simple layout
+    vector<vector<int>> mapLayout = {
         {0, 0, 1, 0},
         {0, 1, 0, 0},
-        {0, 0, 0, 2},
+        {0, 0, 0, 0},
         {0, 1, 0, 0}
     };
 
-    GameMap gameMap(mapData, 4, 4);
-    gameMap.printMap(1, 1);  // Player at (1, 1)
+    int mapWidth = 4;
+    int mapHeight = 4;
 
-    // Check if a specific tile is a barrier
-    auto obj = gameMap.getObjectAt(2, 0);
-    if (obj->isBarrier()) {
-        std::cout << "Tile (2, 0) is a barrier!" << std::endl;
-    }
+    // Create the game map
+    GameMap gameMap(mapLayout, mapWidth, mapHeight);
+
+    // Initialize the player
+    Player player(CharacterType::PLAYER, "Player", 0, 100, 10, 0, 0, 50);
+
+    // Initialize the game manager
+    bool isOver = false;
+    Game_Manager gameManager(gameMap, player, &isOver);
+
+    // Start the game
+    gameManager.start();
 
     return 0;
 }

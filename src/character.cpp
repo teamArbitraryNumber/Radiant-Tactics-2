@@ -27,14 +27,16 @@ bool Character::isAlive() const {
 int Character::getRowPosition() const{
     return row_pos;
 }
-int Character::setRowPosition(int new_row){
-    row_pos = new_row;
-}  
 
 int Character::getColPosition() const{
     return col_pos;
 }
-int Character::setColPosition(int new_col){
+
+void Character::setRowPosition(int new_row){
+    row_pos = new_row;
+}  
+
+void Character::setColPosition(int new_col){
     col_pos = new_col;
 }
 
