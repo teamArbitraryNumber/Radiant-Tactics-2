@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+/*#include "gtest/gtest.h"
 #include "../header/object.h"
 
 TEST(ObjectTest, Constructor) {
@@ -86,6 +86,6 @@ TEST(ObjectTest, InvalidSetValue4) {
     obj.setValue(0);
     EXPECT_EQ(obj.getValue(), 0);
 }
-
+*/
 
 

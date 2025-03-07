@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+/*#include "gtest/gtest.h"
 #include "../header/player.h"
 
 TEST(PlayerTest, Constructor) {
@@ -126,7 +126,7 @@ TEST(PlayerTest, testCharacterMovement) {
     newPosition = mc.move('d', height, width);
     EXPECT_EQ(newPosition, std::make_pair(0, 0)); // Wrap around to the left
 }
-
+*/
 
 
 

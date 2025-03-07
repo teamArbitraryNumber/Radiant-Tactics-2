@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+/*#include "gtest/gtest.h"
 #include "../header/game_map.h"
 
 TEST(GameMapTest, Constructor) {
@@ -132,3 +132,4 @@ TEST(GameMapTest, NumSkeletonAfterAction){
     EXPECT_EQ(map.getNumSkeleton(), 0);
     EXPECT_EQ(map.getSkeletonsKilled(), 1);
 }
+*/

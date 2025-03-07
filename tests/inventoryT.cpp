@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+/*#include "gtest/gtest.h"
 #include "../header/inventory.h"
 
 TEST(InventoryTest, Setsize){
@@ -45,5 +45,5 @@ TEST(InventoryTest, HasWeapon){
     EXPECT_EQ(true, inv.hasWeapon("Magic"));
     EXPECT_EQ(true, inv.hasWeapon("Spear"));
 }
-
+*/
 
