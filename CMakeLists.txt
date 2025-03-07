@@ -27,7 +27,6 @@ add_subdirectory(googletest)
 # Test executables
 add_executable(game
   src/main.cpp
-  tests/objectT.cpp
   src/object.cpp
   src/character.cpp
   src/enemy.cpp
@@ -36,3 +35,16 @@ add_executable(game
   src/game_manager.cpp
 )
 target_link_libraries(game gmock gtest_main)
+
+add_executable(tests
+  # tests/objectT.cpp
+  # src/object.cpp
+  # tests/game_mapT.cpp
+  src/game_map.cpp
+  src/object.cpp
+  src/character.cpp
+  src/player.cpp
+  tests/playerT.cpp
+
+)
+target_link_libraries(tests gtest gmock gtest_main)
