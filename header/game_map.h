@@ -34,6 +34,7 @@ public:
     void killSkeleton(int x, int y);
     shared_ptr<Object> getObjectAt(int x, int y);
     void setObjectAt(int x, int y, const shared_ptr<Object>& obj);
+    void removeObjectAt(int x, int y);
 
     int getNumSkeleton() const;
     int getSkeletonsKilled() const;
