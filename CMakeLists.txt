@@ -22,15 +22,17 @@ include_directories(
 add_subdirectory(googletest)
 
 # Main application
-add_executable(main_app src/main.cpp)
+# add_executable(main_app src/main.cpp)
 
 # Test executables
-add_executable(character_tests
+add_executable(game
+  src/main.cpp
   tests/objectT.cpp
   src/object.cpp
   src/character.cpp
+  src/enemy.cpp
   src/player.cpp
   src/game_map.cpp
   src/game_manager.cpp
 )
-target_link_libraries(character_tests gtest gmock gtest_main)
+target_link_libraries(game gmock gtest_main)
