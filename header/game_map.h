@@ -6,7 +6,8 @@
 #include "character.h"
 #include "object.h"
 #include "enemy.h"
-#include "player.h"
+
+class Player; // Forward declaration
 using namespace std;
 
 class GameMap {

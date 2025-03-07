@@ -38,6 +38,7 @@ void Game_Manager::takeAction() {
     } else if (action == 'w' || action == 'a' || action == 's' || action == 'd') {
         // Calculate the target position
         pair<int, int> pos = player.move(action, gameMap.getHeight(), gameMap.getWidth());
+        
 
         // Check if the target position is a barrier
         if (!gameMap.isTerrain(pos.first, pos.second)) {
