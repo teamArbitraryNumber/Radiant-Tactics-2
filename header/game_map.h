@@ -10,15 +10,15 @@ using namespace std;
 
 class GameMap {
 private:
-    int height{};
-    int width{};
-    int numSkeleton{};
-    int skeletonKilled{};
-    vector<vector<shared_ptr<Object>>> mapMatrix;  // Use smart pointers to handle objects
+    int height;//{};
+    int width;//{};
+    int numSkeleton;//{};
+    int skeletonKilled;//{};
+    vector<vector<shared_ptr<Object> > > mapMatrix;  // Use smart pointers to handle objects
 
 public:
     GameMap();
-    GameMap(const vector<vector<int>>& initMatrix, int w, int h);
+    GameMap(const vector<vector<int> >& initMatrix, int w, int h);
     ~GameMap() {
         for (auto& row : mapMatrix) {
             for (auto& obj : row) {
@@ -26,7 +26,7 @@ public:
             }
             row.clear(); // Clear each row vector
         }
-    mapMatrix.clear();
+        mapMatrix.clear();
     };
 
     void initMap1();

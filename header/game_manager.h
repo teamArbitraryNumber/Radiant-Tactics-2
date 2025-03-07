@@ -10,13 +10,15 @@ using namespace std;
 class Game_Manager{
     private:
         GameMap gameMap;
-        bool *isOver;
-        bool end{};
+        
+        bool end;//{};
         Player player;
-        Inventory inventory;
-        int enemyGoal{};
+        shared_ptr<Inventory> inventory;
+        int enemyGoal;//{}; //amount of enemies needed to kill to get next level
         bool isPlayerTurn;
     public:
+        bool *isOver;
+
         ~Game_Manager(){};
         void start();
         void takeAction();
@@ -24,7 +26,7 @@ class Game_Manager{
             return gameMap;
         };
         void movePlayer(char input, int new_x, int new_y);
-        void managePlayerInventory(Inventory& inv);
+        void managePlayerInventory(shared_ptr<Inventory> inv);
         void moveEnemies();
 };
 

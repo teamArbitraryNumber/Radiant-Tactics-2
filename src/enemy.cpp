@@ -6,8 +6,8 @@
 #include <unordered_map>
 #include <limits>
 
-Enemy::Enemy(string type, int health, int damage, int x, int y)
-    : Character(type, 0, health, damage, x, y), enemyType(type) {}
+Enemy::Enemy(CharacterType char_type, string type, int value, int h, int d, int row, int col)
+    : Character(char_type, type, value, h, d, row, col), enemyType(type) {}
 
 // Movement logic: Move towards the player
 void Enemy::move(GameMap& map) {
@@ -111,13 +111,18 @@ void Enemy::attack(Character& player) {
     cout << enemyType << " attacks!" << endl; //Attack implenentation placeholder
 }
 
-// Display character for rendering
-string Enemy::getDisplayChar() const {
-    return enemyType == "Skeleton" ? "S" : "G";
+// Skeleton enemy implementation
+Skeleton::Skeleton() : Enemy(CharacterType::SKELETON, "Skeleton",  5    ,  70,   10  ,  0   ,  0  ) {}
+//                                  CharacterType      type      value     h     d     row   col
+
+string Skeleton::getDisplayChar(){
+    return "💀";
 }
 
-// Skeleton enemy implementation
-Skeleton::Skeleton(int x, int y) : Enemy("Skeleton", 100, 10, x, y) {}
-
 // Goblin enemy implementation
-Goblin::Goblin(int x, int y) : Enemy("Goblin", 80, 8, x, y) {}
+Goblin::Goblin() : Enemy(CharacterType::GOBLIN,   "Goblin",    2     ,  80   , 5  ,   0   ,   0) {}
+//                              CharacterType       type      value     h      d     row     col
+
+string Goblin::getDisplayChar(){
+    return "👺";
+}

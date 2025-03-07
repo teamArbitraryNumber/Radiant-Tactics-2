@@ -10,27 +10,26 @@ protected:
     string enemyType;
 
 public:
-    Enemy(string type, int health, int damage, int x, int y);
+    Enemy(CharacterType char_type, string type, int value, int h, int d, int row, int col);
 
     // Movement
     void move(GameMap& map);
 
     // Attack
     void attack(Character &) override;
-
-    // Display character
-    string getDisplayChar() const;
 };
 
 // Specific Enemy Types
 class Skeleton : public Enemy {
 public:
-    Skeleton(int x, int y);
+    Skeleton();
+    string getDisplayChar() override;
 };
 
 class Goblin : public Enemy {
 public:
-    Goblin(int x, int y);
+    Goblin();
+    string getDisplayChar() override;
 };
 
 #endif
