@@ -7,8 +7,8 @@ using namespace std;
 int main() {
     // Initialize the game map with a simple layout
     vector<vector<int>> mapLayout = {
-        {0, 0, 1, 0},
-        {0, 1, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
         {0, 0, 0, 0},
         {0, 1, 0, 0}
     };

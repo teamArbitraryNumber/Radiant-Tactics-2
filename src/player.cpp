@@ -57,6 +57,6 @@ string Player::getDisplayChar(){
 }
 
 void Player::attack(Character &opp){
-    
+    cout << "we attacked";
     //TODO
 }
