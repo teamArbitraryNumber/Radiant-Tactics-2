@@ -22,4 +22,10 @@ public:
     virtual string getDisplayChar() = 0;
 };
 
+class EmptyObject : public Object {
+    public:
+        EmptyObject() : Object("empty", 0) {}
+        string getDisplayChar() override { return " "; }
+};
+
 #endif

@@ -16,6 +16,7 @@
 #include <limits>
 
 #include "item.h"
+using namespace std;
 
 class Inventory
 {       // The class

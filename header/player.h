@@ -16,7 +16,7 @@ class Player : public Character{
         
     public:
         // Player Default Constructor, 
-        Player() = default;
+        Player();
         
         // Player Initialization Constructor
         Player(CharacterType char_type, string type, int value, int h, int d, int row, int col, shared_ptr<Inventory> inv, int curr);

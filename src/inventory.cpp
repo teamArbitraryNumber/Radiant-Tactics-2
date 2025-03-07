@@ -4,7 +4,7 @@ using namespace std;
 
 
 
-
+/*
 //Add Weapon to inventory
 void Inventory::addWeapon(string weaponToAdd){
     if(inventoryCounter < inventorySize){
@@ -139,3 +139,4 @@ void market(int currGold){
         market(currGold);
     }
 }
+    */

@@ -64,7 +64,7 @@ void GameMap::killEnemy(int x, int y) {
 
     shared_ptr<Object>& obj = mapMatrix[y][x];
     if (obj->getType() == "Skeleton") {
-        obj = make_shared<Object>();  // Replace with an empty object
+        obj = make_shared<EmptyObject>();  // Replace with an empty object
         enemiesKilled++;
     } else {
         cerr << "No skeleton at the specified coordinates" << endl;
@@ -158,5 +158,5 @@ void GameMap::removeObjectAt(int x, int y) {
     if (x < 0 || x >= width || y < 0 || y >= height) {
         throw out_of_range("Invalid map coordinates");
     }
-    mapMatrix[y][x] = make_shared<Object>();  // Replace with an empty object
+    mapMatrix[y][x] = make_shared<EmptyObject>();  // Replace with an empty object
 }

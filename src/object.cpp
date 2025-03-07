@@ -8,7 +8,7 @@ Object::Object() : type("Null"), value(0) {}
 Object::Object(const string& type, int value) : type(type), value(value) {}
 
 string Object::getType() const {
-    return "Null";
+    return type;
 }
 
 int Object::getValue() const {
