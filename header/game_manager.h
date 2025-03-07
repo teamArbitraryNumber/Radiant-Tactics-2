@@ -11,10 +11,10 @@ class Game_Manager{
     private:
         GameMap gameMap;
         
-        bool end;//{};
-        Player player;
+        bool end;
+        Player player;//Don't think this is needed - (Corey)
         shared_ptr<Inventory> inventory;
-        int enemyGoal;//{}; //amount of enemies needed to kill to get next level
+        int enemyGoal; //amount of enemies needed to kill to get next level
         bool isPlayerTurn;
     public:
         bool *isOver;
@@ -22,7 +22,7 @@ class Game_Manager{
         ~Game_Manager(){};
         void start();
         void takeAction();
-        GameMap getGameMap()const {
+        GameMap& getGameMap() {
             return gameMap;
         };
         void movePlayer(char input, int new_x, int new_y);

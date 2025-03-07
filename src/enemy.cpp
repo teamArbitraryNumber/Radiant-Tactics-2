@@ -7,7 +7,7 @@
 #include <limits>
 
 Enemy::Enemy(CharacterType char_type, string type, int value, int h, int d, int row, int col)
-    : Character(char_type, type, value, h, d, row, col), enemyType(type) {}
+    : Character(char_type, type, value, h, d, row, col) {}
 
 // Movement logic: Move towards the player
 void Enemy::move(GameMap& map) {
@@ -108,7 +108,7 @@ void Enemy::attack(Character& player) {
     int targetHealth = player.getHealth();
     player.setHealth(targetHealth - damage);
     
-    cout << enemyType << " attacks!" << endl; //Attack implenentation placeholder
+    cout << type << " attacks!" << endl; //Attack implenentation placeholder
 }
 
 // Skeleton enemy implementation

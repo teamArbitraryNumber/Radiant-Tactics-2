@@ -42,10 +42,6 @@ class Character : public virtual Object {
         int getColPosition() const;
         int setColPosition(int new_col);
 
-        virtual string getDisplayChar() = 0;
-
-
-    
         // Position functions
         // Attack function (pure virtual for polymorphism, MUST override)
         virtual void attack(Character &opp) = 0;

@@ -6,9 +6,6 @@
 using namespace std;
 
 class Enemy : public Character {
-protected:
-    string enemyType;
-
 public:
     Enemy(CharacterType char_type, string type, int value, int h, int d, int row, int col);
 

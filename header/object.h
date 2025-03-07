@@ -19,6 +19,7 @@ public:
     int getValue() const;
     void setValue(int newValue);
     virtual void print() const;
+    virtual string getDisplayChar() = 0;
 };
 
 #endif

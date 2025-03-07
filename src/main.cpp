@@ -24,15 +24,17 @@ bool startMenu()
 }
 
 int main(){
-    if(startMenu()){
-        Game_Manager gameManager;
-    // Start the game
-    gameManager.start();
+    if(startMenu()){//player chooses to start a game
+        Game_Manager gameManager = Game_Manager();
 
-    // Main game loop
+        //initialize map
+        gameManager.getGameMap().initMap1();
+        //output map
+        gameManager.getGameMap().displayMap();
+        // Main game loop
         while (true) {
             gameManager.takeAction(); // Handle player and enemy actions
-
+            
             // Check if the game is over
             if (gameManager.isOver) {
                 cout << "Game Over!" << endl;
