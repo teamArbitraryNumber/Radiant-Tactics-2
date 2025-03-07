@@ -3,18 +3,22 @@
 
 #include <vector>
 #include <memory> // For smart pointers
-#include "item.h"
 #include "character.h"
 #include "object.h"
+#include "enemy.h"
+
+class Player; // Forward declaration
 using namespace std;
 
 class GameMap {
 private:
     int height;//{};
     int width;//{};
-    int numSkeleton;//{};
-    int skeletonKilled;//{};
+    int numEnemy;//{};
+    int enemyKilled;//{};
     vector<vector<shared_ptr<Object> > > mapMatrix;  // Use smart pointers to handle objects
+    vector<shared_ptr<Enemy>> enemies; // Store enemy objects
+    shared_ptr<Player> player; // Store the player
 
 public:
     GameMap();
@@ -29,15 +33,21 @@ public:
         mapMatrix.clear();
     };
 
-    void initMap1();
+    // void initMap1();
 
-    void killSkeleton(int x, int y);
+    void killEnemy(int x, int y);
     shared_ptr<Object> getObjectAt(int x, int y);
     void setObjectAt(int x, int y, const shared_ptr<Object>& obj);
     void removeObjectAt(int x, int y);
 
-    int getNumSkeleton() const;
-    int getSkeletonsKilled() const;
+    bool isTerrain(int x, int y) const;
+
+    int getNumEnemy() const;
+    int getEnemyKilled() const;
+    void setPlayer(shared_ptr<Player> p);
+    shared_ptr<Player> getPlayer();
+    void addEnemy(shared_ptr<Enemy> enemy);
+    vector<shared_ptr<Enemy>>& getEnemies();
     int getWidth() const;
     int getHeight() const;
     void printMap(int playerX, int playerY) const;

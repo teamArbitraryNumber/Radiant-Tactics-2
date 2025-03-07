@@ -2,7 +2,9 @@
 #define ENEMY_H
 
 #include "character.h"
-#include "game_map.h"
+
+class GameMap;
+
 using namespace std;
 
 class Enemy : public Character {

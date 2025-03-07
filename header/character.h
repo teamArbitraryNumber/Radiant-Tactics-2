@@ -37,10 +37,10 @@ class Character : public virtual Object {
         bool isAlive() const;
 
         int getRowPosition() const;
-        int setRowPosition(int new_row);
+        void setRowPosition(int new_row);
 
         int getColPosition() const;
-        int setColPosition(int new_col);
+        void setColPosition(int new_col);
 
         virtual string getDisplayChar() = 0;
 
