@@ -30,15 +30,15 @@ int main(){
     gameManager.start();
 
     // Main game loop
-    while (true) {
-        gameManager.takeAction(); // Handle player and enemy actions
+        while (true) {
+            gameManager.takeAction(); // Handle player and enemy actions
 
-        // Check if the game is over
-        if (gameManager.isOver) {
-            cout << "Game Over!" << endl;
-            break;
+            // Check if the game is over
+            if (gameManager.isOver) {
+                cout << "Game Over!" << endl;
+                break;
+            }
         }
-    }
     }
     
     return 0;

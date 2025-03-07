@@ -12,12 +12,11 @@ struct Map {
 void Game_Manager::start(){
     while (!end && !*isOver) {
         while (!end && !*isOver) {
-        pair<int, int> playerPos = player.getPosition();
-        gameMap.printMap(playerPos.first, playerPos.second); //// Print the map
-        takeAction();
-
+            pair<int, int> playerPos = player.getPosition();
+            gameMap.printMap(playerPos.first, playerPos.second); //// Print the map
+            takeAction();
+        }
     }
-}
 }
 
 // void Game_Manager::takeAction(){
@@ -67,7 +66,7 @@ void Game_Manager::managePlayerInventory(shared_ptr<Inventory> inv){
     //TODO
 }
 
-void moveEnemies(){
+void Game_Manager::moveEnemies(){
     //TODO
 }
 
