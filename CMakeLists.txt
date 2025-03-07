@@ -43,8 +43,10 @@ add_executable(tests
   src/game_map.cpp
   src/object.cpp
   src/character.cpp
-  src/player.cpp
-  tests/playerT.cpp
+  src/enemy.cpp
+  tests/enemyT.cpp
+  # src/player.cpp
+  # tests/playerT.cpp
 
 )
 target_link_libraries(tests gtest gmock gtest_main)

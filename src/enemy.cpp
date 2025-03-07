@@ -10,6 +10,10 @@
 Enemy::Enemy(CharacterType char_type, string type, int value, int h, int d, int row, int col)
     : Character(char_type, type, value, h, d, row, col), enemyType(type) {}
 
+    std::pair<int, int> Enemy::getPosition() const {
+    return {getColPosition(), getRowPosition()};
+    }
+
 // Movement logic: Move towards the player
 void Enemy::move(GameMap& map) {
     int width = map.getWidth();

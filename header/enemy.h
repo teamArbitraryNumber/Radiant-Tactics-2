@@ -19,6 +19,8 @@ public:
 
     // Attack
     void attack(Character &) override;
+        std::pair<int, int> getPosition() const;
+
 };
 
 // Specific Enemy Types
