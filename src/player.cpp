@@ -3,12 +3,6 @@
 
 using namespace std;
 
-
-
-// Player Initialization Constructor
-// Player::Player(CharacterType char_type, string type, int value, int h, int d, int row, int col, shared_ptr<Inventory> inv, int curr)    
-//     : Character(char_type, type, value, h, d,  row, col), inventory(inv), currency(curr), max_health(h){}
-
 Player::Player(CharacterType char_type, string type, int value, int h, int d, int row, int col, int curr)    
     : Character(char_type, type, value, h, d,  row, col), currency(curr), max_health(h){}
 int Player::mod(int value, int limit){
@@ -26,9 +20,6 @@ pair<int, int> Player::move(char action, int height, int width){
     } else if (action == 'd') { // Move right
         newX = mod(newX + 1, width);
     }
-
-    setPosition(newX, newY);
-    //          col, row
 
     return {newX, newY};
     //      col , row

@@ -35,6 +35,8 @@ public:
     void setObjectAt(int x, int y, const shared_ptr<Object>& obj);
     void removeObjectAt(int x, int y);
 
+    bool isTerrain(int x, int y) const;
+
     int getNumEnemy() const;
     int getEnemyKilled() const;
     int getWidth() const;

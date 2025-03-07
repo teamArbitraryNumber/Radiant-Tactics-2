@@ -32,6 +32,14 @@ GameMap::GameMap(const vector<vector<int>>& initMatrix, int w, int h) : height(h
     }
 }
 
+bool GameMap::isTerrain(int x, int y) const {
+    if (x < 0 || x >= width || y < 0 || y >= height) {
+        throw out_of_range("Invalid map coordinates");
+    }
+    return mapMatrix[y][x]->isBarrier();
+}
+
+
 void GameMap::killEnemy(int x, int y) {
     if (x < 0 || x >= width || y < 0 || y >= height) {
         throw out_of_range("Invalid map coordinates");
