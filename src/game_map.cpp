@@ -40,6 +40,9 @@ bool GameMap::isTerrain(int x, int y) const {
     return mapMatrix[y][x]->isBarrier();
 }
 
+vector<vector<shared_ptr<Object> > >& GameMap::getMapMatrix(){
+    return mapMatrix;
+}
 
 void GameMap::killEnemy(int x, int y) {
     if (x < 0 || x >= width || y < 0 || y >= height) {
@@ -151,7 +154,7 @@ void GameMap::printMap(int playerX, int playerY) const {
         for (int x = 0; x < width; x++) {
             // Check if the current position is the player
             if (x == playerX && y == playerY) {
-                cout << ":)";  // Represent the player
+                cout << player->getDisplayChar();  // Represent the player
             } else {
                 // Check if the current position has an enemy
                 bool isEnemy = false;
@@ -169,7 +172,12 @@ void GameMap::printMap(int playerX, int playerY) const {
                     if (obj->getType() == "Skeleton" || obj->getType() == "Sword" || obj->getType() == "Potion") {
                         cout << "*";
                     } else {
-                        cout << ". ";  // Represent empty spaces
+                        if(obj->isBarrier()){
+                            cout << "▣ ";
+                        }
+                        else{
+                            cout << "□ ";  // Represent empty spaces
+                        }
                     }
                 }
             }

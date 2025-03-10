@@ -34,7 +34,7 @@ public:
     };
 
     // void initMap1();
-
+    vector<vector<shared_ptr<Object> > >& getMapMatrix();
     void killEnemy(int x, int y);
     shared_ptr<Object> getObjectAt(int x, int y);
     void setObjectAt(int x, int y, const shared_ptr<Object>& obj);

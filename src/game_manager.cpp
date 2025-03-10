@@ -1,6 +1,7 @@
 #include "../header/game_manager.h"
 #include <iostream>
 
+
 using namespace std;
 
 struct Map {
@@ -28,6 +29,7 @@ void Game_Manager::takeAction() {
     if (action == 'q') {
         char choice;
         cout << endl;
+        cout << "Would you like to quit the game? (enter 1 for yes, and 2 for no)" << endl;
         cin >> choice;
         if (choice == '1') {
             cout << "You have quit the game." << endl << endl;
@@ -38,7 +40,6 @@ void Game_Manager::takeAction() {
     } else if (action == 'w' || action == 'a' || action == 's' || action == 'd') {
         // Calculate the target position
         pair<int, int> pos = player.move(action, gameMap.getHeight(), gameMap.getWidth());
-        
 
         // Check if the target position is a barrier
         if (!gameMap.isTerrain(pos.first, pos.second)) {
