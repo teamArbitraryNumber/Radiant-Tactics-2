@@ -24,7 +24,7 @@ class Game_Manager{
         ~Game_Manager(){};
         void start();
         void takeAction();
-        GameMap getGameMap()const {
+        GameMap& getGameMap() {
             return gameMap;
         };
         // void movePlayer(char input, int new_x, int new_y);
