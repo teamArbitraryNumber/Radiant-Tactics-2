@@ -51,7 +51,7 @@ public:
     vector<shared_ptr<Enemy>>& getEnemies();
     int getWidth() const;
     int getHeight() const;
-    void printMap(int playerX, int playerY) const;
+    void printMap() const;
 };
 
 #endif
