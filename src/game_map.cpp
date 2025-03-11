@@ -123,38 +123,6 @@ int GameMap::getHeight() const {
     return height;
 }
 
-// void GameMap::printMap(int playerX, int playerY) const {
-//     for (int y = 0; y < height; y++) {
-//         for (int x = 0; x < width; x++) {
-//             // Check if the current position is the player
-//             if (x == playerX && y == playerY) {
-//                 cout << ":)";  // Represent the player
-//             } else {
-//                 // Check if the current position has an enemy
-//                 bool isEnemy = false;
-//                 for (const auto& enemy : enemies) {
-//                     if (enemy->getColPosition() == x && enemy->getRowPosition() == y) {
-//                         cout << enemy->getDisplayChar(); // Display the enemy
-//                         isEnemy = true;
-//                         break;
-//                     }
-//                 }
-//                 // If no enemy, check for other objects
-//                 if (!isEnemy) {
-//                     auto obj = mapMatrix[y][x];
-//                     if (obj->getType() == "Skeleton" || obj->getType() == "Sword" || obj->getType() == "Potion") {
-//                         cout << "*";
-//                     } else {
-//                         cout << ". ";  // Represent empty spaces
-//                     }
-//                 }
-//             }
-//             cout << "\t";
-//         }
-//         cout << endl;
-//     }
-// }
-
 void GameMap::printMap(int playerX, int playerY) const {
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
@@ -175,7 +143,8 @@ void GameMap::printMap(int playerX, int playerY) const {
     }
     cout << endl;
     
-    /*for (int y = 0; y < height; y++) {
+    /* Below is likely not needed 
+    for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             // Check if the current position is the player
             if (x == playerX && y == playerY) {
