@@ -41,6 +41,7 @@ public:
     void removeObjectAt(int x, int y);
 
     bool isTerrain(int x, int y) const;
+    bool isEnemy(int x, int y) const;
 
     int getNumEnemy() const;
     int getEnemyKilled() const;

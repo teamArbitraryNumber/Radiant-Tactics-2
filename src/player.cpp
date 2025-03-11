@@ -22,7 +22,7 @@ pair<int, int> Player::move(char action, int height, int width){
     }
     
 
-    return {newX, newY};
+    return {newX, newY};//{newX, newY};
     //      col , row
 }
 

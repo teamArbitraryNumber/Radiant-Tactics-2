@@ -12,12 +12,10 @@ struct Map {
 
 void Game_Manager::start(){
     while (!end && !*isOver) {
-        while (!end && !*isOver) {
-            pair<int, int> playerPos = player.getPosition();
-            gameMap.printMap(playerPos.first, playerPos.second); //// Print the map
-            takeAction();
-            moveEnemies();
-        }
+        pair<int, int> playerPos = player->getPosition();
+        gameMap.printMap(playerPos.first, playerPos.second); //// Print the map
+        takeAction();
+        moveEnemies();
     }
 }
 
@@ -39,14 +37,20 @@ void Game_Manager::takeAction() {
         }
     } else if (action == 'w' || action == 'a' || action == 's' || action == 'd') {
         // Calculate the target position
-        pair<int, int> pos = player.move(action, gameMap.getHeight(), gameMap.getWidth());
-
+        pair<int, int> currPos = player->getPosition();
+        pair<int, int> pos = player->move(action, gameMap.getHeight(), gameMap.getWidth());
         // Check if the target position is a barrier
-        if (!gameMap.isTerrain(pos.first, pos.second)) {
+        if (!gameMap.isTerrain(pos.first, pos.second) && !gameMap.isEnemy(pos.first, pos.second)) {
             // Update player position if the target is not a barrier
-            player.setPosition(pos.first, pos.second);
-        } else {
+            gameMap.removeObjectAt(currPos.first, currPos.second);
+            gameMap.setObjectAt(pos.first, pos.second, player);
+            player->setPosition(pos.first, pos.second);
+        }
+        else if(gameMap.isTerrain(pos.first, pos.second)){
             cout << "You cannot move onto a barrier!" << endl;
+        }
+        else if(gameMap.isEnemy(pos.first, pos.second)){
+            cout << "You cannot move onto an enemy!" << endl;
         }
     } else {
         cout << "Invalid action. Please try again." << endl;
