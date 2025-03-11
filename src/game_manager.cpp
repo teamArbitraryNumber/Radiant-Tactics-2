@@ -23,8 +23,8 @@ void Game_Manager::takeAction() {
     char action;
     cout << "Enter your move: ";
     cin >> action;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Clear input buffer
-    
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Clear input buffer, (without this if player enters ww, they move up twice, etc.)
+
     if (action == 'q') {
         char choice;
         cout << endl;
