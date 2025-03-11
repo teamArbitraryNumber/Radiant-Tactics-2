@@ -28,7 +28,6 @@ void Game_Manager::start(){
         pair<int, int> playerPos = player->getPosition();
         gameMap.printMap(); //// Print the map before players move
         takeAction();    // player can either quit or move
-        //gameMap.printMap(); //print map after players move
         //player.attack()      player attacks after move
         if(player->getPosition() != playerPos){// only move enemies if player moved
             moveEnemies();   // enemies move
