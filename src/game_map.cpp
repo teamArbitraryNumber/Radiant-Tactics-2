@@ -131,7 +131,7 @@ void GameMap::printMap(int playerX, int playerY) const {
             }
             else {
                if(mapMatrix[i][j]->isBarrier()){
-                    cout << "▣\t"; 
+                    cout << "🧱\t"; 
                 }
                 else{
                     cout << "□\t";
@@ -139,7 +139,7 @@ void GameMap::printMap(int playerX, int playerY) const {
             }
             
         }
-        cout << endl;
+        cout << endl << endl;
     }
     cout << endl;
     

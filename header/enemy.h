@@ -14,8 +14,9 @@ protected:
 public:
     Enemy(CharacterType char_type, string type, int value, int h, int d, int row, int col);
 
+    int mod(int value, int limit);
     // Movement
-    void move(GameMap& map);
+    void move(shared_ptr<Enemy>& enemy, GameMap& map);
 
     // Attack
     void attack(Character &) override;

@@ -7,14 +7,25 @@ using namespace std;
 int main() {
     // Initialize the game map with a simple layout
     vector<vector<int>> mapLayout = {
+        /*{0, 0, 0, 0},
         {0, 0, 0, 0},
         {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 1, 0, 0}
+        {0, 1, 0, 0}*/
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+        {0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0},
+        {0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0}
     };
 
-    int mapWidth = 4;
-    int mapHeight = 4;
+    int mapWidth = 11/*4*/;
+    int mapHeight = 11/*4*/;
 
     // Create the game map
     GameMap gameMap(mapLayout, mapWidth, mapHeight);

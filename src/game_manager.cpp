@@ -115,7 +115,7 @@ void Game_Manager::takeAction() {
 
 void Game_Manager::moveEnemies() {
     for (auto& enemy : gameMap.getEnemies()) {
-        enemy->move(gameMap); // Move each enemy
+        enemy->move(enemy, gameMap); // Move each enemy
     }
 }
 
