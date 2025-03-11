@@ -23,7 +23,8 @@ void Game_Manager::takeAction() {
     char action;
     cout << "Enter your move: ";
     cin >> action;
-
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Clear input buffer
+    
     if (action == 'q') {
         char choice;
         cout << endl;
@@ -39,7 +40,7 @@ void Game_Manager::takeAction() {
         // Calculate the target position
         pair<int, int> currPos = player->getPosition();
         pair<int, int> pos = player->move(action, gameMap.getHeight(), gameMap.getWidth());
-        // Check if the target position is a barrier
+        // Check if the target position is a barrier or enemy
         if (!gameMap.isTerrain(pos.first, pos.second) && !gameMap.isEnemy(pos.first, pos.second)) {
             // Update player position if the target is not a barrier
             gameMap.removeObjectAt(currPos.first, currPos.second);
