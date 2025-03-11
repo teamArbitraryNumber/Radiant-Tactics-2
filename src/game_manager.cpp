@@ -5,7 +5,7 @@
 
 using namespace std;
 
-char getch() {
+char getch() {//needed for user to not need to hit enter when inputting
     struct termios oldt, newt;
     char ch;
     tcgetattr(STDIN_FILENO, &oldt);  // Get current terminal attributes
@@ -28,7 +28,7 @@ void Game_Manager::start(){
         pair<int, int> playerPos = player->getPosition();
         gameMap.printMap(); //// Print the map before players move
         takeAction();    // player can either quit or move
-        gameMap.printMap(); //print map after players move
+        //gameMap.printMap(); //print map after players move
         //player.attack()      player attacks after move
         if(player->getPosition() != playerPos){// only move enemies if player moved
             moveEnemies();   // enemies move
@@ -43,6 +43,7 @@ void Game_Manager::takeAction() {
     //cin >> action;
     //cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Clear input buffer, (without this if player enters ww, they move up twice, etc.)
     char action = getch();
+    cout << endl;
     if (action == 'q') {
         char choice;
         cout << endl;
@@ -69,12 +70,18 @@ void Game_Manager::takeAction() {
             player->setPosition(pos.first, pos.second);
         }
         else if(gameMap.isTerrain(pos.first, pos.second)){//object is terrain
+            cout << endl;
+            gameMap.printMap(); //print map after players move
             cout << "You cannot move onto a barrier!" << endl;
         }
         else if(gameMap.isEnemy(pos.first, pos.second)){//object is an enemy
+            cout << endl;
+            gameMap.printMap(); //print map after players move
             cout << "You cannot move onto an enemy!" << endl;
         }
     } else {
+        cout << endl;
+        gameMap.printMap(); //print map after players move
         cout << "Invalid action. Please try again." << endl;
     }
 }
