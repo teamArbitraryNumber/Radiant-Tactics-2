@@ -191,11 +191,10 @@ void Enemy::move(shared_ptr<Enemy>& enemy, GameMap& map) {
 
 
 // Attack logic
-void Enemy::attack(Character& player) {
-    int targetHealth = player.getHealth();
-    player.setHealth(targetHealth - damage);
-    
-    cout << enemyType << " attacks!" << endl; //Attack implenentation placeholder
+void Enemy::attack(Character &player) {
+    int damage = getDamage(); // Assuming getDamage() returns the enemy's damage
+    player.setHealth(player.getHealth() - damage);
+    cout << enemyType << " attacks for " << damage << " damage!" << endl;
 }
 
 // Skeleton enemy implementation

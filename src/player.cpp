@@ -58,8 +58,11 @@ string Player::getDisplayChar(){
     return "👼";
 }
 
-void Player::attack(Character &opp){
-    cout << "we attacked";
-    //TODO
+// In Player class
+void Player::attack(Character &target) {
+    int damage = getDamage(); // Assuming getDamage() returns the player's damage
+    target.setHealth(target.getHealth() - damage);
+    cout << "Player attacks for " << damage << " damage!" << endl;
 }
+
 
