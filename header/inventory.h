@@ -18,15 +18,15 @@ class Inventory
 public: // Access specifier
     int inventorySize;
     int inventoryCounter;
-    vector<Item> weaponList;
-    vector<Item> potionList;
+    vector<DamageItem> weaponList;
+    vector<HealingItem> potionList;
     Inventory()
     { // Constructor
-        inventorySize = 10;
+        inventorySize = 15;
         inventoryCounter = 0;
     }
-    void addWeapon(string);
-    void addPotion(string);
+    void addWeapon(DamageItem);
+    void addPotion(HealingItem);
 
     int equipWeapon(int);
     int usePotion();
@@ -34,11 +34,16 @@ public: // Access specifier
     bool hasPotion(string);
     bool hasWeapon(string);
 
-    void invFull(string);
+    void invFullHealing(HealingItem);
+    void invFullWeapon(DamageItem);
 
     void setInvSize(int);
     void setInvCounter(int);
 
+    int market(int);
+
+    //Print Inventory
+    void printInv();
 
     //Destructor
     ~Inventory(){}
