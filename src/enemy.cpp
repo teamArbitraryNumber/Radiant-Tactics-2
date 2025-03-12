@@ -15,7 +15,7 @@ int Enemy::mod(int value, int limit){
 }
 // Movement logic: Move towards the player
 void Enemy::move(shared_ptr<Enemy>& enemy, GameMap& map) {
-    int width = map.getWidth();
+    /*int width = map.getWidth();
     int height = map.getHeight();
 
     // Get player position
@@ -87,23 +87,16 @@ void Enemy::move(shared_ptr<Enemy>& enemy, GameMap& map) {
         }
        
     }
+    */
 
-
-    //compare player position and enemy position
-    //for each available enemy movement location (up, down, left, right)
-    //find one closer to the player
-    //if no there is no other objects on the location
-    //  move to location and update gameMap
-
-
-    /*int width = map.getWidth();
+    int width = map.getWidth();
     int height = map.getHeight();
 
     // Get player position
     shared_ptr<Object> playerObj;
     int playerX = -1, playerY = -1;
 
-    // Find the player's actual position
+    // Find the player's position
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             shared_ptr<Object> obj = map.getObjectAt(x, y);
@@ -119,11 +112,28 @@ void Enemy::move(shared_ptr<Enemy>& enemy, GameMap& map) {
         return; // Player not found, do nothing
     }
 
-    int startX = col_pos;
-    int startY = row_pos;
+    // Check if the enemy is already adjacent to the player
+    int enemyX = getColPosition();
+    int enemyY = getRowPosition();
 
-    // Directions: Right, Left, Down, Up
-    vector<pair<int, int>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    // Directions: Up, Down, Left, Right
+    vector<pair<int, int>> directions = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
+
+    bool isAdjacent = false;
+    for (auto [dx, dy] : directions) {
+        int adjacentX = (enemyX + dx + width) % width; // Wrap around horizontally
+        int adjacentY = (enemyY + dy + height) % height; // Wrap around vertically
+
+        if (adjacentX == playerX && adjacentY == playerY) {
+            isAdjacent = true;
+            break;
+        }
+    }
+
+    // If the enemy is already adjacent to the player, do not move
+    if (isAdjacent) {
+        return;
+    }
 
     // BFS setup
     queue<pair<int, int>> q;
@@ -133,34 +143,40 @@ void Enemy::move(shared_ptr<Enemy>& enemy, GameMap& map) {
     // Lambda to convert (x, y) to a unique key
     auto toKey = [&](int x, int y) { return y * width + x; };
 
+    // Start BFS from the enemy's current position
+    int startX = getColPosition();
+    int startY = getRowPosition();
     q.push({startX, startY});
     visited[toKey(startX, startY)] = true;
 
     bool found = false;
 
+    // Perform BFS to find the shortest path to the player
     while (!q.empty() && !found) {
         auto [x, y] = q.front();
         q.pop();
 
         for (auto [dx, dy] : directions) {
-            int newX = x + dx;
-            int newY = y + dy;
-
-            // Check bounds
-            if (newX < 0 || newX >= width || newY < 0 || newY >= height) continue;
+            int newX = (x + dx + width) % width; // Wrap around horizontally
+            int newY = (y + dy + height) % height; // Wrap around vertically
 
             // Check if already visited
             if (visited[toKey(newX, newY)]) continue;
 
-            // Check if space is occupied
+            // Check if the space is walkable (empty or player)
             shared_ptr<Object> obj = map.getObjectAt(newX, newY);
-            if (obj && obj->getType() != "empty" && obj->getType() != "Player") continue;  // Avoid obstacles/enemies
+            if (obj) {
+                // Avoid barriers and other enemies
+                if (obj->isBarrier() || (obj->getType() != "Player" && obj->getType() != "Null")) {
+                    continue;
+                }
+            }
 
             // Mark as visited and store parent for pathfinding
             visited[toKey(newX, newY)] = true;
             parent[toKey(newX, newY)] = {x, y};
 
-            // If we reached the player, stop BFS
+            // If we reach the player, stop BFS
             if (newX == playerX && newY == playerY) {
                 found = true;
                 break;
@@ -180,13 +196,20 @@ void Enemy::move(shared_ptr<Enemy>& enemy, GameMap& map) {
         previous = current;
         current = parent[toKey(current.first, current.second)];
 
-        if (current == make_pair(startX, startY)) break;  // Stop at the first move
+        if (current == make_pair(startX, startY)) break; // Stop at the first move
     }
 
     // Move the enemy to the first step in the path
-    setColPosition(previous.first);
-    setRowPosition(previous.second);
-    */
+    int newX = previous.first;
+    int newY = previous.second;
+
+    // Update the enemy's position
+    setColPosition(newX);
+    setRowPosition(newY);
+
+    // Update the game map
+    map.removeObjectAt(startX, startY);
+    map.setObjectAt(newX, newY, enemy);
 }
 
 

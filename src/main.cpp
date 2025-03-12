@@ -19,12 +19,12 @@ int main() {
 
     // Start the game
 
-    gameManager.start();
+    gameManager.start();//begin map 1
     
     gameMap1 = initMap2(gameMap1.getPlayer());//update game map
     gameManager.end = false;
     gameManager.enemyGoal = 3;//update game manager
-    gameManager.start();
+    gameManager.start();//begin map 2
     return 0;
 }
 
