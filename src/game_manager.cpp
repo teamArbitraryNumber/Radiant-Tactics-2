@@ -29,7 +29,7 @@ void Game_Manager::start(){
         gameMap.printMap(); //// Print the map before players move
         bool doorEntered = takeAction();// player can either quit or move
         if(doorEntered == 1){ //break while loop if door is entered
-            *isOver = true;
+            end = true;
             break;
         }
         //player.attack()      player attacks after move
