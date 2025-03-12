@@ -1,45 +1,45 @@
 #include "../header/game_manager.h"
+#include "../header/enemy.h"
 #include <iostream>
+
 using namespace std;
 
-bool startMenu()
-{
-    cout << "Welcome to Radiant Tactics: Dungeon Crawler!" << endl << endl;
-    cout << "Would you like to start a game? (type 'y' for yes or 'n' for no)" << endl;
-    string input;
-    getline(cin, input);
+int main() {
+    // Initialize the game map with a simple layout
+    vector<vector<int>> mapLayout = {
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 1, 0, 0}
+    };
 
-    while (input != "y" && input != "n")
-    {
-        cout << "invalid input: (type 'y' for yes or 'n' for no)" << endl;
-        getline(cin, input);
-    }
+    int mapWidth = 4;
+    int mapHeight = 4;
 
-    if (input == "y")
-    {
-        return true;
-    }
+    // Create the game map
+    GameMap gameMap(mapLayout, mapWidth, mapHeight);
 
-    return false;
-}
+    // Initialize the player
+    auto player = make_shared<Player>(CharacterType::PLAYER, "Player", 0, 100, 10, 0, 0, 50);
+    gameMap.setPlayer(player); // Set the player in the map
 
-int main(){
-    if(startMenu()){
-        Game_Manager gameManager;
+    // Add enemies to the map
+    auto skeleton = make_shared<Skeleton>();
+    skeleton->setColPosition(2); // Set initial position
+    skeleton->setRowPosition(2);
+    gameMap.addEnemy(skeleton);
+
+    auto goblin = make_shared<Goblin>();
+    goblin->setColPosition(3); // Set initial position
+    goblin->setRowPosition(3);
+    gameMap.addEnemy(goblin);
+
+    // Initialize the game manager
+    bool isOver = false;
+    Game_Manager gameManager(gameMap, *player, &isOver);
+
     // Start the game
     gameManager.start();
 
-    // Main game loop
-        while (true) {
-            gameManager.takeAction(); // Handle player and enemy actions
-
-            // Check if the game is over
-            if (gameManager.isOver) {
-                cout << "Game Over!" << endl;
-                break;
-            }
-        }
-    }
-    
     return 0;
 }

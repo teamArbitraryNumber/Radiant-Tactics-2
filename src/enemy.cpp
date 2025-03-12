@@ -1,5 +1,6 @@
 #include "../header/enemy.h"
 #include "../header/player.h"
+#include "../header/game_map.h"
 #include <iostream>
 #include <queue>
 #include <vector>
@@ -102,6 +103,7 @@ void Enemy::move(GameMap& map) {
     setColPosition(previous.first);
     setRowPosition(previous.second);
 }
+
 
 // Attack logic
 void Enemy::attack(Character& player) {

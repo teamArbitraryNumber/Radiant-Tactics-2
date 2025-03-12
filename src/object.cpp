@@ -3,25 +3,35 @@
 #include <string>
 using namespace std;
 
-Object::Object() : type("Null"), value(0) {}
+Object::Object() : type("Null"), value(0), barrier(false) {}
 
-Object::Object(const string& type, int value) : type(type), value(value) {}
+Object::Object(const string& type, int value, bool isBarrier) 
+    : type(type), value(value), barrier(isBarrier) {}
 
 string Object::getType() const {
-    return "Null";
+    return type;
 }
 
 int Object::getValue() const {
     return value;
-}   
+}
 
- void Object::setType(const string& newType) {
+bool Object::isBarrier() const {
+    return barrier;
+}
+
+void Object::setType(const string& newType) {
     type = newType;
- }
+}
+
 void Object::setValue(int newValue) {
     value = newValue;
-}   
+}
+
+void Object::setIsBarrier(bool isBarrier) {
+    barrier = isBarrier;
+}
 
 void Object::print() const {
-    cout << "Name: " << type << ", Value: " << value << endl;
+    cout << "Name: " << type << ", Value: " << value << ", Barrier: " << (barrier ? "Yes" : "No") << endl;
 }

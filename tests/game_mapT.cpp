@@ -10,8 +10,8 @@ TEST(GameMapTest, Constructor) {
     GameMap map(matrix, 3, 3);
     EXPECT_EQ(map.getWidth(), 3);
     EXPECT_EQ(map.getHeight(), 3);
-    EXPECT_EQ(map.getNumSkeleton(), 0);
-    EXPECT_EQ(map.getSkeletonsKilled(), 0);
+    EXPECT_EQ(map.getNumEnemy(), 0);
+    EXPECT_EQ(map.getEnemyKilled(), 0);
 }
 
 TEST(GameMapTest, KillSkeleton) {
@@ -21,9 +21,9 @@ TEST(GameMapTest, KillSkeleton) {
         {0, 0, 0}
     };
     GameMap map(matrix, 3, 3);
-    map.killSkeleton(1, 1);
-    EXPECT_EQ(map.getNumSkeleton(), 0);
-    EXPECT_EQ(map.getSkeletonsKilled(), 1);
+    map.killEnemy(1, 1);
+    EXPECT_EQ(map.getNumEnemy(), 0);
+    EXPECT_EQ(map.getEnemyKilled(), 1);
 }
 
 TEST(GameMapTest, GetObjectAt) {
@@ -128,7 +128,7 @@ TEST(GameMapTest, NumSkeletonAfterAction){
         {0, 0, 0}
     };
     GameMap map(matrix, 3, 3);
-    map.killSkeleton(1, 1);
-    EXPECT_EQ(map.getNumSkeleton(), 0);
-    EXPECT_EQ(map.getSkeletonsKilled(), 1);
+    map.killEnemy(1, 1);
+    EXPECT_EQ(map.getNumEnemy(), 0);
+    EXPECT_EQ(map.getEnemyKilled(), 1);
 }
