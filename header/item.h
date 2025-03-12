@@ -64,4 +64,37 @@ const DamageItem FIRE_BOMB("Fire Bomb", 20);
 const DamageItem EXPLOSIVE_ARROW("Explosive Arrow", 35);
 const DamageItem THUNDER_SCROLL("Thunder Scroll", 50);
 
+// More Healing Items
+const HealingItem ELVEN_REMEDY("Elven Remedy", 40);
+const HealingItem DRAGON_HEART("Dragon Heart", 999);
+const HealingItem HERBAL_TONIC("Herbal Tonic", 15);
+
+// More Damage Items
+const DamageItem SHADOW_DAGGER("Shadow Dagger", 20);
+const DamageItem WAR_HAMMER("War Hammer", 40);
+const DamageItem FLAME_BLADE("Flame Blade", 35);
+const DamageItem ICE_SPEAR("Ice Spear", 30);
+const DamageItem VAMPIRE_FANG("Vampire Fang", 25);
+
+// Battle & Explosive Items
+const DamageItem HOLY_GRENADE("Holy Grenade", 50);
+const DamageItem ACID_FLASK("Acid Flask", 30);
+const DamageItem SMOKE_BOMB("Smoke Bomb", 0);
+
+// Special Items
+const DamageItem PHOENIX_FEATHER("Phoenix Feather", 0);
+const DamageItem TIME_CRYSTAL("Time Crystal", 0);
+const DamageItem DEMON_SEAL("Demon Seal", 0);
+
+// Ranged & Magic Items
+const DamageItem EXPLODING_ARROW("Exploding Arrow", 40);
+const DamageItem MAGIC_ORB("Magic Orb", 25);
+const DamageItem LIGHTNING_RUNE("Lightning Rune", 50);
+
+// Rare & Legendary Items
+const DamageItem EXCALIBUR("Excalibur", 100);
+const DamageItem NECRONOMICON("Necronomicon", 0);
+const DamageItem CELESTIAL_SHIELD("Celestial Shield", 0);
+
+
 #endif // ITEM_H
