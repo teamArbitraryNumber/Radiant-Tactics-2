@@ -15,6 +15,7 @@ public:
     Enemy(CharacterType char_type, string type, int value, int h, int d, int row, int col);
 
     int mod(int value, int limit);
+    int dropCurrency(); // Drop currency when defeated
     // Movement
     void move(shared_ptr<Enemy>& enemy, GameMap& map);
 

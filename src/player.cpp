@@ -65,4 +65,9 @@ void Player::attack(Character &target) {
     cout << "Player attacks for " << damage << " damage!" << endl;
 }
 
+void Player::addCurrency(int amount) {
+    currency += amount;
+    cout << "You gained " << amount << " currency! Total: " << currency << endl;
+}
+
 

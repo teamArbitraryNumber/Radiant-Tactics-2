@@ -6,6 +6,8 @@
 #include <vector>
 #include <unordered_map>
 #include <limits>
+#include <cstdlib> // For rand()
+#include <ctime>  // For time()
 
 Enemy::Enemy(CharacterType char_type, string type, int value, int h, int d, int row, int col)
     : Character(char_type, type, value, h, d, row, col), enemyType(type) {}
@@ -211,4 +213,11 @@ Goblin::Goblin() : Enemy(CharacterType::GOBLIN,   "Goblin",    2     ,  80   , 5
 
 string Goblin::getDisplayChar(){
     return "👺";
+}
+
+int Enemy::dropCurrency() {
+    srand(time(0)); // Seed the random number generator
+    int minCurrency = 5;  // Minimum currency dropped
+    int maxCurrency = 20; // Maximum currency dropped
+    return minCurrency + (rand() % (maxCurrency - minCurrency + 1));
 }

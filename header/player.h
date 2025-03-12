@@ -27,6 +27,7 @@ class Player : public Character{
 
         int getCurrency() const;
         void setCurrency(int curr);
+            void addCurrency(int amount);
         void heal(int amount);
 
 
