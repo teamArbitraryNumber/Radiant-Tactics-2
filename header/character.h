@@ -44,8 +44,6 @@ class Character : public virtual Object {
 
         //virtual string getDisplayChar() = 0;
 
-
-    
         // Position functions
         // Attack function (pure virtual for polymorphism, MUST override)
         virtual void attack(Character &opp) = 0;
