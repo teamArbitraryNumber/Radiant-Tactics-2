@@ -49,8 +49,34 @@ GameMap initMap1(){
 }; 
     GameMap gameMap1(mapLayout1, 11, 11);
     // Initialize the player
-    
-    auto player = make_shared<Player>(CharacterType::PLAYER, "Player", 0, 100, 10, 1, 0, 50);
+    cout << "Choose character type (Enter a number):" << endl;
+    cout << "1. Warrior 🛡️ (High health, Medium damage)" << endl;
+    cout << "2. Mage 🧙‍♂️    (Low health, High damage)" << endl;
+    cout << "3. Rogue 🦹‍♀️   (Medium health, Medium damage)" << endl;
+    cout << "4. God 👑     (Ridiculous health, Ridiculous damage)" << endl;
+    int choice;
+    cin >> choice;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    shared_ptr<Player> player;
+    switch (choice) {
+        case 1:
+            player = make_shared<Player>(PlayerType::WARRIOR, CharacterType::PLAYER, "Warrior", 0, 120, 15, 1, 0, 50);
+            break;
+        case 2:
+            player = make_shared<Player>(PlayerType::MAGE, CharacterType::PLAYER, "Mage", 0, 80, 25, 1, 0, 50);
+            break;
+        case 3:
+            player = make_shared<Player>(PlayerType::ROGUE, CharacterType::PLAYER, "Rogue", 0, 100, 20, 1, 0, 50);
+            break;
+        case 4:
+            player = make_shared<Player>(PlayerType::GOD, CharacterType::PLAYER, "God", 0, 1000000, 100, 1, 0, 50);
+            break;
+        default:
+            cout << "Invalid choice. Defaulting to Warrior." << endl;
+            player = make_shared<Player>(PlayerType::WARRIOR, CharacterType::PLAYER, "Warrior", 0, 120, 15, 1, 0, 50);
+            break;
+    }
+    //auto player = make_shared<Player>(CharacterType::PLAYER, "Player", 0, 100, 10, 1, 0, 50);
     gameMap1.setPlayer(player); // Set the player in the map
     player->setType("Player");//must initialize type, there is a bug in constructor ( type always gets initialized to null)
     // Add enemies to the map
