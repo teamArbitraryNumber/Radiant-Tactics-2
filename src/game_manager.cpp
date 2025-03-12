@@ -38,7 +38,7 @@ void Game_Manager::start(){
 
 void Game_Manager::takeAction() {
     //char action;
-    cout << "Enter your move (w, a, s, d): ";
+    cout << "Enter your move (w, a, s, d) or (q) to quit: ";
     //cin >> action;
     //cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Clear input buffer, (without this if player enters ww, they move up twice, etc.)
     char action = getch();
@@ -84,52 +84,6 @@ void Game_Manager::takeAction() {
         cout << "Invalid action. Please try again." << endl;
     }
 }
-
-// void Game_Manager::takeAction(){
-//     char action;
-//     cout << "Enter your move: ";
-//     cin >> action;
-//     char choice;
-// if(action == 'q'){
-//         cout << endl;
-//         cin >> choice;
-//         if (choice == '1') {
-//             cout << "You have quit the game." << endl << endl;
-//             *isOver = true;
-//         }
-// }
-//         else if (choice == '2') {
-//             cout << "You have chosen not to quit the game." << endl << endl;
-//         }
-//          else if (action == 'w' || action == 'a' || action == 's' || action == 'd') {
-//         pair<int, int> pos = player.move(action, gameMap.getHeight(), gameMap.getWidth());
-        
-//         // shared_ptr<Object> encounter = gameMap.getObjectAt(pos.first, pos.second);
-//     //     if (encounter) {
-//     //         string type = encounter->getType();
-//     //     if (type == "Goblin") {
-//     //             Goblin* goblin = dynamic_cast<Goblin*>(encounter.get());
-//     //             if (goblin) {
-//     //                 Character& character = *goblin;
-//     //                 player.attack(character);
-//     //             }
-//     //             if (goblin->getHealth() <= 0) {
-//     //                 gameMap.removeObjectAt(pos.first, pos.second);
-//     //                 enemyGoal--;
-//     //                 if (enemyGoal == 0) {
-//     //                     cout << "You have defeated all the enemies. You win!" << endl;
-//     //                     *isOver = true;
-//     //                 }
-//     //             }
-//     //         }
-//     //     else {
-//     //         cout << "Invalid action. Please try again." << endl;
-//     //     }
-//     //     // cout << "You have quit the game." << endl << endl;
-//     //     // *isOver = true;
-//     // }
-// }
-// }
 
 
 

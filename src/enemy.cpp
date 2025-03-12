@@ -201,6 +201,7 @@ void Enemy::attack(Character& player) {
 // Skeleton enemy implementation
 Skeleton::Skeleton() : Enemy(CharacterType::SKELETON, "Skeleton",  5    ,  70,   10  ,  0   ,  0  ) {}
 //                                  CharacterType      type      value     h     d     row   col
+Skeleton::Skeleton(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col ) : Enemy(charType, type, value, h, d, row, col) {}
 
 string Skeleton::getDisplayChar(){
     return "💀";
@@ -209,6 +210,7 @@ string Skeleton::getDisplayChar(){
 // Goblin enemy implementation
 Goblin::Goblin() : Enemy(CharacterType::GOBLIN,   "Goblin",    2     ,  80   , 5  ,   0   ,   0) {}
 //                              CharacterType       type      value     h      d     row     col
+Goblin::Goblin(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col ) : Enemy(charType, type, value, h, d, row, col){}
 
 string Goblin::getDisplayChar(){
     return "👺";
