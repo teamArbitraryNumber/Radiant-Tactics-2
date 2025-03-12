@@ -23,7 +23,7 @@ class Game_Manager{
 
         ~Game_Manager(){};
         void start();
-        void takeAction();
+        int takeAction();
         GameMap& getGameMap() {
             return gameMap;
         };

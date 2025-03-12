@@ -19,7 +19,7 @@ GameMap::GameMap(const vector<vector<int>>& initMatrix, int w, int h) : height(h
             case 2:
                 mapMatrix[y][x] = make_shared<Object>(true, "Door", 100);     // Door object
                 break;
-            case 0:
+            default:
                 mapMatrix[y][x] = make_shared<Object>();  // Empty object
                 break;
             }
@@ -119,6 +119,7 @@ void GameMap::printMap() const {
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
             cout << mapMatrix[i][j]->getDisplayChar() << "\t";
+            //cout << mapMatrix[i][j]->getType() << "\t";
         }
         cout << endl << endl;
     }
