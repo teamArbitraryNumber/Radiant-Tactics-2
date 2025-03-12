@@ -16,13 +16,15 @@
 #include <limits>
 #include "item.h"
 
+using namespace std;
+
 class Inventory
 {       // The class
 public: // Access specifier
     int inventorySize;
     int inventoryCounter;
-    vector<DamageItem> weaponList;
-    vector<HealingItem> potionList;
+    std::vector<DamageItem> weaponList;
+    std::vector<HealingItem> potionList;
     Inventory()
     { // Constructor
         inventorySize = 15;

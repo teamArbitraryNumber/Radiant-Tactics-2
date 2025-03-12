@@ -14,13 +14,13 @@ public:
     Item(const std::string& itemName, const std::string& itemType) 
         : name(itemName), type(itemType) {}
 
-    virtual ~Item() = default;
+     virtual ~Item() = default;
 
     std::string getName() const { return name; }
     std::string getType() const { return type; }
 
     virtual void useItem() const = 0;
-    virtual void displayItem() const;
+    void displayItem() const;
 };
 
 // Healing Item
@@ -97,4 +97,4 @@ const DamageItem NECRONOMICON("Necronomicon", 0);
 const DamageItem CELESTIAL_SHIELD("Celestial Shield", 0);
 
 
-#endif // ITEM_H
+#endif

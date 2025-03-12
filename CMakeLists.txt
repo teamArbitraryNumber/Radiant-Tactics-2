@@ -48,3 +48,14 @@ add_executable(tests
 
 )
 target_link_libraries(tests gtest gmock gtest_main)
+
+add_executable(fun
+  # tests/objectT.cpp
+  # src/object.cpp
+  # tests/game_mapT.cpp
+  src/item.cpp
+  src/inventory.cpp
+  src/main2.cpp
+
+)
+target_link_libraries(fun gtest gmock gtest_main)
