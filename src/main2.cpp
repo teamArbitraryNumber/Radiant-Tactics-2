@@ -1,49 +1,61 @@
-#include "../header/inventory.h"
-#include "../header/item.h"
+#include "../header/player.h"
 #include <iostream>
 
-int main() {
-    // Create an inventory
-    Inventory myInventory;
+using namespace std;
 
-    // Add some items to the inventory
-    myInventory.addWeapon(BASIC_SWORD);
-    myInventory.addWeapon(GREATER_SWORD);
-    myInventory.addPotion(SMALL_POTION);
-    myInventory.addPotion(LARGE_POTION);
+int main() {
+    // Initialize a player with some default values
+    Player player(CharacterType::PLAYER, "Hero", 100, 100, 10, 0, 0, 1000); // 1000 gold
+
+    // Display initial player stats
+    cout << "Initial Player Stats:" << endl;
+    cout << "Health: " << player.getHealth() << endl;
+    cout << "Currency: " << player.getCurrency() << endl;
+    cout << "Equipped Weapon Damage: " << player.getDamage() << endl;
+    cout << endl;
+
+    // Add some items to the player's inventory
+    player.getInventory().addWeapon(BASIC_SWORD);
+    player.getInventory().addPotion(SMALL_POTION);
+    player.getInventory().addPotion(LARGE_POTION);
 
     // Print the inventory
-    std::cout << "Initial Inventory:" << std::endl;
-    myInventory.printInv();
-    std::cout << std::endl;
+    cout << "Player's Inventory:" << endl;
+    player.getInventory().printInv();
+    cout << endl;
 
-    // Equip a weapon
-    int originalDamage = 10;
-    int newDamage = myInventory.equipWeapon(originalDamage);
-    std::cout << "Original Damage: " << originalDamage << ", New Damage: " << newDamage << std::endl;
-    std::cout << std::endl;
+    // Test equipping a weapon
+    cout << "Equipping a weapon..." << endl;
+    int newDamage = player.getInventory().equipWeapon(player.getDamage());
+    player.setDamage(newDamage);
+    cout << "New Equipped Weapon Damage: " << player.getDamage() << endl;
+    cout << endl;
 
-    // Use a potion
-    int healingAmount = myInventory.usePotion();
-    std::cout << "Healing Amount: " << healingAmount << std::endl;
-    std::cout << std::endl;
+    // Test using a potion
+    cout << "Using a potion..." << endl;
+    int healingAmount = player.getInventory().usePotion();
+    player.heal(healingAmount);
+    cout << "Player's Health after using potion: " << player.getHealth() << endl;
+    cout << endl;
 
-    // Print the inventory after using a potion
-    std::cout << "Inventory after using a potion:" << std::endl;
-    myInventory.printInv();
-    std::cout << std::endl;
+    // Test buying items from the market
+    cout << "Visiting the market..." << endl;
+    int remainingGold = player.getInventory().market(player.getCurrency());
+    player.setCurrency(remainingGold);
+    cout << "Remaining Gold: " << player.getCurrency() << endl;
+    cout << endl;
 
-    // Test the market function
-    int currentGold = 500;
-    std::cout << "Entering the market with " << currentGold << " gold." << std::endl;
-    currentGold = myInventory.market(currentGold);
-    std::cout << "Remaining gold after market: " << currentGold << std::endl;
-    std::cout << std::endl;
+    // Print the updated inventory
+    cout << "Updated Player's Inventory:" << endl;
+    player.getInventory().printInv();
+    cout << endl;
 
-    // Print the inventory after market transactions
-    std::cout << "Inventory after market transactions:" << std::endl;
-    myInventory.printInv();
-    std::cout << std::endl;
+    // Display final player stats
+    cout << "Final Player Stats:" << endl;
+    cout << "Health: " << player.getHealth() << endl;
+    cout << "Currency: " << player.getCurrency() << endl;
+    cout << "Equipped Weapon Damage: " << player.getDamage() << endl;
 
     return 0;
 }
+

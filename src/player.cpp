@@ -5,7 +5,6 @@ using namespace std;
 
 Player::Player(CharacterType char_type, string type, int value, int h, int d, int row, int col, int curr)    
     : Character(char_type, type, value, h, d,  row, col), currency(curr), max_health(h){
-            inventory = make_shared<Inventory>();  // Initialize the inventory
     }
 int Player::mod(int value, int limit){
     return (value % limit + limit ) % limit;
@@ -44,8 +43,8 @@ void Player::heal(int amount){
     health = health + amount;
 }
 
-shared_ptr<Inventory> Player::getInventory(){
-    return inventory;
+Inventory& Player::getInventory() {
+    return playerInventory;
 }
 
 int Player::getCurrency() const{
@@ -63,3 +62,4 @@ void Player::attack(Character &opp){
     cout << "we attacked";
     //TODO
 }
+

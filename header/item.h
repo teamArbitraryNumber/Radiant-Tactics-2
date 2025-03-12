@@ -14,7 +14,7 @@ public:
     Item(const std::string& itemName, const std::string& itemType) 
         : name(itemName), type(itemType) {}
 
-     virtual ~Item() = default;
+      ~Item() = default;
 
     std::string getName() const { return name; }
     std::string getType() const { return type; }
