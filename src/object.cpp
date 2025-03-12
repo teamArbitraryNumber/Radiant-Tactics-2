@@ -35,3 +35,7 @@ void Object::setIsBarrier(bool isBarrier) {
 void Object::print() const {
     cout << "Name: " << type << ", Value: " << value << ", Barrier: " << (barrier ? "Yes" : "No") << endl;
 }
+
+string Object::getDisplayChar(){
+    return "*";//placeholder
+}

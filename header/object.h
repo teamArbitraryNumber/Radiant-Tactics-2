@@ -5,10 +5,11 @@
 #include <string>
 #include <memory>
 
+using namespace std;
 class Object {
 public:
     Object();
-    Object(const std::string& type, int value, bool isBarrier = false);
+    Object(const string& type, int value, bool isBarrier = false);
 
     std::string getType() const;
     int getValue() const;
@@ -19,9 +20,10 @@ public:
     void setIsBarrier(bool isBarrier);  // Set whether the object is a barrier
 
     void print() const;
+    virtual string getDisplayChar();
 
 private:
-    std::string type;
+    string type;
     int value;
     bool barrier;  // Indicates whether this object is a barrier
 };

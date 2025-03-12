@@ -20,8 +20,9 @@ pair<int, int> Player::move(char action, int height, int width){
     } else if (action == 'd') { // Move right
         newX = mod(newX + 1, width);
     }
+    
 
-    return {newX, newY};
+    return {newX, newY};//{newX, newY};
     //      col , row
 }
 
@@ -53,7 +54,7 @@ void Player::setCurrency(int curr){
 }
 
 string Player::getDisplayChar(){
-    return "☺";
+    return "👼";
 }
 
 void Player::attack(Character &opp){

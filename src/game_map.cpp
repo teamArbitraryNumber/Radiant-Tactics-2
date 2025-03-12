@@ -7,11 +7,6 @@ GameMap::GameMap() : height(0), width(0), numEnemy(0), enemyKilled(0) {
     mapMatrix.resize(0, vector<shared_ptr<Object>>(0));
 }
 
-// GameMap::GameMap(const vector<vector<int>>& initMatrix, int w, int h){
-//     mapMatrix.resize(h, vector<shared_ptr<Object>>(w));
-//     height = h;
-//     width = w;
-// }
 GameMap::GameMap(const vector<vector<int>>& initMatrix, int w, int h) : height(h), width(w), numEnemy(0), enemyKilled(0) {
     mapMatrix.resize(h, vector<shared_ptr<Object>>(w));
 
@@ -40,6 +35,19 @@ bool GameMap::isTerrain(int x, int y) const {
     return mapMatrix[y][x]->isBarrier();
 }
 
+bool GameMap::isEnemy(int x, int y) const {
+    if (x < 0 || x >= width || y < 0 || y >= height) {
+        throw out_of_range("Invalid map coordinates");
+    }
+    if(mapMatrix[y][x]->getType() == "Skeleton" || mapMatrix[y][x]->getType() == "Goblin"){
+        return true;
+    }
+    return false;
+}
+
+vector<vector<shared_ptr<Object> > >& GameMap::getMapMatrix(){
+    return mapMatrix;
+}
 
 void GameMap::killEnemy(int x, int y) {
     if (x < 0 || x >= width || y < 0 || y >= height) {
@@ -76,6 +84,7 @@ shared_ptr<Object> GameMap::getObjectAt(int x, int y) {
 void GameMap::addEnemy(shared_ptr<Enemy> enemy) {
     enemies.push_back(enemy);
     numEnemy++;
+    mapMatrix[enemy->getColPosition()][enemy->getRowPosition()] = enemy;
 }
 
 // Get all enemies
@@ -114,69 +123,25 @@ int GameMap::getHeight() const {
     return height;
 }
 
-// void GameMap::printMap(int playerX, int playerY) const {
-//     for (int y = 0; y < height; y++) {
-//         for (int x = 0; x < width; x++) {
-//             // Check if the current position is the player
-//             if (x == playerX && y == playerY) {
-//                 cout << ":)";  // Represent the player
-//             } else {
-//                 // Check if the current position has an enemy
-//                 bool isEnemy = false;
-//                 for (const auto& enemy : enemies) {
-//                     if (enemy->getColPosition() == x && enemy->getRowPosition() == y) {
-//                         cout << enemy->getDisplayChar(); // Display the enemy
-//                         isEnemy = true;
-//                         break;
-//                     }
-//                 }
-//                 // If no enemy, check for other objects
-//                 if (!isEnemy) {
-//                     auto obj = mapMatrix[y][x];
-//                     if (obj->getType() == "Skeleton" || obj->getType() == "Sword" || obj->getType() == "Potion") {
-//                         cout << "*";
-//                     } else {
-//                         cout << ". ";  // Represent empty spaces
-//                     }
-//                 }
-//             }
-//             cout << "\t";
-//         }
-//         cout << endl;
-//     }
-// }
-
-void GameMap::printMap(int playerX, int playerY) const {
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            // Check if the current position is the player
-            if (x == playerX && y == playerY) {
-                cout << ":)";  // Represent the player
-            } else {
-                // Check if the current position has an enemy
-                bool isEnemy = false;
-                for (const auto& enemy : enemies) {
-                    if (enemy->getColPosition() == x && enemy->getRowPosition() == y) {
-                        cout << enemy->getDisplayChar(); // Display the enemy
-                        isEnemy = true;
-                        break;
-                    }
+void GameMap::printMap() const {
+    for(int i = 0; i < height; i++){
+        for(int j = 0; j < width; j++){
+            if(mapMatrix[i][j]->getType() != "Null" && mapMatrix[i][j]->getType() != "Barrier"){
+                cout << mapMatrix[i][j]->getDisplayChar() << "\t";
+            }
+            else {
+               if(mapMatrix[i][j]->isBarrier()){
+                    cout << "🪨 \t"; 
                 }
-
-                // If no enemy, check for other objects
-                if (!isEnemy) {
-                    auto obj = mapMatrix[y][x];
-                    if (obj->getType() == "Skeleton" || obj->getType() == "Sword" || obj->getType() == "Potion") {
-                        cout << "*";
-                    } else {
-                        cout << ". ";  // Represent empty spaces
-                    }
+                else{
+                    cout << ".\t";
                 }
             }
-            cout << "\t";
+            
         }
-        cout << endl;
+        cout << endl << endl;
     }
+    cout << endl;
 }
 
 void GameMap::removeObjectAt(int x, int y) {
@@ -188,6 +153,7 @@ void GameMap::removeObjectAt(int x, int y) {
 
 void GameMap::setPlayer(shared_ptr<Player> p) {
     player = p;
+    mapMatrix[p->getRowPosition()][p->getColPosition()] = player;
 }
 
 // Get the player
