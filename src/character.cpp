@@ -1,5 +1,8 @@
 #include "../header/character.h"
 
+Character::Character(CharacterType char_type, string type, int value, int h, int d, int row, int col)
+        : Object(type, value), health(h), damage(d), charType(char_type), row_pos(row), col_pos(col) {}
+
 // Health functions
 int Character::getHealth() const { 
     return health; 
@@ -21,17 +24,19 @@ bool Character::isAlive() const {
     return health > 0; 
 }
 
-int Character::getRowPosition(){
+int Character::getRowPosition() const{
     return row_pos;
 }
-int Character::setRowPosition(int new_row){
+
+int Character::getColPosition() const{
+    return col_pos;
+}
+
+void Character::setRowPosition(int new_row){
     row_pos = new_row;
 }  
 
-int Character::getColPosition(){
-    return col_pos;
-}
-int Character::setColPosition(int new_col){
+void Character::setColPosition(int new_col){
     col_pos = new_col;
 }
 

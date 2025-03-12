@@ -1,3 +1,6 @@
+#ifndef INVENTORY_H
+#define INVENTORY_H
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -11,22 +14,24 @@
 #include <string>
 #include <algorithm>
 #include <limits>
-#include <item.h>
+#include "item.h"
+
+using namespace std;
 
 class Inventory
 {       // The class
 public: // Access specifier
     int inventorySize;
     int inventoryCounter;
-    vector<Item> weaponList;
-    vector<Item> potionList;
+    std::vector<DamageItem> weaponList;
+    std::vector<HealingItem> potionList;
     Inventory()
     { // Constructor
-        inventorySize = 10;
+        inventorySize = 15;
         inventoryCounter = 0;
     }
-    void addWeapon(string);
-    void addPotion(string);
+    void addWeapon(DamageItem);
+    void addPotion(HealingItem);
 
     int equipWeapon(int);
     int usePotion();
@@ -34,13 +39,20 @@ public: // Access specifier
     bool hasPotion(string);
     bool hasWeapon(string);
 
-    void invFull(string);
+    void invFullHealing(HealingItem);
+    void invFullWeapon(DamageItem);
 
     void setInvSize(int);
     void setInvCounter(int);
 
+    int market(int);
+
+    //Print Inventory
+    void printInv();
 
     //Destructor
     ~Inventory(){}
 };
+
+#endif
 

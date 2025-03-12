@@ -5,32 +5,32 @@
 #include "inventory.h"
 #include "game_map.h"
 
+using namespace std;
+
 class Player : public Character{
     private:
-        Inventory inventory;
+    Inventory playerInventory; // Inventory specific to the Player
         char movement;
-        int x, y;
         int currency;
+        int max_health;
         
     public:
-        // Player Constructor, 
+        // Player Default Constructor, 
         Player() = default;
         
-        Player(Inventory& inv, int curr, int max_health)    
-            : Character(CharacterType::PLAYER, "Player", 100, max_health, 10), inventory(inv), currency(curr) {}
-      //                    CharacterType    ,  type   , health , max_health , damage , int x ,  int y ) 
+        // Player Initialization Constructor
+        Player(CharacterType char_type, string type, int value, int h, int d, int row, int col, int curr);
         
         // Will need more constructors for different character classes
 
-        Inventory& getInventory();
+    Inventory& getInventory(); // Accessor for Inventory
 
         int getCurrency() const;
         void setCurrency(int curr);
-        void heal(int);
-        Player(int x = 0, int y = 0); 
+        void heal(int amount);
 
 
-        string getDisplayChar();
+        string getDisplayChar() override;
         int mod(int value, int limit);
         pair<int, int> move(char action, int height, int width);
         pair<int, int> getPosition() const;

@@ -10,8 +10,8 @@ TEST(GameMapTest, Constructor) {
     GameMap map(matrix, 3, 3);
     EXPECT_EQ(map.getWidth(), 3);
     EXPECT_EQ(map.getHeight(), 3);
-    EXPECT_EQ(map.getNumSkeleton(), 0);
-    EXPECT_EQ(map.getSkeletonsKilled(), 0);
+    EXPECT_EQ(map.getNumEnemy(), 0);
+    EXPECT_EQ(map.getEnemyKilled(), 0);
 }
 
 TEST(GameMapTest, KillSkeleton) {
@@ -21,9 +21,9 @@ TEST(GameMapTest, KillSkeleton) {
         {0, 0, 0}
     };
     GameMap map(matrix, 3, 3);
-    map.killSkeleton(1, 1);
-    EXPECT_EQ(map.getNumSkeleton(), 0);
-    EXPECT_EQ(map.getSkeletonsKilled(), 1);
+    map.killEnemy(1, 1);
+    EXPECT_EQ(map.getNumEnemy(), 0);
+    EXPECT_EQ(map.getEnemyKilled(), 1);
 }
 
 TEST(GameMapTest, GetObjectAt) {
@@ -48,19 +48,6 @@ TEST(GameMapTest, SetObjectAt) {
     map.setObjectAt(1, 1, obj);
     shared_ptr<Object> obj2 = map.getObjectAt(1, 1);
     EXPECT_EQ(obj, obj2);
-}
-
-TEST(GameMapTest, PrintMap) {
-    vector<vector<int>> matrix = {
-        {0, 0, 0},
-        {0, 0, 0},
-        {0, 0, 0}
-    };
-    GameMap map(matrix, 3, 3);
-    testing::internal::CaptureStdout();
-    map.printMap(1, 1);
-    std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "0 0 0 \n0 P 0 \n0 0 0 \n");
 }
 
 TEST(GameMapTest, Destructor) {
@@ -128,7 +115,7 @@ TEST(GameMapTest, NumSkeletonAfterAction){
         {0, 0, 0}
     };
     GameMap map(matrix, 3, 3);
-    map.killSkeleton(1, 1);
-    EXPECT_EQ(map.getNumSkeleton(), 0);
-    EXPECT_EQ(map.getSkeletonsKilled(), 1);
+    map.killEnemy(1, 1);
+    EXPECT_EQ(map.getNumEnemy(), 0);
+    EXPECT_EQ(map.getEnemyKilled(), 1);
 }

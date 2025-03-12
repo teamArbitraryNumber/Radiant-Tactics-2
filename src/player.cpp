@@ -3,45 +3,48 @@
 
 using namespace std;
 
-Player::Player(int x, int y) : x(x), y(y) {}
-
+Player::Player(CharacterType char_type, string type, int value, int h, int d, int row, int col, int curr)    
+    : Character(char_type, type, value, h, d,  row, col), currency(curr), max_health(h){
+    }
 int Player::mod(int value, int limit){
     return (value % limit + limit ) % limit;
 }
 
 pair<int, int> Player::move(char action, int height, int width){
-    int newX = x, newY = y;
+    int newX = getColPosition(), newY = getRowPosition();
     if (action == 'w') { // Move up
-        newY = mod(y - 1, height);
+        newY = mod(newY - 1, height);
     } else if (action == 's') { // Move down
-        newY = mod(y + 1, height);
+        newY = mod(newY + 1, height);
     } else if (action == 'a') { // Move left
-        newX = mod(x - 1, width);
+        newX = mod(newX - 1, width);
     } else if (action == 'd') { // Move right
-        newX = mod(x + 1, width);
+        newX = mod(newX + 1, width);
     }
+    
 
-    setPosition(newX, newY);
-
-    return {newX, newY};
+    return {newX, newY};//{newX, newY};
+    //      col , row
 }
 
 pair<int, int> Player::getPosition() const{
-    return {x, y};
+    int row = getRowPosition();
+    int col = getColPosition();
+    return {col, row};
 }
 
 void Player::setPosition(int newX, int newY){
     // cout << "the player is moved to " << newX << " " << newY << endl;
-        x = newX;
-    y = newY;
+    setColPosition(newX);
+    setRowPosition(newY);
 }
 
 void Player::heal(int amount){
     health = health + amount;
 }
 
-Inventory& Player::getInventory(){
-    return inventory;
+Inventory& Player::getInventory() {
+    return playerInventory;
 }
 
 int Player::getCurrency() const{
@@ -52,10 +55,11 @@ void Player::setCurrency(int curr){
 }
 
 string Player::getDisplayChar(){
-    return "☺";
+    return "👼";
 }
 
 void Player::attack(Character &opp){
-    
+    cout << "we attacked";
     //TODO
 }
+

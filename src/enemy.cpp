@@ -1,17 +1,102 @@
 #include "../header/enemy.h"
 #include "../header/player.h"
+#include "../header/game_map.h"
 #include <iostream>
 #include <queue>
 #include <vector>
 #include <unordered_map>
 #include <limits>
 
-Enemy::Enemy(string type, int health, int damage, int x, int y)
-    : Character(type, 0, health, damage, x, y), enemyType(type) {}
+Enemy::Enemy(CharacterType char_type, string type, int value, int h, int d, int row, int col)
+    : Character(char_type, type, value, h, d, row, col), enemyType(type) {}
 
+int Enemy::mod(int value, int limit){
+    return (value % limit + limit ) % limit;
+}
 // Movement logic: Move towards the player
-void Enemy::move(GameMap& map) {
+void Enemy::move(shared_ptr<Enemy>& enemy, GameMap& map) {
     int width = map.getWidth();
+    int height = map.getHeight();
+
+    // Get player position
+    shared_ptr<Object> playerObj;
+    int playerX = -1, playerY = -1;
+
+    int enemyX = getColPosition();
+    int enemyY = getRowPosition();
+
+    // Find the player's and enemy's actual position
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            shared_ptr<Object> obj = map.getObjectAt(x, y);
+            if(obj){
+                if (obj->getType() == "Player") {
+                    playerX = x;
+                    playerY = y;
+                    break;
+                }
+            }  
+        }
+    }
+    pair<int, int> possibleMoves[4] = {
+        {mod(enemyX, width), mod(enemyY - 1, height)}, // Up
+        {mod(enemyX, width), mod(enemyY + 1, height)}, // Down
+        {mod(enemyX - 1, width), mod(enemyY, height)}, // Left
+        {mod(enemyX + 1, width), mod(enemyY, height)}  // Right
+    };
+    int bestMoveIndex = -1;
+    int minDistance = INT_MAX;
+
+    for (int i = 0; i < 4; i++) {
+        int newX = possibleMoves[i].first;
+        int newY = possibleMoves[i].second;
+
+        //newX = mod(newX, width); 
+        //newY = mod(newY, height);
+        // Ensure the new position is within the map boundaries
+        //if (newX >= 0 && newX < width && newY >= 0 && newY < height) {
+            shared_ptr<Object> objAtNewPos = map.getObjectAt(newX, newY);
+            
+            // Check if the new position is empty (no barrier or other object)
+            if (objAtNewPos && objAtNewPos->getType() == "Null") {
+                // Calculate the distance to the player for this move
+                int distance = abs(playerX - newX) + abs(playerY - newY);
+                
+                // If this move brings the enemy closer to the player, update bestMoveIndex
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    bestMoveIndex = i;
+                }
+            }
+        //}
+    }
+    if (bestMoveIndex != -1) {
+        int newX = possibleMoves[bestMoveIndex].first;
+        int newY = possibleMoves[bestMoveIndex].second;
+
+        int oldX = getColPosition();
+        int oldY = getRowPosition();
+        // Update the enemy's position
+        setColPosition(newX);
+        setRowPosition(newY);
+
+        // Update the game map with the new position
+        if (newX >= 0 && newX < width && newY >= 0 && newY < height){
+            map.removeObjectAt(oldX, oldY);
+            map.setObjectAt(newX, newY, enemy);
+        }
+       
+    }
+
+
+    //compare player position and enemy position
+    //for each available enemy movement location (up, down, left, right)
+    //find one closer to the player
+    //if no there is no other objects on the location
+    //  move to location and update gameMap
+
+
+    /*int width = map.getWidth();
     int height = map.getHeight();
 
     // Get player position
@@ -101,7 +186,9 @@ void Enemy::move(GameMap& map) {
     // Move the enemy to the first step in the path
     setColPosition(previous.first);
     setRowPosition(previous.second);
+    */
 }
+
 
 // Attack logic
 void Enemy::attack(Character& player) {
@@ -111,13 +198,18 @@ void Enemy::attack(Character& player) {
     cout << enemyType << " attacks!" << endl; //Attack implenentation placeholder
 }
 
-// Display character for rendering
-string Enemy::getDisplayChar() const {
-    return enemyType == "Skeleton" ? "S" : "G";
+// Skeleton enemy implementation
+Skeleton::Skeleton() : Enemy(CharacterType::SKELETON, "Skeleton",  5    ,  70,   10  ,  0   ,  0  ) {}
+//                                  CharacterType      type      value     h     d     row   col
+
+string Skeleton::getDisplayChar(){
+    return "💀";
 }
 
-// Skeleton enemy implementation
-Skeleton::Skeleton(int x, int y) : Enemy("Skeleton", 100, 10, x, y) {}
-
 // Goblin enemy implementation
-Goblin::Goblin(int x, int y) : Enemy("Goblin", 80, 8, x, y) {}
+Goblin::Goblin() : Enemy(CharacterType::GOBLIN,   "Goblin",    2     ,  80   , 5  ,   0   ,   0) {}
+//                              CharacterType       type      value     h      d     row     col
+
+string Goblin::getDisplayChar(){
+    return "👺";
+}
