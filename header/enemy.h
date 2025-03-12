@@ -35,4 +35,23 @@ public:
     string getDisplayChar() override;
 };
 
+class Orc : public Enemy {
+public:
+    Orc();
+    std::string getDisplayChar() override;
+};
+
+class Slime : public Enemy {
+public:
+    Slime();
+    std::string getDisplayChar() override;
+    bool specialAbility();  // Splits when killed
+};
+
+class Knight : public Enemy {
+public:
+    Knight();
+    std::string getDisplayChar() override;
+};
+
 #endif
