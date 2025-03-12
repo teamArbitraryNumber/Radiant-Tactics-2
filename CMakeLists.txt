@@ -33,6 +33,8 @@ add_executable(game
   src/player.cpp
   src/game_map.cpp
   src/game_manager.cpp
+  src/item.cpp
+  src/inventory.cpp
 )
 target_link_libraries(game gmock gtest_main)
 
