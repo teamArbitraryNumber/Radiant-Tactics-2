@@ -37,14 +37,17 @@ add_executable(game
 target_link_libraries(game gmock gtest_main)
 
 add_executable(tests
-  # tests/objectT.cpp
-  # src/object.cpp
-  # tests/game_mapT.cpp
+  tests/objectT.cpp
+  src/object.cpp
+  tests/game_mapT.cpp
   src/game_map.cpp
   src/object.cpp
   src/character.cpp
   src/player.cpp
   tests/playerT.cpp
+  src/item.cpp
+  src/inventory.cpp
+  tests/inventoryT.cpp
 
 )
 target_link_libraries(tests gtest gmock gtest_main)
