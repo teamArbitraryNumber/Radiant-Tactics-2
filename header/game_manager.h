@@ -32,10 +32,11 @@ class Game_Manager{
         // void movePlayer(char input, int new_x, int new_y);
         // void managePlayerInventory(shared_ptr<Inventory> inv);
         bool isPlayerNextToEnemy();
+        shared_ptr<Enemy> getAdjacentEnemy();
         void playerTurn();
         bool isEnemyDefeated();
         void enemyTurn();
-        void startCombat();
+        void startCombat(shared_ptr<Enemy>& enemy);
         void moveEnemies();
             void displayCommands() ;
 
