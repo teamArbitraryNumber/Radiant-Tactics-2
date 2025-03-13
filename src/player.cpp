@@ -69,7 +69,7 @@ string Player::getDisplayChar(){
         case PlayerType::MAGE:
             return "🧙"; // Mage symbol
         case PlayerType::ROGUE:
-            return "🦹‍♀️"; // Rogue symbol
+            return "🥷"; // Rogue symbol
         case PlayerType::GOD:
             return "👑";
         default:

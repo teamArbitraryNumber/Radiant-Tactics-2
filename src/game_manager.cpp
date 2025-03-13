@@ -89,7 +89,7 @@ bool Game_Manager::isPlayerNextToEnemy() {
 
         if (newX >= 0 && newX < gameMap.getWidth() && newY >= 0 && newY < gameMap.getHeight()) {
             shared_ptr<Object> obj = gameMap.getObjectAt(newX, newY);
-            if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin")) {
+            if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin" || obj->getType() == "Orc" || obj->getType() == "Slime" || obj->getType() == "Knight")) {
                 return true;
             }
         }
