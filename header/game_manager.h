@@ -3,6 +3,8 @@
 #include "game_map.h"
 #include "player.h"
 #include "enemy.h"
+#include <iostream>
+#include "animation.h"
 // #include "inventory.h"
 // #include "item.h"
 
@@ -12,7 +14,7 @@ class Game_Manager{
         GameMap& gameMap;
         
         
-        /*Player*/shared_ptr<Player> player;
+        shared_ptr<Player> player;
         // shared_ptr<Inventory> inventory;
         
         bool isPlayerTurn;
@@ -32,11 +34,14 @@ class Game_Manager{
         // void movePlayer(char input, int new_x, int new_y);
         // void managePlayerInventory(shared_ptr<Inventory> inv);
         bool isPlayerNextToEnemy();
+        shared_ptr<Enemy> getAdjacentEnemy();
         void playerTurn();
         bool isEnemyDefeated();
         void enemyTurn();
-        void startCombat();
+        void startCombat(shared_ptr<Enemy>& enemy);
         void moveEnemies();
+        void displayCommands() ;
+
 };
 
 #endif

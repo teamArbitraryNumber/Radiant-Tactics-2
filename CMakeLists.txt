@@ -38,6 +38,7 @@ add_executable(game
   src/game_manager.cpp
   src/item.cpp
   src/inventory.cpp
+  src/animation.cpp
 )
 target_link_libraries(game gmock gtest_main)
 
