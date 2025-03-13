@@ -166,3 +166,11 @@ void GameMap::setPlayer(shared_ptr<Player> p) {
 shared_ptr<Player> GameMap::getPlayer() {
     return player;
 }
+
+void GameMap::spawnBoss() {
+    auto radiantDragon = std::make_shared<RadiantDragon>();
+    radiantDragon->setColPosition(5);
+    radiantDragon->setRowPosition(5);
+    addEnemy(radiantDragon);
+    std::cout << "🐉 The Radiant Dragon has appeared!" << std::endl;
+}
