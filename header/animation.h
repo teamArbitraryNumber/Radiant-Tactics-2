@@ -1,38 +1,24 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
+
 #include <vector>
+#include <string>
+#include <thread>
+#include <chrono>
+#include <iostream>
 
-const int MUSHROOM_WIDTH = 8;
-const int MUSHROOM_HEIGHT = 6;
-const int MUSHROOM_FRAMES = 3;
-
-// Animation array for Mushroom
-extern std::vector<std::vector<std::vector<int> > > MushroomAnimation = { 
-    { // Frame 1
-        {0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 255, 255, 255, 255, 255, 0},
-        {0, 255, 255, 255, 255, 255, 255, 0},
-        {0, 0, 255, 255, 255, 255, 255, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0}
-    },
-    { // Frame 2
-        {0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 255, 255, 255, 0, 0},
-        {0, 0, 255, 255, 255, 255, 255, 0},
-        {0, 255, 255, 255, 255, 255, 0, 0},
-        {0, 255, 255, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0}
-    },
-    { // Frame 3
-        {0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 255, 0, 0, 0, 255, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0}
-    }
+enum ColorCode {
+    RED = 31,
+    GREEN = 32,
+    YELLOW = 33,
+    BLUE = 34,
+    MAGENTA = 35,
+    CYAN = 36,
+    WHITE = 37,
+    DEFAULT = 39
 };
 
-#endif // MUSHROOMANIMATIONARRAY_H
+void animateWelcomeMessage(int durationSeconds = 7);
+
+#endif // ANIMATED_HEADER_H
 
