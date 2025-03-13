@@ -38,4 +38,26 @@ public:
     string getDisplayChar() override;
 };
 
+class Orc : public Enemy {
+public:
+    Orc();
+    std::string getDisplayChar() override;
+    void specialAbility(Character& player); // 50% more damage under half health
+};
+
+class Slime : public Enemy {
+private:
+    bool hasSplit = false; // Tracks whether the Slime has already split
+public:
+    Slime();
+    std::string getDisplayChar() override;
+    bool specialAbility(GameMap& map); // Returns true if it splits
+};
+
+class Knight : public Enemy {
+public:
+    Knight();
+    std::string getDisplayChar() override;
+};
+
 #endif

@@ -49,17 +49,26 @@ vector<vector<shared_ptr<Object> > >& GameMap::getMapMatrix(){
 }
 
 void GameMap::killEnemy(int x, int y) {
-    if (x < 0 || x >= width || y < 0 || y >= height) {
-        throw out_of_range("Invalid map coordinates");
-    }
+    for (auto it = enemies.begin(); it != enemies.end(); ++it) {
+        if ((*it)->getRowPosition() == x && (*it)->getColPosition() == y) {
+            
+            // Check if it's a Slime and if it can split
+            Slime* slimePtr = dynamic_cast<Slime*>(it->get());
+            if (slimePtr && slimePtr->specialAbility(*this)) {
+                return;  // Slime duplicated, so do not remove it
+            }
 
-    shared_ptr<Object>& obj = mapMatrix[y][x];
-    if (obj->getType() == "Skeleton") {
-        obj = make_shared<Object>();  // Replace with an empty object
-        enemyKilled++;
-    } else {
-        cerr << "No skeleton at the specified coordinates" << endl;
+            std::cout << (*it)->getDisplayChar() << " was defeated!" << std::endl;
+            enemies.erase(it);
+            return;
+        }
     }
+}
+
+
+// Function to check if a position is empty (No enemies or obstacles)
+bool GameMap::isPositionEmpty(int row, int col) {
+    return getObjectAt(row, col) == nullptr;
 }
 
 shared_ptr<Object> GameMap::getObjectAt(int x, int y) {
