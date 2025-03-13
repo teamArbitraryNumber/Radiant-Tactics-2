@@ -220,7 +220,7 @@ Orc::Orc() : Enemy(CharacterType::ORC, "Orc", 3, 120, 15, 0, 0) {}
 std::string Orc::getDisplayChar() { return "🏹"; }
 
 void Orc::specialAbility(Character& player) {
-    if (getHealth() < 60) {  // Below 50% health
+    if (getHealth() < 60) {  // If Orc is below 50% HP
         int boostedDamage = getDamage() * 1.5;
         player.setHealth(player.getHealth() - boostedDamage);
         std::cout << "Orc is enraged! It deals " << boostedDamage << " damage!" << std::endl;
@@ -236,12 +236,41 @@ std::string Slime::getDisplayChar() {
     return hasSplit ? "🟣" : "🟢";  // Green before split, Purple after split
 }
 
-bool Slime::specialAbility() {
+bool Slime::specialAbility(GameMap& map) {
     if (getHealth() <= 0 && !hasSplit) {
         hasSplit = true;
-        return true;  // Indicates duplication
+        std::cout << "Slime splits into two smaller slimes!" << std::endl;
+
+        // Find two open spaces near the Slime
+        std::vector<std::pair<int, int>> possibleSpots = {
+            {getRowPosition() + 1, getColPosition()},
+            {getRowPosition() - 1, getColPosition()},
+            {getRowPosition(), getColPosition() + 1},
+            {getRowPosition(), getColPosition() - 1}
+        };
+
+        std::vector<std::pair<int, int>> validSpots;
+        for (auto& spot : possibleSpots) {
+            if (map.isPositionEmpty(spot.first, spot.second)) {
+                validSpots.push_back(spot);
+            }
+        }
+
+        // Spawn slimes only in available spaces
+        int spawnCount = 0;
+        for (auto& spot : validSpots) {
+            if (spawnCount >= 2) break; // Ensure only two Slimes spawn
+            std::shared_ptr<Slime> newSlime = std::make_shared<Slime>();
+            newSlime->setRowPosition(spot.first);
+            newSlime->setColPosition(spot.second);
+            newSlime->hasSplit = true;
+            map.addEnemy(newSlime);
+            spawnCount++;
+        }
+
+        return spawnCount > 0;  // True if at least one new slime was placed
     }
-    return false;  // Dies normally if it already split
+    return false;
 }
 
 // KNIGHT: Tanky enemy with high health
