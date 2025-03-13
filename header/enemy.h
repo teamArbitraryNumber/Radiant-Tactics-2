@@ -27,12 +27,14 @@ public:
 class Skeleton : public Enemy {
 public:
     Skeleton();
+    Skeleton(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col );
     string getDisplayChar() override;
 };
 
 class Goblin : public Enemy {
 public:
     Goblin();
+    Goblin(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col );
     string getDisplayChar() override;
 };
 

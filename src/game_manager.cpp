@@ -29,8 +29,12 @@ struct Map {
 void Game_Manager::start() {
     while (!end && !*isOver) {
         pair<int, int> playerPos = player->getPosition();
-        gameMap.printMap(); // Print the map before players move
-        takeAction();       // Player can either quit, move, or attack
+        gameMap.printMap(); //// Print the map before players move
+        bool doorEntered = takeAction();// player can either quit, move, or attack
+        if(doorEntered == 1){ //break while loop if door is entered
+            end = true;
+            break;
+        }      
 
         // Check if the player is next to an enemy and initiate combat
         if (isPlayerNextToEnemy()) {
@@ -256,10 +260,11 @@ bool Game_Manager::isEnemyDefeated() {
 }
 
 
-void Game_Manager::takeAction() {
-    char action;
+int Game_Manager::takeAction() {//returns 1 if player tries moving to door, 0 otherwise
+    //char action;
     cout << "Enter your move (w, a, s, d), attack (x), use item (i), or quit (q): ";
-    action = getch();
+    char action = getch();
+
     cout << endl;
 
     if (action == 'q') {
@@ -276,6 +281,11 @@ void Game_Manager::takeAction() {
     } else if (action == 'w' || action == 'a' || action == 's' || action == 'd') {
         pair<int, int> currPos = player->getPosition();
         pair<int, int> pos = player->move(action, gameMap.getHeight(), gameMap.getWidth());
+
+        if(gameMap.getMapMatrix()[pos.second][pos.first]->isDoor()){ 
+            return 1; 
+        } // return 
+        // Check if the target position is a barrier or enemy
 
         if (!gameMap.isTerrain(pos.first, pos.second) && !gameMap.isEnemy(pos.first, pos.second)) {
             gameMap.removeObjectAt(currPos.first, currPos.second);
@@ -309,6 +319,7 @@ void Game_Manager::takeAction() {
         gameMap.printMap();
         cout << "Invalid action. Please try again." << endl;
     }
+    return 0;
 }
 
 void Game_Manager::moveEnemies() {

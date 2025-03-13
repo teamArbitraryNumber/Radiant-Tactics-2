@@ -4,8 +4,13 @@
 using namespace std;
 
 Player::Player(CharacterType char_type, string type, int value, int h, int d, int row, int col, int curr)    
-    : Character(char_type, type, value, h, d,  row, col), currency(curr), max_health(h){
-    }
+
+    : Character(char_type, type, value, h, d,  row, col), currency(curr), max_health(h){}
+
+Player::Player(PlayerType pType, CharacterType char_type, string type, int value, int h, int d, int row, int col, int curr) 
+    : Character(char_type, type, value, h, d,  row, col), currency(curr), max_health(h), playerType(pType){}
+    
+
 int Player::mod(int value, int limit){
     return (value % limit + limit ) % limit;
 }
@@ -42,6 +47,9 @@ void Player::setPosition(int newX, int newY){
 void Player::heal(int amount){
     health = health + amount;
 }
+PlayerType Player::getPlayerType() const {
+    return playerType;
+}
 
 Inventory& Player::getInventory() {
     return playerInventory;
@@ -55,7 +63,18 @@ void Player::setCurrency(int curr){
 }
 
 string Player::getDisplayChar(){
-    return "👼";
+    switch (playerType) {
+        case PlayerType::WARRIOR:
+            return "🛡️"; // Warrior symbol
+        case PlayerType::MAGE:
+            return "🧙"; // Mage symbol
+        case PlayerType::ROGUE:
+            return "🦹‍♀️"; // Rogue symbol
+        case PlayerType::GOD:
+            return "👑";
+        default:
+            return "👼"; // Default symbol
+    }
 }
 
 // In Player class

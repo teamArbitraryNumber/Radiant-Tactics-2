@@ -33,7 +33,6 @@ public:
         mapMatrix.clear();
     };
 
-    // void initMap1();
     vector<vector<shared_ptr<Object> > >& getMapMatrix();
     void killEnemy(int x, int y);
     shared_ptr<Object> getObjectAt(int x, int y);
@@ -44,6 +43,7 @@ public:
     bool isEnemy(int x, int y) const;
 
     int getNumEnemy() const;
+    void setNumEnemy(int num);
     int getEnemyKilled() const;
     void setPlayer(shared_ptr<Player> p);
     shared_ptr<Player> getPlayer();

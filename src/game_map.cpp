@@ -16,10 +16,9 @@ GameMap::GameMap(const vector<vector<int>>& initMatrix, int w, int h) : height(h
             case 1:
                 mapMatrix[y][x] = make_shared<Object>("Barrier", 100, true);  // Barrier object
                 break;
-            // case 2:
-            //     mapMatrix[y][x] = make_shared<Skeleton>("Skeleton", 75, 10, "Bow and Arrow");
-            //     numEnemy++;
-            //     break;
+            case 2:
+                mapMatrix[y][x] = make_shared<Object>(true, "Door", 100);     // Door object
+                break;
             default:
                 mapMatrix[y][x] = make_shared<Object>();  // Empty object
                 break;
@@ -73,7 +72,7 @@ shared_ptr<Object> GameMap::getObjectAt(int x, int y) {
 void GameMap::addEnemy(shared_ptr<Enemy> enemy) {
     enemies.push_back(enemy);
     numEnemy++;
-    mapMatrix[enemy->getColPosition()][enemy->getRowPosition()] = enemy;
+    mapMatrix[enemy->getRowPosition()][enemy->getColPosition()] = enemy;
 }
 
 // Get all enemies
@@ -90,6 +89,9 @@ void GameMap::setObjectAt(int x, int y, const shared_ptr<Object>& obj) {
 
 int GameMap::getNumEnemy() const {
     return numEnemy;
+}
+void GameMap::setNumEnemy(int num){
+    numEnemy = num;
 }
 
 int GameMap::getEnemyKilled() const {
@@ -115,18 +117,8 @@ int GameMap::getHeight() const {
 void GameMap::printMap() const {
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
-            if(mapMatrix[i][j]->getType() != "Null" && mapMatrix[i][j]->getType() != "Barrier"){
-                cout << mapMatrix[i][j]->getDisplayChar() << "\t";
-            }
-            else {
-               if(mapMatrix[i][j]->isBarrier()){
-                    cout << "🪨 \t"; 
-                }
-                else{
-                    cout << ".\t";
-                }
-            }
-            
+            cout << mapMatrix[i][j]->getDisplayChar() << "\t";
+            //cout << mapMatrix[i][j]->getType() << "\t";
         }
         cout << endl << endl;
     }
