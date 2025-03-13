@@ -29,6 +29,7 @@ void animateWelcomeMessage(int durationSeconds = 7);
 // void animateFlame(int durationSeconds = 3);         // Animate the flame
 void displayInstructions(); 
 void animateTorch(int durationSeconds = 5); // New function for torch animation
+void animateGameOver(int durationSeconds = 5); // New function for Game Over animation
 
 
 #endif // ANIMATED_HEADER_H

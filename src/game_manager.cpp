@@ -167,9 +167,10 @@ void Game_Manager::startCombat(shared_ptr<Enemy>& enemy) {
 
         // Check if the player is defeated
         if (player->getHealth() <= 0) {
-            cout << "Player defeated!" << endl;
+            // cout << "Player defeated!" << endl;
             combatOver = true;
             *isOver = true;
+            animateGameOver(5); // Display for 5 seconds
             break;
         }
     }
