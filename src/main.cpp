@@ -16,6 +16,7 @@ int main() {
 
 
     displayInstructions();
+    cout << endl;
 
     GameMap gameMap1 = initMap1();//initialize gameMap1
     
@@ -55,7 +56,7 @@ GameMap initMap1(){
 }; 
     GameMap gameMap1(mapLayout1, 11, 11);
     // Initialize the player
-    cout << "Choose character type (Enter a number):" << endl;
+    cout << "\nChoose character type (Enter a number):" << endl;
     cout << "1. Warrior 🛡️ (High health, Medium damage)" << endl;
     cout << "2. Mage 🧙‍♂️    (Low health, High damage)" << endl;
     cout << "3. Rogue 🦹‍♀️   (Medium health, Medium damage)" << endl;

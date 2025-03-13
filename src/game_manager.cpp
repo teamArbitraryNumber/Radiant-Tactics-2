@@ -102,20 +102,22 @@ shared_ptr<Enemy> Game_Manager::getAdjacentEnemy() {
     pair<int, int> playerPos = player->getPosition();
     int playerX = playerPos.first;
     int playerY = playerPos.second;
+    int width = gameMap.getWidth();
+    int height = gameMap.getHeight();
 
-    // Check all four directions around the player
+    // Check all four directions around the player, including wrap-around
     pair<int, int> possibleMoves[4] = {
-        {playerX, playerY - 1}, // Up
-        {playerX, playerY + 1}, // Down
-        {playerX - 1, playerY}, // Left
-        {playerX + 1, playerY}  // Right
+        {(playerX - 1 + width) % width, playerY}, // Left (wrap-around)
+        {(playerX + 1) % width, playerY},         // Right (wrap-around)
+        {playerX, (playerY - 1 + height) % height}, // Up (wrap-around)
+        {playerX, (playerY + 1) % height}          // Down (wrap-around)
     };
 
     for (int i = 0; i < 4; i++) {
         int newX = possibleMoves[i].first;
         int newY = possibleMoves[i].second;
 
-        if (newX >= 0 && newX < gameMap.getWidth() && newY >= 0 && newY < gameMap.getHeight()) {
+        if (newX >= 0 && newX < width && newY >= 0 && newY < height) {
             shared_ptr<Object> obj = gameMap.getObjectAt(newX, newY);
             if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin")) {
                 return dynamic_pointer_cast<Enemy>(obj);

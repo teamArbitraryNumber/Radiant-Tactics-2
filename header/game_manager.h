@@ -12,7 +12,7 @@ class Game_Manager{
         GameMap& gameMap;
         
         
-        /*Player*/shared_ptr<Player> player;
+        shared_ptr<Player> player;
         // shared_ptr<Inventory> inventory;
         
         bool isPlayerTurn;
@@ -38,7 +38,7 @@ class Game_Manager{
         void enemyTurn();
         void startCombat(shared_ptr<Enemy>& enemy);
         void moveEnemies();
-            void displayCommands() ;
+        void displayCommands() ;
 
 };
 
