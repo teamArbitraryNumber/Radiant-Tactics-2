@@ -37,6 +37,8 @@ class Game_Manager{
         void enemyTurn();
         void startCombat();
         void moveEnemies();
+            void displayCommands() ;
+
 };
 
 #endif
