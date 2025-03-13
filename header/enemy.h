@@ -39,13 +39,16 @@ class Orc : public Enemy {
 public:
     Orc();
     std::string getDisplayChar() override;
+    void specialAbility(Character& player);
 };
 
 class Slime : public Enemy {
+private:
+    bool hasSplit = false;
 public:
     Slime();
     std::string getDisplayChar() override;
-    bool specialAbility();  // Splits when killed
+    bool specialAbility();
 };
 
 class Knight : public Enemy {
