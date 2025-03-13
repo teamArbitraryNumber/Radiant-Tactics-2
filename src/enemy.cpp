@@ -144,8 +144,23 @@ void Enemy::move(shared_ptr<Enemy>& enemy, GameMap& map) {
 
 // Attack logic
 void Enemy::attack(Character &player) {
-    int damage = getDamage(); // Assuming getDamage() returns the enemy's damage
+    /*int damage = getDamage(); // Assuming getDamage() returns the enemy's damage
     player.setHealth(player.getHealth() - damage);
+    cout << enemyType << " attacks for " << damage << " damage!" << endl;*/
+    if (getHealth() <= 0) {
+        cout << enemyType << " is dead and cannot attack." << endl;
+        return;
+    }
+
+    if (player.getHealth() <= 0) {
+        cout << "Player is already dead." << endl;
+        return;
+    }
+
+    int damage = getDamage(); // Assuming getDamage() returns the enemy's damage
+    int newHealth = player.getHealth() - damage;
+    player.setHealth(newHealth < 0 ? 0 : newHealth); // Ensure health doesn't go below 0
+
     cout << enemyType << " attacks for " << damage << " damage!" << endl;
 }
 

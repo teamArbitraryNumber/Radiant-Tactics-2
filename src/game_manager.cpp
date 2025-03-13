@@ -31,24 +31,24 @@ void Game_Manager::start() {
         pair<int, int> playerPos = player->getPosition();
         gameMap.printMap(); //// Print the map before players move
         bool doorEntered = takeAction();// player can either quit, move, or attack
+        gameMap.printMap();//output Map after enemies move
         if(doorEntered == 1){ //break while loop if door is entered
             end = true;
             break;
         }      
-
+        shared_ptr<Enemy> enemy = getAdjacentEnemy();
         // Check if the player is next to an enemy and initiate combat
-        if (isPlayerNextToEnemy()) {
-            startCombat();
+        if (enemy) {
+            startCombat(enemy);
         }
 
         if (player->getPosition() != playerPos) { // Only move enemies if player moved
             moveEnemies();   // Enemies move
-            gameMap.printMap();//output Map after enemies move
         }
-
+        gameMap.printMap();//output Map after enemies move
         // Check if the player is next to an enemy after enemies move
-        if (isPlayerNextToEnemy()) {
-            startCombat();
+        if (enemy && enemy->getHealth() > 0) {
+            startCombat(enemy);
         }
     }
 }
@@ -81,25 +81,72 @@ bool Game_Manager::isPlayerNextToEnemy() {
     return false;
 }
 
-void Game_Manager::startCombat() {
-    cout << "Combat has started!" << endl;
+shared_ptr<Enemy> Game_Manager::getAdjacentEnemy() {
+    pair<int, int> playerPos = player->getPosition();
+    int playerX = playerPos.first;
+    int playerY = playerPos.second;
+
+    // Check all four directions around the player
+    pair<int, int> possibleMoves[4] = {
+        {playerX, playerY - 1}, // Up
+        {playerX, playerY + 1}, // Down
+        {playerX - 1, playerY}, // Left
+        {playerX + 1, playerY}  // Right
+    };
+
+    for (int i = 0; i < 4; i++) {
+        int newX = possibleMoves[i].first;
+        int newY = possibleMoves[i].second;
+
+        if (newX >= 0 && newX < gameMap.getWidth() && newY >= 0 && newY < gameMap.getHeight()) {
+            shared_ptr<Object> obj = gameMap.getObjectAt(newX, newY);
+            if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin")) {
+                return dynamic_pointer_cast<Enemy>(obj);
+            }
+        }
+    }
+
+    return nullptr;
+}
+
+void Game_Manager::startCombat(shared_ptr<Enemy>& enemy) {
+    cout << "Combat with " << enemy->getType() << " has started!" << endl << endl;
     bool combatOver = false;
 
     while (!combatOver) {
         // Player's turn
-        cout << "Player's turn!" << endl;
+        cout << "Your turn!\t\t" << "Your Health: " << player->getHealth() << "\tEnemy Health: " << enemy->getHealth() << endl << endl;
         playerTurn();
 
+        //Check if the enemy is defeated
+        if(enemy->getHealth() <= 0){
+            cout << "Enemy defeated!" << endl;
+            combatOver = true;
+            break;
+        }
         // Check if the enemy is defeated
         if (isEnemyDefeated()) {
             cout << "Enemy defeated!" << endl;
             combatOver = true;
             break;
         }
-
+        //Check if player is dead
+        if (player->getHealth() <= 0) {
+            cout << "Player defeated!" << endl;
+            combatOver = true;
+            *isOver = true;
+            break;
+        }
         // Enemy's turn
-        cout << "Enemy's turn!" << endl;
-        enemyTurn();
+        if(enemy->getHealth() > 0){
+            cout << "Enemy's turn!" << endl;
+            enemyTurn();
+        }
+        else{
+            cout << "No enemy to attack." << endl;
+        }
+        //cout << "Enemy's turn!" << endl;
+        //enemyTurn();
 
         // Check if the player is defeated
         if (player->getHealth() <= 0) {
@@ -113,9 +160,13 @@ void Game_Manager::startCombat() {
 
 void Game_Manager::playerTurn() {
     char action;
+    if(player->getHealth() <=0){
+        cout << "Player is dead and cannot attack." << endl;
+        return;
+    }
     cout << "Do you want to attack (a), use an item (i), or do nothing (n)? ";
     cin >> action;
-
+    cout << endl;
     if (action == 'a') {
         // Player attacks
         pair<int, int> playerPos = player->getPosition();
@@ -146,6 +197,7 @@ void Game_Manager::playerTurn() {
                             player->setCurrency(player->getCurrency() + droppedCurrency); // Add currency to player
                             cout << "Enemy dropped " << droppedCurrency << " currency!" << endl;
                             gameMap.removeObjectAt(newX, newY); // Remove defeated enemy
+                            return;
                         }
                         break;
                     }
@@ -189,9 +241,19 @@ void Game_Manager::enemyTurn() {
             shared_ptr<Object> obj = gameMap.getObjectAt(newX, newY);
             if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin")) {
                 shared_ptr<Enemy> enemy = dynamic_pointer_cast<Enemy>(obj);
-                if (enemy) {
+                /*if (enemy) {
                     enemy->attack(*player);
                     break;
+                }*/
+                if (enemy && enemy->getHealth() > 0) {
+                    if (player->getHealth() > 0) {
+                        enemy->attack(*player);
+                        if (player->getHealth() <= 0) {
+                            cout << "Player defeated!" << endl;
+                            *isOver = true;
+                            return;
+                        }
+                    }
                 }
             }
         }
@@ -201,7 +263,7 @@ void Game_Manager::enemyTurn() {
 bool Game_Manager::isEnemyDefeated() {
     // Check if all enemies are defeated
     for (const auto& enemy : gameMap.getEnemies()) {
-        if (enemy->getHealth() > 0) {
+        if (enemy->getHealth() >= 0) {
             return false;
         }
     }
@@ -251,8 +313,9 @@ int Game_Manager::takeAction() {//returns 1 if player tries moving to door, 0 ot
         }
     } else if (action == 'x') {
         // Player wants to attack
-        if (isPlayerNextToEnemy()) {
-            startCombat();
+        shared_ptr<Enemy> enemy = getAdjacentEnemy();
+        if (enemy != nullptr) {
+            startCombat(enemy);
         } else {
             cout << "No enemy nearby to attack!" << endl;
         }

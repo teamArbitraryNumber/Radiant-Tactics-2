@@ -155,6 +155,12 @@ void GameMap::removeObjectAt(int x, int y) {
         throw out_of_range("Invalid map coordinates");
     }
     mapMatrix[y][x] = make_shared<Object>();  // Replace with an empty object
+    for(auto it = enemies.begin(); it != enemies.end(); ++it){//delete from enemies list
+        if((*it)->getRowPosition() == y && (*it)->getColPosition() == x){
+            enemies.erase(it);
+            break;
+        }
+    }
 }
 
 void GameMap::setPlayer(shared_ptr<Player> p) {
