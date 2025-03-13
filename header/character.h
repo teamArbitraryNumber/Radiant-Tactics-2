@@ -8,7 +8,10 @@ using namespace std;
 enum class CharacterType {
     PLAYER,
     SKELETON,
-    GOBLIN
+    GOBLIN,
+    ORC,    // New
+    SLIME,  // New
+    KNIGHT  // New
 };
 
 class Character : public virtual Object {

@@ -240,9 +240,75 @@ string Goblin::getDisplayChar(){
     return "👺";
 }
 
+
+// ORC: Deals 50% more damage when under half health
+Orc::Orc() : Enemy(CharacterType::ORC, "Orc", 3, 120, 15, 0, 0) {}
+Orc::Orc(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col ) : Enemy(charType, type, value, h, d, row, col){}
+std::string Orc::getDisplayChar() { return "🏹"; }
+
+void Orc::specialAbility(Character& player) {
+    if (getHealth() < 60) {  // If Orc is below 50% HP
+        int boostedDamage = getDamage() * 1.5;
+        player.setHealth(player.getHealth() - boostedDamage);
+        std::cout << "Orc is enraged! It deals " << boostedDamage << " damage!" << std::endl;
+    } else {
+        player.setHealth(player.getHealth() - getDamage());
+    }
+}
+
+// SLIME: Splits into two and changes color to purple
+Slime::Slime() : Enemy(CharacterType::SLIME, "Slime", 1, 60, 5, 0, 0) {}
+Slime::Slime(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col ) : Enemy(charType, type, value, h, d, row, col){}
+std::string Slime::getDisplayChar() {
+    return hasSplit ? "🟣" : "🟢";  // Green before split, Purple after split
+}
+
+bool Slime::specialAbility(GameMap& map) {
+    if (getHealth() <= 0 && !hasSplit) {
+        hasSplit = true;
+        std::cout << "Slime splits into two smaller slimes!" << std::endl;
+
+        // Find two open spaces near the Slime
+        std::vector<std::pair<int, int>> possibleSpots = {
+            {getRowPosition() + 1, getColPosition()},
+            {getRowPosition() - 1, getColPosition()},
+            {getRowPosition(), getColPosition() + 1},
+            {getRowPosition(), getColPosition() - 1}
+        };
+
+        std::vector<std::pair<int, int>> validSpots;
+        for (auto& spot : possibleSpots) {
+            if (map.isPositionEmpty(spot.first, spot.second)) {
+                validSpots.push_back(spot);
+            }
+        }
+
+        // Spawn slimes only in available spaces
+        int spawnCount = 0;
+        for (auto& spot : validSpots) {
+            if (spawnCount >= 2) break; // Ensure only two Slimes spawn
+            std::shared_ptr<Slime> newSlime = std::make_shared<Slime>();
+            newSlime->setRowPosition(spot.first);
+            newSlime->setColPosition(spot.second);
+            newSlime->hasSplit = true;
+            map.addEnemy(newSlime);
+            spawnCount++;
+        }
+    
+        return spawnCount > 0;  // True if at least one new slime was placed
+    }
+    return false;
+}
+
+// KNIGHT: Tanky enemy with high health
+Knight::Knight() : Enemy(CharacterType::KNIGHT, "Knight", 5, 150, 20, 0, 0) {}
+Knight::Knight(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col ) : Enemy(charType, type, value, h, d, row, col){}
+std::string Knight::getDisplayChar() { return "⚔️"; }
+
 int Enemy::dropCurrency() {
     srand(time(0)); // Seed the random number generator
     int minCurrency = 5;  // Minimum currency dropped
     int maxCurrency = 20; // Maximum currency dropped
     return minCurrency + (rand() % (maxCurrency - minCurrency + 1));
 }
+

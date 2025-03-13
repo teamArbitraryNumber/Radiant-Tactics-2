@@ -41,6 +41,7 @@ public:
 
     bool isTerrain(int x, int y) const;
     bool isEnemy(int x, int y) const;
+    bool isPositionEmpty(int row, int col);
 
     int getNumEnemy() const;
     void setNumEnemy(int num);

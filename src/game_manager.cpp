@@ -43,6 +43,7 @@ void Game_Manager::start() {
 
         if (player->getPosition() != playerPos) { // Only move enemies if player moved
             moveEnemies();   // Enemies move
+            gameMap.printMap();//output Map after enemies move
         }
 
         // Check if the player is next to an enemy after enemies move
