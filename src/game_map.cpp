@@ -38,7 +38,8 @@ bool GameMap::isEnemy(int x, int y) const {
     if (x < 0 || x >= width || y < 0 || y >= height) {
         throw out_of_range("Invalid map coordinates");
     }
-    if(mapMatrix[y][x]->getType() == "Skeleton" || mapMatrix[y][x]->getType() == "Goblin"){
+    if(mapMatrix[y][x]->getType() == "Skeleton" || mapMatrix[y][x]->getType() == "Goblin" || mapMatrix[y][x]->getType() == "Orc" 
+        || mapMatrix[y][x]->getType() == "Slime" || mapMatrix[y][x]->getType() == "Knight"){
         return true;
     }
     return false;
@@ -119,7 +120,7 @@ void GameMap::setNumEnemy(int num){
     numEnemy = num;
 }
 
-int GameMap::getEnemyKilled() const {
+int GameMap::getEnemyKilled() const {//this function ain't used
     int count = 0;
     for (const auto& row : mapMatrix) {
         for (const auto& obj : row) {

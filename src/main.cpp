@@ -7,6 +7,7 @@ using namespace std;
 
 GameMap initMap1();
 GameMap initMap2(shared_ptr<Player> p);
+GameMap initMap3(shared_ptr<Player> p);
 
 int main() {
     // Initialize the game map with a simple layout
@@ -32,6 +33,12 @@ int main() {
     gameManager.end = false;
     gameManager.enemyGoal = 3;//update game manager
     gameManager.start();//begin map 2
+
+    gameMap1 = initMap3(gameMap1.getPlayer());//update game map
+    gameManager.end = false;
+    gameManager.enemyGoal = 4;//update game manager
+    gameManager.start();//begin map 3
+
     return 0;
 }
 
@@ -58,9 +65,9 @@ GameMap initMap1(){
     // Initialize the player
     cout << "\nChoose character type (Enter a number):" << endl;
     cout << "1. Warrior 🛡️ (High health, Medium damage)" << endl;
-    cout << "2. Mage 🧙‍♂️    (Low health, High damage)" << endl;
-    cout << "3. Rogue 🦹‍♀️   (Medium health, Medium damage)" << endl;
-    cout << "4. God 👑     (Ridiculous health, Ridiculous damage)" << endl;
+    cout << "2. Mage    🧙 (Low health, High damage)" << endl;
+    cout << "3. Rogue   🥷 (Medium health, Medium damage)" << endl;
+    cout << "4. God     👑 (Ridiculous health, Ridiculous damage)" << endl;
     int choice;
     cin >> choice;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -114,8 +121,6 @@ GameMap initMap2(shared_ptr<Player> p){
     GameMap gameMap2(mapLayout2, 11, 11);
     p->setPosition(2, 2);
     gameMap2.setPlayer(p);
-    
-
 
     auto skeleton = make_shared<Skeleton>(CharacterType::SKELETON, "Skeleton",  5    ,  70,   10  ,  9   ,  9  );
     skeleton->setType("Skeleton");//must initialize type, there is a bug in constructor ( type always gets initialized to null)
@@ -125,9 +130,47 @@ GameMap initMap2(shared_ptr<Player> p){
     goblin1->setType("Goblin");//must initialize type, there is a bug in constructor ( type always gets initialized to null)
     gameMap2.addEnemy(goblin1);
 
-    auto goblin2 = make_shared<Goblin>(CharacterType::GOBLIN,   "Goblin",    2     ,  80   , 5  ,   2   ,   7);
-    goblin2->setType("Goblin");//must initialize type, there is a bug in constructor ( type always gets initialized to null)
+    auto goblin2 = make_shared<Knight>(CharacterType::KNIGHT,   "Knight",    2     ,  80   , 5  ,   2   ,   7);
+    goblin2->setType("Knight");//must initialize type, there is a bug in constructor ( type always gets initialized to null)
     gameMap2.addEnemy(goblin2);
     
     return gameMap2;
+}
+
+GameMap initMap3(shared_ptr<Player> p){
+    vector<vector<int>> mapLayout3 = {//0 = empty, 1 = barrier, 2 = door
+        {1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1},
+        {2, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1}
+    }; 
+    GameMap gameMap3(mapLayout3, 11, 11);
+    p->setPosition(1, 2);
+    gameMap3.setPlayer(p);
+
+    auto knight1 = make_shared<Knight>(CharacterType::KNIGHT,   "Knight",    2     ,  80   , 5  ,   7   ,   4);
+    knight1->setType("Knight");//must initialize type, there is a bug in constructor ( type always gets initialized to null)
+    gameMap3.addEnemy(knight1);
+
+    auto knight2 = make_shared<Knight>(CharacterType::KNIGHT,   "Knight",    2     ,  80   , 5  ,   9   ,   4);
+    knight2->setType("Knight");//must initialize type, there is a bug in constructor ( type always gets initialized to null)
+    gameMap3.addEnemy(knight2);
+
+    auto orc = make_shared<Knight>(CharacterType::ORC, "Orc", 3, 120, 15,   7   ,   2);
+    orc->setType("Knight");//must initialize type, there is a bug in constructor ( type always gets initialized to null)
+    gameMap3.addEnemy(orc);
+
+    auto slime = make_shared<Slime>(CharacterType::SLIME, "Slime", 1, 60, 5, 7, 3);
+    slime->setType("Slime");
+    gameMap3.addEnemy(slime);
+    
+    
+    return gameMap3;
 }
