@@ -170,7 +170,7 @@ void Game_Manager::startCombat(shared_ptr<Enemy>& enemy) {
             // cout << "Player defeated!" << endl;
             combatOver = true;
             *isOver = true;
-            animateGameOver(5); // Display for 5 seconds
+            animateGameOver(3); // Display for 5 seconds
             break;
         }
     }
