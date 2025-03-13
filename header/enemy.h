@@ -13,7 +13,8 @@ protected:
 
 public:
     Enemy(CharacterType char_type, string type, int value, int h, int d, int row, int col);
-
+    virtual ~Enemy() = default;
+    
     int mod(int value, int limit);
     int dropCurrency(); // Drop currency when defeated
     // Movement
@@ -41,6 +42,7 @@ public:
 class Orc : public Enemy {
 public:
     Orc();
+    Orc(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col );
     std::string getDisplayChar() override;
     void specialAbility(Character& player); // 50% more damage under half health
 };
@@ -50,6 +52,7 @@ private:
     bool hasSplit = false; // Tracks whether the Slime has already split
 public:
     Slime();
+    Slime(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col );
     std::string getDisplayChar() override;
     bool specialAbility(GameMap& map); // Returns true if it splits
 };
@@ -57,6 +60,7 @@ public:
 class Knight : public Enemy {
 public:
     Knight();
+    Knight(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col );
     std::string getDisplayChar() override;
 };
 

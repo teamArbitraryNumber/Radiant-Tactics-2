@@ -294,7 +294,7 @@ bool Slime::specialAbility(GameMap& map) {
             map.addEnemy(newSlime);
             spawnCount++;
         }
-
+    
         return spawnCount > 0;  // True if at least one new slime was placed
     }
     return false;

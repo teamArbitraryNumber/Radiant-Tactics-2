@@ -49,18 +49,34 @@ vector<vector<shared_ptr<Object> > >& GameMap::getMapMatrix(){
 }
 
 void GameMap::killEnemy(int x, int y) {
-    for (auto it = enemies.begin(); it != enemies.end(); ++it) {
+    /*for (auto it = enemies.begin(); it != enemies.end(); ++it) {
         if ((*it)->getRowPosition() == x && (*it)->getColPosition() == y) {
             
             // Check if it's a Slime and if it can split
-            Slime* slimePtr = dynamic_cast<Slime*>(it->get());
-            if (slimePtr && slimePtr->specialAbility(*this)) {
-                return;  // Slime duplicated, so do not remove it
-            }
+            //Slime* slimePtr = dynamic_cast<Slime*>(it->get());
+            //if (slimePtr && slimePtr->specialAbility(*this)) {
+                //return;  // Slime duplicated, so do not remove it
+            //}
 
             std::cout << (*it)->getDisplayChar() << " was defeated!" << std::endl;
             enemies.erase(it);
             return;
+        }
+    }*/
+    for (auto it = enemies.begin(); it != enemies.end(); ) {
+        if ((*it)->getRowPosition() == x && (*it)->getColPosition() == y) {
+            if ((*it)->getType() == "Slime") {
+                shared_ptr<Slime> slime = dynamic_pointer_cast<Slime>(*it);
+                if (slime && slime->specialAbility(*this)) {
+                    return;
+                }
+            }
+            
+            std::cout << (*it)->getDisplayChar() << " was defeated!" << std::endl;
+            it = enemies.erase(it);
+            return;
+        } else {
+            ++it;
         }
     }
 }
