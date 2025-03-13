@@ -6,6 +6,7 @@
 #include <thread>
 #include <chrono>
 #include <iostream>
+#include <cstdlib> // For rand()
 
 enum ColorCode {
     RED = 31,
@@ -18,7 +19,17 @@ enum ColorCode {
     DEFAULT = 39
 };
 
+#define RED "\033[31m"
+#define ORANGE "\033[33m"
+#define YELLOW_LIGHT "\033[93m"
+#define RESET "\033[0m"
+
 void animateWelcomeMessage(int durationSeconds = 7);
+
+// void animateFlame(int durationSeconds = 3);         // Animate the flame
+void displayInstructions(); 
+void animateTorch(int durationSeconds = 5); // New function for torch animation
+
 
 #endif // ANIMATED_HEADER_H
 
