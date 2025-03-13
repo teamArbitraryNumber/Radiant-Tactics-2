@@ -15,6 +15,7 @@ public:
     Enemy(CharacterType char_type, string type, int value, int h, int d, int row, int col);
 
     int mod(int value, int limit);
+    int dropCurrency(); // Drop currency when defeated
     // Movement
     void move(shared_ptr<Enemy>& enemy, GameMap& map);
 
@@ -26,12 +27,14 @@ public:
 class Skeleton : public Enemy {
 public:
     Skeleton();
+    Skeleton(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col );
     string getDisplayChar() override;
 };
 
 class Goblin : public Enemy {
 public:
     Goblin();
+    Goblin(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col );
     string getDisplayChar() override;
 };
 
