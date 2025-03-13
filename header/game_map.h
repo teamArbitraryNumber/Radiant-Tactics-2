@@ -53,6 +53,8 @@ public:
     int getWidth() const;
     int getHeight() const;
     void printMap() const;
+
+    void spawnBoss();
 };
 
 #endif
