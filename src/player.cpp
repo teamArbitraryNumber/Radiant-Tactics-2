@@ -79,8 +79,23 @@ string Player::getDisplayChar(){
 
 // In Player class
 void Player::attack(Character &target) {
-    int damage = getDamage(); // Assuming getDamage() returns the player's damage
+    /*int damage = getDamage(); // Assuming getDamage() returns the player's damage
     target.setHealth(target.getHealth() - damage);
+    cout << "Player attacks for " << damage << " damage!" << endl;*/
+    if (getHealth() <= 0) {
+        cout << "Player is dead and cannot attack." << endl;
+        return;
+    }
+
+    if (target.getHealth() <= 0) {
+        cout << "Target is already dead." << endl;
+        return;
+    }
+
+    int damage = getDamage(); // Assuming getDamage() returns the player's damage
+    int newHealth = target.getHealth() - damage;
+    target.setHealth(newHealth < 0 ? 0 : newHealth); // Ensure health doesn't go below 0
+
     cout << "Player attacks for " << damage << " damage!" << endl;
 }
 
