@@ -60,6 +60,7 @@ void Game_Manager::start() {
 
         if (player->getPosition() != playerPos) { // Only move enemies if player moved
             moveEnemies();   // Enemies move
+            enemy = getAdjacentEnemy();
         }
 
         gameMap.printMap();//output Map after enemies move
@@ -119,7 +120,7 @@ shared_ptr<Enemy> Game_Manager::getAdjacentEnemy() {
 
         if (newX >= 0 && newX < width && newY >= 0 && newY < height) {
             shared_ptr<Object> obj = gameMap.getObjectAt(newX, newY);
-            if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin")) {
+            if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin" || obj->getType() == "Orc" || obj->getType() == "Knight" || obj->getType() == "Slime")) {
                 return dynamic_pointer_cast<Enemy>(obj);
             }
         }
@@ -145,7 +146,7 @@ void Game_Manager::startCombat(shared_ptr<Enemy>& enemy) {
         }
         // Check if the enemy is defeated
         if (isEnemyDefeated()) {
-            cout << "Enemy defeated!" << endl;
+            cout << "Enemies defeated!" << endl;
             combatOver = true;
             return;
         }
@@ -207,7 +208,7 @@ void Game_Manager::playerTurn() {
 
             if (newX >= 0 && newX < gameMap.getWidth() && newY >= 0 && newY < gameMap.getHeight()) {
                 shared_ptr<Object> obj = gameMap.getObjectAt(newX, newY);
-                if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin")) {
+                if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin" || obj->getType() == "Orc" || obj->getType() == "Knight" || obj->getType() == "Slime") ){
                     shared_ptr<Enemy> enemy = dynamic_pointer_cast<Enemy>(obj);
                     if (enemy) {
                         player->attack(*enemy);
@@ -265,12 +266,12 @@ void Game_Manager::enemyTurn() {
 
         if (newX >= 0 && newX < gameMap.getWidth() && newY >= 0 && newY < gameMap.getHeight()) {
             shared_ptr<Object> obj = gameMap.getObjectAt(newX, newY);
-            if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin")) {
+            if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin" || obj->getType() == "Orc" || obj->getType() == "Knight" || obj->getType() == "Slime")) {
                 shared_ptr<Enemy> enemy = dynamic_pointer_cast<Enemy>(obj);
-                /*if (enemy) {
+                if (enemy) {
                     enemy->attack(*player);
                     break;
-                }*/
+                }
                 if (enemy && enemy->getHealth() > 0) {
                     if (player->getHealth() > 0) {
                         enemy->attack(*player);

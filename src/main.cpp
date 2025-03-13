@@ -139,7 +139,7 @@ GameMap initMap2(shared_ptr<Player> p){
 
 GameMap initMap3(shared_ptr<Player> p){
     vector<vector<int>> mapLayout3 = {//0 = empty, 1 = barrier, 2 = door
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -149,13 +149,13 @@ GameMap initMap3(shared_ptr<Player> p){
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+        {1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1}
     }; 
     GameMap gameMap3(mapLayout3, 11, 11);
     p->setPosition(1, 2);
     gameMap3.setPlayer(p);
 
-    auto knight1 = make_shared<Knight>(CharacterType::KNIGHT,   "Knight",    2     ,  80   , 5  ,   2   ,   7);
+    auto knight1 = make_shared<Knight>(CharacterType::KNIGHT,   "Knight",    2     ,  80   , 5  ,   7   ,   4);
     knight1->setType("Knight");//must initialize type, there is a bug in constructor ( type always gets initialized to null)
     gameMap3.addEnemy(knight1);
 
@@ -163,11 +163,11 @@ GameMap initMap3(shared_ptr<Player> p){
     knight2->setType("Knight");//must initialize type, there is a bug in constructor ( type always gets initialized to null)
     gameMap3.addEnemy(knight2);
 
-    auto orc = make_shared<Knight>(CharacterType::ORC, "Orc", 3, 120, 15,   5   ,   2);
+    auto orc = make_shared<Knight>(CharacterType::ORC, "Orc", 3, 120, 15,   7   ,   2);
     orc->setType("Knight");//must initialize type, there is a bug in constructor ( type always gets initialized to null)
     gameMap3.addEnemy(orc);
 
-    auto slime = make_shared<Slime>(CharacterType::SLIME, "Slime", 1, 60, 5, 0, 0);
+    auto slime = make_shared<Slime>(CharacterType::SLIME, "Slime", 1, 60, 5, 7, 3);
     slime->setType("Slime");
     gameMap3.addEnemy(slime);
     
