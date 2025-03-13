@@ -55,6 +55,6 @@ class Knight : public Enemy {
 public:
     Knight();
     std::string getDisplayChar() override;
-}
+};
 
 #endif
