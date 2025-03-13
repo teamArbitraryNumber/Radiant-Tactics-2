@@ -64,4 +64,13 @@ public:
     std::string getDisplayChar() override;
 };
 
+class RadiantDragon : public Enemy {
+public:
+    RadiantDragon();
+    std::string getDisplayChar() override;
+    void takeTurn(GameMap& map, Character& player);
+    void flameBreath(GameMap& map, Character& player);
+    void fly(GameMap& map);
+};
+
 #endif
