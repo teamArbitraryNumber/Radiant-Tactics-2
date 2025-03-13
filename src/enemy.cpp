@@ -213,3 +213,38 @@ Goblin::Goblin() : Enemy(CharacterType::GOBLIN,   "Goblin",    2     ,  80   , 5
 string Goblin::getDisplayChar(){
     return "👺";
 }
+
+// ORC: Deals 50% more damage when under half health
+Orc::Orc() : Enemy(CharacterType::ORC, "Orc", 3, 120, 15, 0, 0) {}
+
+std::string Orc::getDisplayChar() { return "🏹"; }
+
+void Orc::specialAbility(Character& player) {
+    if (getHealth() < 60) {  // Below 50% health
+        int boostedDamage = getDamage() * 1.5;
+        player.setHealth(player.getHealth() - boostedDamage);
+        std::cout << "Orc is enraged! It deals " << boostedDamage << " damage!" << std::endl;
+    } else {
+        player.setHealth(player.getHealth() - getDamage());
+    }
+}
+
+// SLIME: Splits into two and changes color to purple
+Slime::Slime() : Enemy(CharacterType::SLIME, "Slime", 1, 60, 5, 0, 0) {}
+
+std::string Slime::getDisplayChar() {
+    return hasSplit ? "🟣" : "🟢";  // Green before split, Purple after split
+}
+
+bool Slime::specialAbility() {
+    if (getHealth() <= 0 && !hasSplit) {
+        hasSplit = true;
+        return true;  // Indicates duplication
+    }
+    return false;  // Dies normally if it already split
+}
+
+// KNIGHT: Tanky enemy with high health
+Knight::Knight() : Enemy(CharacterType::KNIGHT, "Knight", 5, 150, 20, 0, 0) {}
+
+std::string Knight::getDisplayChar() { return "🛡"; }
