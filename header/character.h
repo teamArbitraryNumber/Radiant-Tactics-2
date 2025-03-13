@@ -12,6 +12,7 @@ enum class CharacterType {
     ORC,    // New
     SLIME,  // New
     KNIGHT  // New
+    RADIANT_DRAGON  // New Boss Enemy
 };
 
 class Character : public virtual Object {
