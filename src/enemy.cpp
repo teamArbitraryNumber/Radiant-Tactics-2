@@ -305,6 +305,92 @@ Knight::Knight() : Enemy(CharacterType::KNIGHT, "Knight", 5, 150, 20, 0, 0) {}
 Knight::Knight(CharacterType charType, string type,  int value,  int h,   int d  ,  int row, int col ) : Enemy(charType, type, value, h, d, row, col){}
 std::string Knight::getDisplayChar() { return "⚔️"; }
 
+RadiantDragon::RadiantDragon() 
+    : Enemy(CharacterType::RADIANT_DRAGON, "Radiant Dragon", 10, 300, 30, 0, 0) {}
+
+std::string RadiantDragon::getDisplayChar() {
+    return "🐉";
+}
+
+void RadiantDragon::takeTurn(GameMap& map, Character& player) {
+    int choice = rand() % 3;
+
+    if (choice == 0) {
+        std::cout << "🐉 The Radiant Dragon attacks!" << std::endl;
+        player.setHealth(player.getHealth() - getDamage());
+    } 
+    else if (choice == 1) {
+        fly(map);
+    } 
+    else {
+        flameBreath(map, player);
+    }
+}
+
+void RadiantDragon::fly(GameMap& map) {
+    std::cout << "🐉 The Radiant Dragon soars into the sky!" << std::endl;
+
+    std::vector<std::pair<int, int>> possibleSpots;
+    for (int dx = -3; dx <= 3; dx++) {
+        for (int dy = -3; dy <= 3; dy++) {
+            int newX = getColPosition() + dx;
+            int newY = getRowPosition() + dy;
+            if (map.isPositionEmpty(newX, newY)) {
+                possibleSpots.push_back({newX, newY});
+            }
+        }
+    }
+
+    if (!possibleSpots.empty()) {
+        auto [newX, newY] = possibleSpots[rand() % possibleSpots.size()];
+        map.removeObjectAt(getRowPosition(), getColPosition());
+
+        // Instead of shared_from_this(), create a new shared_ptr
+        map.setObjectAt(newX, newY, std::make_shared<RadiantDragon>(*this));
+
+        setColPosition(newX);
+        setRowPosition(newY);
+        std::cout << "🐉 The Radiant Dragon lands!" << std::endl;
+    }
+}
+
+void RadiantDragon::flameBreath(GameMap& map, Character& player) {
+    std::cout << "🐉 The Radiant Dragon breathes fire! 🔥" << std::endl;
+
+    int fireX = getColPosition();
+    int fireY = getRowPosition();
+
+    while (true) {
+        int playerX = player.getColPosition();
+        int playerY = player.getRowPosition();
+
+        if (fireX < playerX) fireX++;
+        else if (fireX > playerX) fireX--;
+        
+        if (fireY < playerY) fireY++;
+        else if (fireY > playerY) fireY--;
+
+        std::cout << "🔥 The fireball moves to (" << fireX << ", " << fireY << ")!" << std::endl;
+
+        if ((fireX == playerX && fireY == playerY) || !map.isPositionEmpty(fireX, fireY)) {
+            std::cout << "💥 The fireball explodes!" << std::endl;
+
+            std::vector<std::pair<int, int>> explosionArea = {
+                {fireX, fireY}, {fireX+1, fireY}, {fireX-1, fireY},
+                {fireX, fireY+1}, {fireX, fireY-1}
+            };
+
+            for (auto [exX, exY] : explosionArea) {
+                shared_ptr<Object> obj = map.getObjectAt(exX, exY);
+                if (obj && obj->getType() == "Player") {
+                    player.setHealth(player.getHealth() - 40);
+                }
+            }
+            return;
+        }
+    }
+}
+
 int Enemy::dropCurrency() {
     srand(time(0)); // Seed the random number generator
     int minCurrency = 5;  // Minimum currency dropped
