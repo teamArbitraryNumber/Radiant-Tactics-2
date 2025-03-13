@@ -27,7 +27,11 @@ void Game_Manager::start(){
     while (!end && !*isOver) {
         pair<int, int> playerPos = player->getPosition();
         gameMap.printMap(); //// Print the map before players move
-        takeAction();    // player can either quit or move
+        bool doorEntered = takeAction();// player can either quit or move
+        if(doorEntered == 1){ //break while loop if door is entered
+            end = true;
+            break;
+        }
         //player.attack()      player attacks after move
         if(player->getPosition() != playerPos){// only move enemies if player moved
             moveEnemies();   // enemies move
@@ -36,9 +40,9 @@ void Game_Manager::start(){
     }
 }
 
-void Game_Manager::takeAction() {
+int Game_Manager::takeAction() {//returns 1 if player tries moving to door, 0 otherwise
     //char action;
-    cout << "Enter your move (w, a, s, d): ";
+    cout << "Enter your move (w, a, s, d) or (q) to quit: ";
     //cin >> action;
     //cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Clear input buffer, (without this if player enters ww, they move up twice, etc.)
     char action = getch();
@@ -60,7 +64,9 @@ void Game_Manager::takeAction() {
         // Calculate the target position
         pair<int, int> currPos = player->getPosition();
         pair<int, int> pos = player->move(action, gameMap.getHeight(), gameMap.getWidth());
-
+        if(gameMap.getMapMatrix()[pos.second][pos.first]->isDoor()){ 
+            return 1; 
+        } // return 
         // Check if the target position is a barrier or enemy
         if (!gameMap.isTerrain(pos.first, pos.second) && !gameMap.isEnemy(pos.first, pos.second)) {
             // Update player position if the target is not a barrier
@@ -83,53 +89,8 @@ void Game_Manager::takeAction() {
         gameMap.printMap(); //print map after players move
         cout << "Invalid action. Please try again." << endl;
     }
+    return 0;
 }
-
-// void Game_Manager::takeAction(){
-//     char action;
-//     cout << "Enter your move: ";
-//     cin >> action;
-//     char choice;
-// if(action == 'q'){
-//         cout << endl;
-//         cin >> choice;
-//         if (choice == '1') {
-//             cout << "You have quit the game." << endl << endl;
-//             *isOver = true;
-//         }
-// }
-//         else if (choice == '2') {
-//             cout << "You have chosen not to quit the game." << endl << endl;
-//         }
-//          else if (action == 'w' || action == 'a' || action == 's' || action == 'd') {
-//         pair<int, int> pos = player.move(action, gameMap.getHeight(), gameMap.getWidth());
-        
-//         // shared_ptr<Object> encounter = gameMap.getObjectAt(pos.first, pos.second);
-//     //     if (encounter) {
-//     //         string type = encounter->getType();
-//     //     if (type == "Goblin") {
-//     //             Goblin* goblin = dynamic_cast<Goblin*>(encounter.get());
-//     //             if (goblin) {
-//     //                 Character& character = *goblin;
-//     //                 player.attack(character);
-//     //             }
-//     //             if (goblin->getHealth() <= 0) {
-//     //                 gameMap.removeObjectAt(pos.first, pos.second);
-//     //                 enemyGoal--;
-//     //                 if (enemyGoal == 0) {
-//     //                     cout << "You have defeated all the enemies. You win!" << endl;
-//     //                     *isOver = true;
-//     //                 }
-//     //             }
-//     //         }
-//     //     else {
-//     //         cout << "Invalid action. Please try again." << endl;
-//     //     }
-//     //     // cout << "You have quit the game." << endl << endl;
-//     //     // *isOver = true;
-//     // }
-// }
-// }
 
 
 
