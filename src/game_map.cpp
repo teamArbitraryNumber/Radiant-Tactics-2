@@ -63,17 +63,6 @@ void GameMap::killEnemy(int x, int y) {
     }
 }
 
-// void GameMap::initMap1(){
-//     for(int y = 1; y <= this->height; y++){
-//         for(int x = 1; x <= this->width; x++){
-//             if(y == this->height && x == this->width / 2){//place player on the bottom middle of the map
-//                 shared_ptr<Inventory> inv = make_shared<Inventory>();
-//                 mapMatrix[y][x] = make_shared<Player>(CharacterType::PLAYER, "Player", 0, 100, 10, y, x, inv, 0);
-//             }
-//         }
-//     }   
-// }
-
 shared_ptr<Object> GameMap::getObjectAt(int x, int y) {
     if (x < 0 || x >= width || y < 0 || y >= height) {
         throw out_of_range("Invalid map coordinates");
