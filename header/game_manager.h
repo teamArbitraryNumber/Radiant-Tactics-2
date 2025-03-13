@@ -38,6 +38,8 @@ class Game_Manager{
         void enemyTurn();
         void startCombat(shared_ptr<Enemy>& enemy);
         void moveEnemies();
+            void displayCommands() ;
+
 };
 
 #endif

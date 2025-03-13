@@ -26,7 +26,23 @@ struct Map {
 
 //start
 
+void Game_Manager::displayCommands() {
+    cout << "List of Commands:" << endl;
+    cout << "w - Move Up" << endl;
+    cout << "a - Move Left" << endl;
+    cout << "s - Move Down" << endl;
+    cout << "d - Move Right" << endl;
+    cout << "h - Display Health" << endl;
+    cout << "c - Display Currency" << endl;
+    cout << "q - Quit Game" << endl;
+    cout << "i - Display Inventory" << endl;
+    cout << "m - Open Merchant Shop" << endl;
+    cout << "d - Display Damage You Can Deal" << endl;
+    cout << "z - Show This List of Commands" << endl;
+}
+
 void Game_Manager::start() {
+        displayCommands(); // Show commands at the start of the game
     while (!end && !*isOver) {
         pair<int, int> playerPos = player->getPosition();
         gameMap.printMap(); //// Print the map before players move
@@ -45,6 +61,7 @@ void Game_Manager::start() {
         if (player->getPosition() != playerPos) { // Only move enemies if player moved
             moveEnemies();   // Enemies move
         }
+
         gameMap.printMap();//output Map after enemies move
         // Check if the player is next to an enemy after enemies move
         if (enemy && enemy->getHealth() > 0) {
@@ -128,7 +145,7 @@ void Game_Manager::startCombat(shared_ptr<Enemy>& enemy) {
         if (isEnemyDefeated()) {
             cout << "Enemy defeated!" << endl;
             combatOver = true;
-            break;
+            return;
         }
         //Check if player is dead
         if (player->getHealth() <= 0) {
@@ -197,7 +214,13 @@ void Game_Manager::playerTurn() {
                             player->setCurrency(player->getCurrency() + droppedCurrency); // Add currency to player
                             cout << "Enemy dropped " << droppedCurrency << " currency!" << endl;
                             gameMap.removeObjectAt(newX, newY); // Remove defeated enemy
+
+                            cout << "Enemy defeated!" << endl;
+                            // End combat immediately
+                            //*isOver = true; 
+                            //break;
                             return;
+
                         }
                         break;
                     }
@@ -271,11 +294,8 @@ bool Game_Manager::isEnemyDefeated() {
 }
 
 
-int Game_Manager::takeAction() {//returns 1 if player tries moving to door, 0 otherwise
-    //char action;
-    cout << "Enter your move (w, a, s, d), attack (x), use item (i), or quit (q): ";
+int Game_Manager::takeAction() {
     char action = getch();
-
     cout << endl;
 
     if (action == 'q') {
@@ -290,14 +310,15 @@ int Game_Manager::takeAction() {//returns 1 if player tries moving to door, 0 ot
             cout << "You have chosen not to quit the game." << endl << endl;
         }
     } else if (action == 'w' || action == 'a' || action == 's' || action == 'd') {
+        // Handle movement
         pair<int, int> currPos = player->getPosition();
         pair<int, int> pos = player->move(action, gameMap.getHeight(), gameMap.getWidth());
 
-        if(gameMap.getMapMatrix()[pos.second][pos.first]->isDoor()){ 
-            return 1; 
-        } // return 
-        // Check if the target position is a barrier or enemy
+        if (gameMap.getMapMatrix()[pos.second][pos.first]->isDoor()) {
+            return 1; // Player entered a door
+        }
 
+        // Check if the target position is a barrier or enemy
         if (!gameMap.isTerrain(pos.first, pos.second) && !gameMap.isEnemy(pos.first, pos.second)) {
             gameMap.removeObjectAt(currPos.first, currPos.second);
             gameMap.setObjectAt(pos.first, pos.second, player);
@@ -326,7 +347,25 @@ int Game_Manager::takeAction() {//returns 1 if player tries moving to door, 0 ot
             player->heal(healingAmount);
             cout << "Player healed for " << healingAmount << " HP!" << endl;
         }
+    } else if (action == 'h') {
+        // Display player health
+        cout << "Player Health: " << player->getHealth() << "/" << endl;
+    } else if (action == 'c') {
+        // Display player currency
+        cout << "Player Currency: " << player->getCurrency() << endl;
+    } else if (action == 'm') {
+        // Open merchant shop
+        int currentGold = player->getCurrency();
+        int newGold = player->getInventory().market(currentGold);
+        player->setCurrency(newGold);
+    } else if (action == 'd') {
+        // Display player damage
+        cout << "Player Damage: " << player->getDamage() << endl;
+    } else if (action == 'z') {
+        // Display list of commands
+        displayCommands();
     } else {
+        // Invalid action
         cout << endl;
         gameMap.printMap();
         cout << "Invalid action. Please try again." << endl;

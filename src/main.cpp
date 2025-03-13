@@ -1,5 +1,6 @@
 #include "../header/game_manager.h"
 #include "../header/enemy.h"
+#include "../header/animation.h"
 #include <iostream>
 
 using namespace std;
@@ -10,6 +11,11 @@ GameMap initMap2(shared_ptr<Player> p);
 int main() {
     // Initialize the game map with a simple layout
     //                                            All maps will be 11 x 11
+    // animateWelcomeMessage(7);
+    // animateTorch(5);
+
+
+    // displayInstructions();
 
     GameMap gameMap1 = initMap1();//initialize gameMap1
     
