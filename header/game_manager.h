@@ -3,6 +3,8 @@
 #include "game_map.h"
 #include "player.h"
 #include "enemy.h"
+#include <iostream>
+#include "animation.h"
 // #include "inventory.h"
 // #include "item.h"
 
