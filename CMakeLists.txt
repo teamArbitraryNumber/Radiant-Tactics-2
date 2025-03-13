@@ -53,7 +53,7 @@ add_executable(tests
   src/item.cpp
   src/inventory.cpp
   tests/inventoryT.cpp
-
+  src/enemy.cpp
 )
 target_link_libraries(tests gtest gmock gtest_main)
 
