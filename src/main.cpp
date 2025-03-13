@@ -11,12 +11,11 @@ GameMap initMap2(shared_ptr<Player> p);
 int main() {
     // Initialize the game map with a simple layout
     //                                            All maps will be 11 x 11
-    animateWelcomeMessage(7);
-    animateTorch(5);
+    // animateWelcomeMessage(7);
+    // animateTorch(5);
 
 
-    // Display the instructions
-    displayInstructions();
+    // displayInstructions();
 
     GameMap gameMap1 = initMap1();//initialize gameMap1
     
