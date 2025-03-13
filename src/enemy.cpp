@@ -6,6 +6,8 @@
 #include <vector>
 #include <unordered_map>
 #include <limits>
+#include <cstdlib> // For rand()
+#include <ctime>  // For time()
 
 Enemy::Enemy(CharacterType char_type, string type, int value, int h, int d, int row, int col)
     : Character(char_type, type, value, h, d, row, col), enemyType(type) {}
@@ -214,11 +216,10 @@ void Enemy::move(shared_ptr<Enemy>& enemy, GameMap& map) {
 
 
 // Attack logic
-void Enemy::attack(Character& player) {
-    int targetHealth = player.getHealth();
-    player.setHealth(targetHealth - damage);
-    
-    cout << enemyType << " attacks!" << endl; //Attack implenentation placeholder
+void Enemy::attack(Character &player) {
+    int damage = getDamage(); // Assuming getDamage() returns the enemy's damage
+    player.setHealth(player.getHealth() - damage);
+    cout << enemyType << " attacks for " << damage << " damage!" << endl;
 }
 
 // Skeleton enemy implementation
@@ -237,4 +238,11 @@ Goblin::Goblin(CharacterType charType, string type,  int value,  int h,   int d 
 
 string Goblin::getDisplayChar(){
     return "👺";
+}
+
+int Enemy::dropCurrency() {
+    srand(time(0)); // Seed the random number generator
+    int minCurrency = 5;  // Minimum currency dropped
+    int maxCurrency = 20; // Maximum currency dropped
+    return minCurrency + (rand() % (maxCurrency - minCurrency + 1));
 }

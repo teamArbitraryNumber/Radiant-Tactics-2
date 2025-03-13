@@ -62,7 +62,6 @@ void GameMap::killEnemy(int x, int y) {
     }
 }
 
-
 shared_ptr<Object> GameMap::getObjectAt(int x, int y) {
     if (x < 0 || x >= width || y < 0 || y >= height) {
         throw out_of_range("Invalid map coordinates");

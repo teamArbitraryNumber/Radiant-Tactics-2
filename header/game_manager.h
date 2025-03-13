@@ -31,6 +31,11 @@ class Game_Manager{
         };
         // void movePlayer(char input, int new_x, int new_y);
         // void managePlayerInventory(shared_ptr<Inventory> inv);
+        bool isPlayerNextToEnemy();
+        void playerTurn();
+        bool isEnemyDefeated();
+        void enemyTurn();
+        void startCombat();
         void moveEnemies();
 };
 
