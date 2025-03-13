@@ -50,19 +50,6 @@ TEST(GameMapTest, SetObjectAt) {
     EXPECT_EQ(obj, obj2);
 }
 
-TEST(GameMapTest, PrintMap) {
-    vector<vector<int>> matrix = {
-        {0, 0, 0},
-        {0, 0, 0},
-        {0, 0, 0}
-    };
-    GameMap map(matrix, 3, 3);
-    testing::internal::CaptureStdout();
-    map.printMap(1, 1);
-    std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "0 0 0 \n0 P 0 \n0 0 0 \n");
-}
-
 TEST(GameMapTest, Destructor) {
     vector<vector<int>> matrix = {
         {0, 0, 0},

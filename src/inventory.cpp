@@ -1,4 +1,4 @@
-#include "inventory.h"
+#include "../header/inventory.h"
 
 using namespace std;
 
@@ -56,6 +56,7 @@ bool Inventory::hasPotion(string itemToCompare)
             return true;
         }
     }
+        return false;
 }
 bool Inventory::hasWeapon(string itemToCompare)
 {
@@ -66,6 +67,7 @@ bool Inventory::hasWeapon(string itemToCompare)
             return true;
         }
     }
+        return false;
 }
 
 // If Inventory Full
@@ -184,22 +186,23 @@ int Inventory::equipWeapon(int origDamage)
     cout << "1. Select Weapon To Equip." << endl;
     cout << "2. Leave" << endl;
     cin >> input;
+    
     if (input == 1)
     {
         cout << "Damage Item List:" << endl;
-        int i;
-        for (i = 0; i < weaponList.size(); i++)
+        for (int i = 0; i < weaponList.size(); i++)
         {
             cout << "   " << i << ". " << weaponList[i].getName() << endl;
         }
-        if (input < weaponList.size())
+        cin >> input;
+        if (input >= 0 && input < weaponList.size())
         {
             return weaponList[input].getDamage();
         }
         else
         {
             cout << "Invalid Input, try again." << endl;
-            equipWeapon(origDamage);
+            return equipWeapon(origDamage);
         }
     }
     else if (input == 2)
@@ -209,9 +212,10 @@ int Inventory::equipWeapon(int origDamage)
     else
     {
         cout << "Invalid Input, try again." << endl;
-        equipWeapon(origDamage);
+        return equipWeapon(origDamage);
     }
 }
+
 
 int Inventory::usePotion()
 {
@@ -220,6 +224,7 @@ int Inventory::usePotion()
     cout << "1. Select a potion to use: " << endl;
     cout << "2. Leave" << endl;
     cin >> input;
+    
     if (input == 1)
     {
         cout << "   Potions:" << endl;
@@ -229,12 +234,14 @@ int Inventory::usePotion()
             cout << "   " << i << ". " << potionList[i].getName() << endl;
         }
         cin >> input;
-        if (input >= potionList.size())
+
+        if (input >= potionList.size() || input < 0)
         {
             cout << "Invalid Input, try again." << endl;
-            usePotion();
+            return usePotion(); // Recursively ask the user for input again
         }
-        // Delete potion and return healing amount;
+        
+        // Delete potion and return healing amount
         int healingAmount = potionList[input].getHealingAmount();
         potionList.erase(potionList.begin() + input);
         inventoryCounter--;
@@ -242,14 +249,15 @@ int Inventory::usePotion()
     }
     else if (input == 2)
     {
-        return 0;
+        return 0;  // Return 0 if the user decides to leave
     }
     else
     {
         cout << "Invalid Input, try again." << endl;
-        usePotion();
+        return usePotion();  // Recursively ask the user for input again
     }
 }
+
 
 int Inventory::market(int currGold)
 {
@@ -257,9 +265,11 @@ int Inventory::market(int currGold)
     cout << endl;
     cout << "Current Gold: " << currGold << endl;
     cout << "Select an Option: " << endl;
-    cout << "   " << "1. Buy Items" << endl;
-    cout << "   " << "2. Leave" << endl;
-    int input = -1;
+    cout << "   1. Buy Items" << endl;
+    cout << "   2. Leave" << endl;
+    int input;
+    cin >> input;  // FIXED: Now reads input
+    
     if (input == 1)
     {
         cout << "Merchant List: " << endl;
@@ -269,44 +279,32 @@ int Inventory::market(int currGold)
         cout << " 4. Basic Sword - 25 Gold" << endl;
         cout << " 5. Greater Sword - 100 Gold" << endl;
         cout << " 6. Magic Wand - 200 Gold" << endl;
+        cout << "Select an item to buy: ";
+        cin >> input;
+        
         if(input == 1 && currGold >= 10){
             addPotion(SMALL_POTION);
             newGold -= 10;
-            market(newGold);
         }else if(input == 2 && currGold >= 35){
             addPotion(LARGE_POTION);
             newGold -= 35;
-            market(newGold);
         }else if(input == 3 && currGold >= 300){
             addPotion(MYSTIC_ELIXIR);
             newGold -= 300;
-            market(newGold);
         }else if(input == 4 && currGold >= 25){
             addWeapon(BASIC_SWORD);
             newGold -= 25;
-            market(newGold);
         }else if(input == 5 && currGold >= 100){
             addWeapon(GREATER_SWORD);
             newGold -= 100;
-            market(newGold);
         }else if(input == 6 && currGold >= 200){
             addWeapon(MAGIC_WAND);
             newGold -= 200;
-            market(newGold);
         }else{
-            cout << "Invalid Input or Insufficient Gold" << endl;
-            cout << endl;
-            market(newGold);
+            cout << "Not enough gold or invalid selection." << endl;
         }
+
+        return market(newGold);  // Recursive call to continue shopping
     }
-    else if (input == 2)
-    {
-        return newGold;
-    }
-    else
-    {
-        cout << "Invalid input" << endl;
-        cout << endl;
-        market(currGold);
-    }
+    return newGold;
 }

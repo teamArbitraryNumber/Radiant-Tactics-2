@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include "character.h"
-// #include "inventory.h"
+#include "inventory.h"
 #include "game_map.h"
 
 using namespace std;
@@ -16,7 +16,7 @@ enum class PlayerType {
 
 class Player : public Character{
     private:
-        // shared_ptr<Inventory> inventory;
+    Inventory playerInventory; // Inventory specific to the Player
         char movement;
         int currency;
         int max_health;
@@ -27,13 +27,12 @@ class Player : public Character{
         Player() = default;
         
         // Player Initialization Constructor
-        // Player(CharacterType char_type, string type, int value, int h, int d, int row, int col, shared_ptr<Inventory> inv, int curr);
         Player(CharacterType char_type, string type, int value, int h, int d, int row, int col, int curr);
         Player(PlayerType pType, CharacterType char_type, string type, int value, int h, int d, int row, int col, int curr);
         
         // Will need more constructors for different character classes
 
-        // shared_ptr<Inventory> getInventory();
+    Inventory& getInventory(); // Accessor for Inventory
 
         int getCurrency() const;
         void setCurrency(int curr);

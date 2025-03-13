@@ -4,11 +4,13 @@
 using namespace std;
 
 Player::Player(CharacterType char_type, string type, int value, int h, int d, int row, int col, int curr)    
+
     : Character(char_type, type, value, h, d,  row, col), currency(curr), max_health(h){}
 
 Player::Player(PlayerType pType, CharacterType char_type, string type, int value, int h, int d, int row, int col, int curr) 
     : Character(char_type, type, value, h, d,  row, col), currency(curr), max_health(h), playerType(pType){}
     
+
 int Player::mod(int value, int limit){
     return (value % limit + limit ) % limit;
 }
@@ -49,9 +51,9 @@ PlayerType Player::getPlayerType() const {
     return playerType;
 }
 
-// shared_ptr<Inventory> Player::getInventory(){
-//     return inventory;
-// }
+Inventory& Player::getInventory() {
+    return playerInventory;
+}
 
 int Player::getCurrency() const{
     return currency;
@@ -79,3 +81,4 @@ void Player::attack(Character &opp){
     cout << "we attacked";
     //TODO
 }
+
