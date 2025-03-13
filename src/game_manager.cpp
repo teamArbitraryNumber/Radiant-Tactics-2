@@ -111,58 +111,6 @@ void Game_Manager::startCombat() {
     }
 }
 
-// void Game_Manager::playerTurn() {
-//     char action;
-//     cout << "Do you want to attack (a), use an item (i), or do nothing (n)? ";
-//     cin >> action;
-
-//     if (action == 'a') {
-//         // Player attacks
-//         pair<int, int> playerPos = player->getPosition();
-//         int playerX = playerPos.first;
-//         int playerY = playerPos.second;
-
-//         // Find the enemy next to the player
-//         pair<int, int> possibleMoves[4] = {
-//             {playerX, playerY - 1}, // Up
-//             {playerX, playerY + 1}, // Down
-//             {playerX - 1, playerY}, // Left
-//             {playerX + 1, playerY}  // Right
-//         };
-
-//         for (int i = 0; i < 4; i++) {
-//             int newX = possibleMoves[i].first;
-//             int newY = possibleMoves[i].second;
-
-//             if (newX >= 0 && newX < gameMap.getWidth() && newY >= 0 && newY < gameMap.getHeight()) {
-//                 shared_ptr<Object> obj = gameMap.getObjectAt(newX, newY);
-//                 if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin")) {
-//                     shared_ptr<Enemy> enemy = dynamic_pointer_cast<Enemy>(obj);
-//                     if (enemy) {
-//                         player->attack(*enemy);
-//                         if (enemy->getHealth() <= 0) {
-//                             gameMap.removeObjectAt(newX, newY); // Remove defeated enemy
-//                         }
-//                         break;
-//                     }
-//                 }
-//             }
-//         }
-//     } else if (action == 'i') {
-//         // Player uses an item from inventory
-//         int healingAmount = player->getInventory().usePotion();
-//         if (healingAmount > 0) {
-//             player->heal(healingAmount);
-//             cout << "Player healed for " << healingAmount << " HP!" << endl;
-//         }
-//     } else if (action == 'n') {
-//         // Player does nothing
-//         cout << "Player does nothing." << endl;
-//     } else {
-//         cout << "Invalid action. Player does nothing." << endl;
-//     }
-// }
-
 void Game_Manager::playerTurn() {
     char action;
     cout << "Do you want to attack (a), use an item (i), or do nothing (n)? ";
