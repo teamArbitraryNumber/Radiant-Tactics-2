@@ -19,10 +19,11 @@ class Player : public Character{
     Inventory playerInventory; // Inventory specific to the Player
         char movement;
         int currency;
-        int max_health;
+        
         PlayerType playerType;
 
     public:
+        int max_health;
         // Player Default Constructor, 
         Player() = default;
         

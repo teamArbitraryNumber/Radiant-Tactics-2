@@ -45,7 +45,13 @@ void Player::setPosition(int newX, int newY){
 }
 
 void Player::heal(int amount){
-    health = health + amount;
+    if(health + amount <= max_health){
+        health = health + amount;
+    }
+    else{
+        health = max_health;
+    }
+    
 }
 PlayerType Player::getPlayerType() const {
     return playerType;

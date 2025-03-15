@@ -37,7 +37,7 @@ void Game_Manager::displayCommands() {
     cout << "q - Quit Game" << endl;
     cout << "i - Display Inventory" << endl;
     cout << "m - Open Merchant Shop" << endl;
-    cout << "d - Display Damage You Can Deal" << endl;
+    cout << "v - Display Damage You Can Deal" << endl;
     cout << "z - Show This List of Commands" << endl;
 }
 
@@ -47,7 +47,7 @@ void Game_Manager::start() {
         pair<int, int> playerPos = player->getPosition();
         gameMap.printMap(); //// Print the map before players move
         bool doorEntered = takeAction();// player can either quit, move, or attack
-        gameMap.printMap();//output Map after enemies move
+        //gameMap.printMap();//output Map after  move
         if(doorEntered == 1){ //break while loop if door is entered
             end = true;
             break;
@@ -55,6 +55,7 @@ void Game_Manager::start() {
         shared_ptr<Enemy> enemy = getAdjacentEnemy();
         // Check if the player is next to an enemy and initiate combat
         if (enemy) {
+            gameMap.printMap();
             startCombat(enemy);
         }
 
@@ -63,9 +64,10 @@ void Game_Manager::start() {
             enemy = getAdjacentEnemy();
         }
 
-        gameMap.printMap();//output Map after enemies move
+        
         // Check if the player is next to an enemy after enemies move
         if (enemy && enemy->getHealth() > 0) {
+            gameMap.printMap();//output Map before enemies move
             startCombat(enemy);
         }
     }
@@ -196,10 +198,10 @@ void Game_Manager::playerTurn() {
 
         // Find the enemy next to the player
         pair<int, int> possibleMoves[4] = {
-            {playerX, playerY - 1}, // Up
-            {playerX, playerY + 1}, // Down
-            {playerX - 1, playerY}, // Left
-            {playerX + 1, playerY}  // Right
+            {(playerX - 1 + gameMap.getWidth()) % gameMap.getWidth(), playerY}, // Left (wrap-around)
+            {(playerX + 1) % gameMap.getWidth(), playerY},         // Right (wrap-around)
+            {playerX, (playerY - 1 + gameMap.getHeight()) % gameMap.getHeight()}, // Up (wrap-around)
+            {playerX, (playerY + 1) % gameMap.getHeight()}          // Down (wrap-around)
         };
 
         for (int i = 0; i < 4; i++) {
@@ -254,10 +256,10 @@ void Game_Manager::enemyTurn() {
 
     // Find the enemy next to the player
     pair<int, int> possibleMoves[4] = {
-        {playerX, playerY - 1}, // Up
-        {playerX, playerY + 1}, // Down
-        {playerX - 1, playerY}, // Left
-        {playerX + 1, playerY}  // Right
+        {(playerX - 1 + gameMap.getWidth()) % gameMap.getWidth(), playerY}, // Left (wrap-around)
+        {(playerX + 1) % gameMap.getWidth(), playerY},         // Right (wrap-around)
+        {playerX, (playerY - 1 + gameMap.getHeight()) % gameMap.getHeight()}, // Up (wrap-around)
+        {playerX, (playerY + 1) % gameMap.getHeight()}          // Down (wrap-around)
     };
 
     for (int i = 0; i < 4; i++) {
@@ -268,10 +270,10 @@ void Game_Manager::enemyTurn() {
             shared_ptr<Object> obj = gameMap.getObjectAt(newX, newY);
             if (obj && (obj->getType() == "Skeleton" || obj->getType() == "Goblin" || obj->getType() == "Orc" || obj->getType() == "Knight" || obj->getType() == "Slime")) {
                 shared_ptr<Enemy> enemy = dynamic_pointer_cast<Enemy>(obj);
-                if (enemy) {
-                    enemy->attack(*player);
-                    break;
-                }
+                //if (enemy) {
+                    //enemy->attack(*player);
+                    //break;
+                //}
                 if (enemy && enemy->getHealth() > 0) {
                     if (player->getHealth() > 0) {
                         enemy->attack(*player);
@@ -329,11 +331,11 @@ int Game_Manager::takeAction() {
             player->setPosition(pos.first, pos.second);
         } else if (gameMap.isTerrain(pos.first, pos.second)) {
             cout << endl;
-            gameMap.printMap();
+            //gameMap.printMap();
             cout << "You cannot move onto a barrier!" << endl;
         } else if (gameMap.isEnemy(pos.first, pos.second)) {
             cout << endl;
-            gameMap.printMap();
+            //gameMap.printMap();
             cout << "You cannot move onto an enemy!" << endl;
         }
     } else if (action == 'x') {
@@ -353,7 +355,7 @@ int Game_Manager::takeAction() {
         }
     } else if (action == 'h') {
         // Display player health
-        cout << "Player Health: " << player->getHealth() << "/" << endl;
+        cout << "Player Health: " << player->getHealth() << "/" << player->max_health << endl;
     } else if (action == 'c') {
         // Display player currency
         cout << "Player Currency: " << player->getCurrency() << endl;
@@ -362,7 +364,7 @@ int Game_Manager::takeAction() {
         int currentGold = player->getCurrency();
         int newGold = player->getInventory().market(currentGold);
         player->setCurrency(newGold);
-    } else if (action == 'd') {
+    } else if (action == 'v') {
         // Display player damage
         cout << "Player Damage: " << player->getDamage() << endl;
     } else if (action == 'z') {
@@ -371,7 +373,7 @@ int Game_Manager::takeAction() {
     } else {
         // Invalid action
         cout << endl;
-        gameMap.printMap();
+        //gameMap.printMap();
         cout << "Invalid action. Please try again." << endl;
     }
     return 0;
