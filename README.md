@@ -20,3 +20,9 @@ The rough structure or flow of the game:
 ![alt text](images/inventory_potion.png)  
 ### Using Market:
 ![alt text](images/market.png)  
+## Installation/Usage
+cmake .  
+make  
+./bin/game  
+## Testing
+We used the GoogleTest framework to write some unit tests for our code.
