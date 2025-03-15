@@ -4,10 +4,19 @@ The main functionalities of our dungeon crawler are to allow the user to engage 
 
 ## Class Diagram
 The relationships between all of the classes and there functions within them:
-![alt text](images/class_diagram.png)
+![alt text](images/class_diagram.png)  
 ## Use Case Diagram:
 Describes the actors in the game and what they can do:
-![alt text](images/use_case_diagram.png)
+![alt text](images/use_case_diagram.png)  
 ## Navigation Diagram:
 The rough structure or flow of the game:
-![alt text](images/navigation.png)
+![alt text](images/navigation.png)  
+# Screen Layouts:
+Start Screen:
+![alt text](images/start.png)
+Combat:
+![alt text](images/combat.png)
+Using Potions:
+![alt text](images/inventory_potion.png)
+Using Market
+![alt text](images/market.png)
