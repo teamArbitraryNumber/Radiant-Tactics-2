@@ -10,4 +10,4 @@ Describes the actors in the game and what they can do:
 ![alt text](images/use_case_diagram.png)
 ## Navigation Diagram:
 The rough structure or flow of the game:
-![alt text](images/navigation_diagram.png)
+![alt text](images/navigation.png)
