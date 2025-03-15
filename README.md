@@ -5,6 +5,7 @@ The main functionalities of our dungeon crawler are to allow the user to engage 
 ## Class Diagram:
 The relationships between all of the classes and there functions within them:
 ![alt text](images/class_diagram.png)  
+Object is an abstract class, as well as character which inherits from object. Each of the players and enemies will inherit from character. The player contains an inventory which contains functions to get items. The Game Manager class manages the logic of the game, including the player's turn, and  enemy's turn. The game map is essentially an array of pointers to these characters or objects that inherit from the object class. The null initialized objects can either represent a door or a barrier, and are represented as so on the map.  
 ## Use Case Diagram:
 Describes the actors in the game and what they can do:
 ![alt text](images/use_case_diagram.png)  
