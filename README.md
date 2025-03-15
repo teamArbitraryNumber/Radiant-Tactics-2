@@ -13,10 +13,10 @@ The rough structure or flow of the game:
 ![alt text](images/navigation.png)  
 # Screen Layouts:
 Start Screen:
-![alt text](images/start.png)
+![alt text](images/start.png)  
 Combat:
-![alt text](images/combat.png)
+![alt text](images/combat.png)  
 Using Potions:
-![alt text](images/inventory_potion.png)
+![alt text](images/inventory_potion.png)  
 Using Market
-![alt text](images/market.png)
+![alt text](images/market.png)  
