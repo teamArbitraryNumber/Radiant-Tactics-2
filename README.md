@@ -11,7 +11,7 @@ Describes the actors in the game and what they can do:
 ## Navigation Diagram:
 The rough structure or flow of the game:
 ![alt text](images/navigation.png)  
-# Screen Layouts:
+## Screen Layouts:
 ### Start Screen:
 ![alt text](images/start.png)  
 ### Combat:
